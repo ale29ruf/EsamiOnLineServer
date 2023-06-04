@@ -4841,28 +4841,17 @@ public final class Remotemethod {
         getIdAppelloBytes();
 
     /**
-     * <code>repeated .Risposta risposte = 3;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    java.util.List<proto.Remotemethod.Risposta> 
-        getRisposteList();
+    boolean hasListaRisposte();
     /**
-     * <code>repeated .Risposta risposte = 3;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    proto.Remotemethod.Risposta getRisposte(int index);
+    proto.Remotemethod.ListaRisposte getListaRisposte();
     /**
-     * <code>repeated .Risposta risposte = 3;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    int getRisposteCount();
-    /**
-     * <code>repeated .Risposta risposte = 3;</code>
-     */
-    java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
-        getRisposteOrBuilderList();
-    /**
-     * <code>repeated .Risposta risposte = 3;</code>
-     */
-    proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
-        int index);
+    proto.Remotemethod.ListaRisposteOrBuilder getListaRisposteOrBuilder();
   }
   /**
    * Protobuf type {@code RispostaAppello}
@@ -4878,7 +4867,6 @@ public final class Remotemethod {
     }
     private RispostaAppello() {
       idAppello_ = "";
-      risposte_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -4911,13 +4899,17 @@ public final class Remotemethod {
               idAppello_ = s;
               break;
             }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                risposte_ = new java.util.ArrayList<proto.Remotemethod.Risposta>();
-                mutable_bitField0_ |= 0x00000002;
+            case 18: {
+              proto.Remotemethod.ListaRisposte.Builder subBuilder = null;
+              if (listaRisposte_ != null) {
+                subBuilder = listaRisposte_.toBuilder();
               }
-              risposte_.add(
-                  input.readMessage(proto.Remotemethod.Risposta.parser(), extensionRegistry));
+              listaRisposte_ = input.readMessage(proto.Remotemethod.ListaRisposte.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(listaRisposte_);
+                listaRisposte_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -4935,9 +4927,6 @@ public final class Remotemethod {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          risposte_ = java.util.Collections.unmodifiableList(risposte_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -4955,7 +4944,6 @@ public final class Remotemethod {
               proto.Remotemethod.RispostaAppello.class, proto.Remotemethod.RispostaAppello.Builder.class);
     }
 
-    private int bitField0_;
     public static final int IDAPPELLO_FIELD_NUMBER = 1;
     private volatile java.lang.Object idAppello_;
     /**
@@ -4990,39 +4978,25 @@ public final class Remotemethod {
       }
     }
 
-    public static final int RISPOSTE_FIELD_NUMBER = 3;
-    private java.util.List<proto.Remotemethod.Risposta> risposte_;
+    public static final int LISTARISPOSTE_FIELD_NUMBER = 2;
+    private proto.Remotemethod.ListaRisposte listaRisposte_;
     /**
-     * <code>repeated .Risposta risposte = 3;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    public java.util.List<proto.Remotemethod.Risposta> getRisposteList() {
-      return risposte_;
+    public boolean hasListaRisposte() {
+      return listaRisposte_ != null;
     }
     /**
-     * <code>repeated .Risposta risposte = 3;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    public java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
-        getRisposteOrBuilderList() {
-      return risposte_;
+    public proto.Remotemethod.ListaRisposte getListaRisposte() {
+      return listaRisposte_ == null ? proto.Remotemethod.ListaRisposte.getDefaultInstance() : listaRisposte_;
     }
     /**
-     * <code>repeated .Risposta risposte = 3;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    public int getRisposteCount() {
-      return risposte_.size();
-    }
-    /**
-     * <code>repeated .Risposta risposte = 3;</code>
-     */
-    public proto.Remotemethod.Risposta getRisposte(int index) {
-      return risposte_.get(index);
-    }
-    /**
-     * <code>repeated .Risposta risposte = 3;</code>
-     */
-    public proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
-        int index) {
-      return risposte_.get(index);
+    public proto.Remotemethod.ListaRisposteOrBuilder getListaRisposteOrBuilder() {
+      return getListaRisposte();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -5042,8 +5016,8 @@ public final class Remotemethod {
       if (!getIdAppelloBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idAppello_);
       }
-      for (int i = 0; i < risposte_.size(); i++) {
-        output.writeMessage(3, risposte_.get(i));
+      if (listaRisposte_ != null) {
+        output.writeMessage(2, getListaRisposte());
       }
       unknownFields.writeTo(output);
     }
@@ -5057,9 +5031,9 @@ public final class Remotemethod {
       if (!getIdAppelloBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idAppello_);
       }
-      for (int i = 0; i < risposte_.size(); i++) {
+      if (listaRisposte_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, risposte_.get(i));
+          .computeMessageSize(2, getListaRisposte());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -5079,8 +5053,11 @@ public final class Remotemethod {
       boolean result = true;
       result = result && getIdAppello()
           .equals(other.getIdAppello());
-      result = result && getRisposteList()
-          .equals(other.getRisposteList());
+      result = result && (hasListaRisposte() == other.hasListaRisposte());
+      if (hasListaRisposte()) {
+        result = result && getListaRisposte()
+            .equals(other.getListaRisposte());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -5094,9 +5071,9 @@ public final class Remotemethod {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + IDAPPELLO_FIELD_NUMBER;
       hash = (53 * hash) + getIdAppello().hashCode();
-      if (getRisposteCount() > 0) {
-        hash = (37 * hash) + RISPOSTE_FIELD_NUMBER;
-        hash = (53 * hash) + getRisposteList().hashCode();
+      if (hasListaRisposte()) {
+        hash = (37 * hash) + LISTARISPOSTE_FIELD_NUMBER;
+        hash = (53 * hash) + getListaRisposte().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -5226,7 +5203,6 @@ public final class Remotemethod {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getRisposteFieldBuilder();
         }
       }
       @java.lang.Override
@@ -5234,11 +5210,11 @@ public final class Remotemethod {
         super.clear();
         idAppello_ = "";
 
-        if (risposteBuilder_ == null) {
-          risposte_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (listaRisposteBuilder_ == null) {
+          listaRisposte_ = null;
         } else {
-          risposteBuilder_.clear();
+          listaRisposte_ = null;
+          listaRisposteBuilder_ = null;
         }
         return this;
       }
@@ -5266,19 +5242,12 @@ public final class Remotemethod {
       @java.lang.Override
       public proto.Remotemethod.RispostaAppello buildPartial() {
         proto.Remotemethod.RispostaAppello result = new proto.Remotemethod.RispostaAppello(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.idAppello_ = idAppello_;
-        if (risposteBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            risposte_ = java.util.Collections.unmodifiableList(risposte_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.risposte_ = risposte_;
+        if (listaRisposteBuilder_ == null) {
+          result.listaRisposte_ = listaRisposte_;
         } else {
-          result.risposte_ = risposteBuilder_.build();
+          result.listaRisposte_ = listaRisposteBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -5331,31 +5300,8 @@ public final class Remotemethod {
           idAppello_ = other.idAppello_;
           onChanged();
         }
-        if (risposteBuilder_ == null) {
-          if (!other.risposte_.isEmpty()) {
-            if (risposte_.isEmpty()) {
-              risposte_ = other.risposte_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureRisposteIsMutable();
-              risposte_.addAll(other.risposte_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.risposte_.isEmpty()) {
-            if (risposteBuilder_.isEmpty()) {
-              risposteBuilder_.dispose();
-              risposteBuilder_ = null;
-              risposte_ = other.risposte_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              risposteBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRisposteFieldBuilder() : null;
-            } else {
-              risposteBuilder_.addAllMessages(other.risposte_);
-            }
-          }
+        if (other.hasListaRisposte()) {
+          mergeListaRisposte(other.getListaRisposte());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5385,7 +5331,6 @@ public final class Remotemethod {
         }
         return this;
       }
-      private int bitField0_;
 
       private java.lang.Object idAppello_ = "";
       /**
@@ -5456,244 +5401,121 @@ public final class Remotemethod {
         return this;
       }
 
-      private java.util.List<proto.Remotemethod.Risposta> risposte_ =
-        java.util.Collections.emptyList();
-      private void ensureRisposteIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          risposte_ = new java.util.ArrayList<proto.Remotemethod.Risposta>(risposte_);
-          bitField0_ |= 0x00000002;
-         }
+      private proto.Remotemethod.ListaRisposte listaRisposte_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.Remotemethod.ListaRisposte, proto.Remotemethod.ListaRisposte.Builder, proto.Remotemethod.ListaRisposteOrBuilder> listaRisposteBuilder_;
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public boolean hasListaRisposte() {
+        return listaRisposteBuilder_ != null || listaRisposte_ != null;
       }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public proto.Remotemethod.ListaRisposte getListaRisposte() {
+        if (listaRisposteBuilder_ == null) {
+          return listaRisposte_ == null ? proto.Remotemethod.ListaRisposte.getDefaultInstance() : listaRisposte_;
+        } else {
+          return listaRisposteBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public Builder setListaRisposte(proto.Remotemethod.ListaRisposte value) {
+        if (listaRisposteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          listaRisposte_ = value;
+          onChanged();
+        } else {
+          listaRisposteBuilder_.setMessage(value);
+        }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder> risposteBuilder_;
+        return this;
+      }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public Builder setListaRisposte(
+          proto.Remotemethod.ListaRisposte.Builder builderForValue) {
+        if (listaRisposteBuilder_ == null) {
+          listaRisposte_ = builderForValue.build();
+          onChanged();
+        } else {
+          listaRisposteBuilder_.setMessage(builderForValue.build());
+        }
 
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public java.util.List<proto.Remotemethod.Risposta> getRisposteList() {
-        if (risposteBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(risposte_);
-        } else {
-          return risposteBuilder_.getMessageList();
-        }
+        return this;
       }
       /**
-       * <code>repeated .Risposta risposte = 3;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public int getRisposteCount() {
-        if (risposteBuilder_ == null) {
-          return risposte_.size();
-        } else {
-          return risposteBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public proto.Remotemethod.Risposta getRisposte(int index) {
-        if (risposteBuilder_ == null) {
-          return risposte_.get(index);
-        } else {
-          return risposteBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder setRisposte(
-          int index, proto.Remotemethod.Risposta value) {
-        if (risposteBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+      public Builder mergeListaRisposte(proto.Remotemethod.ListaRisposte value) {
+        if (listaRisposteBuilder_ == null) {
+          if (listaRisposte_ != null) {
+            listaRisposte_ =
+              proto.Remotemethod.ListaRisposte.newBuilder(listaRisposte_).mergeFrom(value).buildPartial();
+          } else {
+            listaRisposte_ = value;
           }
-          ensureRisposteIsMutable();
-          risposte_.set(index, value);
           onChanged();
         } else {
-          risposteBuilder_.setMessage(index, value);
+          listaRisposteBuilder_.mergeFrom(value);
         }
+
         return this;
       }
       /**
-       * <code>repeated .Risposta risposte = 3;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public Builder setRisposte(
-          int index, proto.Remotemethod.Risposta.Builder builderForValue) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.set(index, builderForValue.build());
+      public Builder clearListaRisposte() {
+        if (listaRisposteBuilder_ == null) {
+          listaRisposte_ = null;
           onChanged();
         } else {
-          risposteBuilder_.setMessage(index, builderForValue.build());
+          listaRisposte_ = null;
+          listaRisposteBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>repeated .Risposta risposte = 3;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public Builder addRisposte(proto.Remotemethod.Risposta value) {
-        if (risposteBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRisposteIsMutable();
-          risposte_.add(value);
-          onChanged();
+      public proto.Remotemethod.ListaRisposte.Builder getListaRisposteBuilder() {
+        
+        onChanged();
+        return getListaRisposteFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public proto.Remotemethod.ListaRisposteOrBuilder getListaRisposteOrBuilder() {
+        if (listaRisposteBuilder_ != null) {
+          return listaRisposteBuilder_.getMessageOrBuilder();
         } else {
-          risposteBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder addRisposte(
-          int index, proto.Remotemethod.Risposta value) {
-        if (risposteBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRisposteIsMutable();
-          risposte_.add(index, value);
-          onChanged();
-        } else {
-          risposteBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder addRisposte(
-          proto.Remotemethod.Risposta.Builder builderForValue) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.add(builderForValue.build());
-          onChanged();
-        } else {
-          risposteBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder addRisposte(
-          int index, proto.Remotemethod.Risposta.Builder builderForValue) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          risposteBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder addAllRisposte(
-          java.lang.Iterable<? extends proto.Remotemethod.Risposta> values) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, risposte_);
-          onChanged();
-        } else {
-          risposteBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder clearRisposte() {
-        if (risposteBuilder_ == null) {
-          risposte_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          risposteBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public Builder removeRisposte(int index) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.remove(index);
-          onChanged();
-        } else {
-          risposteBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public proto.Remotemethod.Risposta.Builder getRisposteBuilder(
-          int index) {
-        return getRisposteFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
-          int index) {
-        if (risposteBuilder_ == null) {
-          return risposte_.get(index);  } else {
-          return risposteBuilder_.getMessageOrBuilder(index);
+          return listaRisposte_ == null ?
+              proto.Remotemethod.ListaRisposte.getDefaultInstance() : listaRisposte_;
         }
       }
       /**
-       * <code>repeated .Risposta risposte = 3;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
-           getRisposteOrBuilderList() {
-        if (risposteBuilder_ != null) {
-          return risposteBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(risposte_);
-        }
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public proto.Remotemethod.Risposta.Builder addRisposteBuilder() {
-        return getRisposteFieldBuilder().addBuilder(
-            proto.Remotemethod.Risposta.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public proto.Remotemethod.Risposta.Builder addRisposteBuilder(
-          int index) {
-        return getRisposteFieldBuilder().addBuilder(
-            index, proto.Remotemethod.Risposta.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Risposta risposte = 3;</code>
-       */
-      public java.util.List<proto.Remotemethod.Risposta.Builder> 
-           getRisposteBuilderList() {
-        return getRisposteFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder> 
-          getRisposteFieldBuilder() {
-        if (risposteBuilder_ == null) {
-          risposteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder>(
-                  risposte_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.Remotemethod.ListaRisposte, proto.Remotemethod.ListaRisposte.Builder, proto.Remotemethod.ListaRisposteOrBuilder> 
+          getListaRisposteFieldBuilder() {
+        if (listaRisposteBuilder_ == null) {
+          listaRisposteBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              proto.Remotemethod.ListaRisposte, proto.Remotemethod.ListaRisposte.Builder, proto.Remotemethod.ListaRisposteOrBuilder>(
+                  getListaRisposte(),
                   getParentForChildren(),
                   isClean());
-          risposte_ = null;
+          listaRisposte_ = null;
         }
-        return risposteBuilder_;
+        return listaRisposteBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -6239,28 +6061,17 @@ public final class Remotemethod {
         getIdAppelloBytes();
 
     /**
-     * <code>repeated .Risposta risposte = 2;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    java.util.List<proto.Remotemethod.Risposta> 
-        getRisposteList();
+    boolean hasListaRisposte();
     /**
-     * <code>repeated .Risposta risposte = 2;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    proto.Remotemethod.Risposta getRisposte(int index);
+    proto.Remotemethod.ListaRisposte getListaRisposte();
     /**
-     * <code>repeated .Risposta risposte = 2;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    int getRisposteCount();
-    /**
-     * <code>repeated .Risposta risposte = 2;</code>
-     */
-    java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
-        getRisposteOrBuilderList();
-    /**
-     * <code>repeated .Risposta risposte = 2;</code>
-     */
-    proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
-        int index);
+    proto.Remotemethod.ListaRisposteOrBuilder getListaRisposteOrBuilder();
 
     /**
      * <code>int32 punteggio = 3;</code>
@@ -6281,7 +6092,6 @@ public final class Remotemethod {
     }
     private Modulo() {
       idAppello_ = "";
-      risposte_ = java.util.Collections.emptyList();
       punteggio_ = 0;
     }
 
@@ -6316,12 +6126,16 @@ public final class Remotemethod {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                risposte_ = new java.util.ArrayList<proto.Remotemethod.Risposta>();
-                mutable_bitField0_ |= 0x00000002;
+              proto.Remotemethod.ListaRisposte.Builder subBuilder = null;
+              if (listaRisposte_ != null) {
+                subBuilder = listaRisposte_.toBuilder();
               }
-              risposte_.add(
-                  input.readMessage(proto.Remotemethod.Risposta.parser(), extensionRegistry));
+              listaRisposte_ = input.readMessage(proto.Remotemethod.ListaRisposte.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(listaRisposte_);
+                listaRisposte_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             case 24: {
@@ -6344,9 +6158,6 @@ public final class Remotemethod {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          risposte_ = java.util.Collections.unmodifiableList(risposte_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -6364,7 +6175,6 @@ public final class Remotemethod {
               proto.Remotemethod.Modulo.class, proto.Remotemethod.Modulo.Builder.class);
     }
 
-    private int bitField0_;
     public static final int IDAPPELLO_FIELD_NUMBER = 1;
     private volatile java.lang.Object idAppello_;
     /**
@@ -6399,39 +6209,25 @@ public final class Remotemethod {
       }
     }
 
-    public static final int RISPOSTE_FIELD_NUMBER = 2;
-    private java.util.List<proto.Remotemethod.Risposta> risposte_;
+    public static final int LISTARISPOSTE_FIELD_NUMBER = 2;
+    private proto.Remotemethod.ListaRisposte listaRisposte_;
     /**
-     * <code>repeated .Risposta risposte = 2;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    public java.util.List<proto.Remotemethod.Risposta> getRisposteList() {
-      return risposte_;
+    public boolean hasListaRisposte() {
+      return listaRisposte_ != null;
     }
     /**
-     * <code>repeated .Risposta risposte = 2;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    public java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
-        getRisposteOrBuilderList() {
-      return risposte_;
+    public proto.Remotemethod.ListaRisposte getListaRisposte() {
+      return listaRisposte_ == null ? proto.Remotemethod.ListaRisposte.getDefaultInstance() : listaRisposte_;
     }
     /**
-     * <code>repeated .Risposta risposte = 2;</code>
+     * <code>.ListaRisposte listaRisposte = 2;</code>
      */
-    public int getRisposteCount() {
-      return risposte_.size();
-    }
-    /**
-     * <code>repeated .Risposta risposte = 2;</code>
-     */
-    public proto.Remotemethod.Risposta getRisposte(int index) {
-      return risposte_.get(index);
-    }
-    /**
-     * <code>repeated .Risposta risposte = 2;</code>
-     */
-    public proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
-        int index) {
-      return risposte_.get(index);
+    public proto.Remotemethod.ListaRisposteOrBuilder getListaRisposteOrBuilder() {
+      return getListaRisposte();
     }
 
     public static final int PUNTEGGIO_FIELD_NUMBER = 3;
@@ -6460,8 +6256,8 @@ public final class Remotemethod {
       if (!getIdAppelloBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idAppello_);
       }
-      for (int i = 0; i < risposte_.size(); i++) {
-        output.writeMessage(2, risposte_.get(i));
+      if (listaRisposte_ != null) {
+        output.writeMessage(2, getListaRisposte());
       }
       if (punteggio_ != 0) {
         output.writeInt32(3, punteggio_);
@@ -6478,9 +6274,9 @@ public final class Remotemethod {
       if (!getIdAppelloBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idAppello_);
       }
-      for (int i = 0; i < risposte_.size(); i++) {
+      if (listaRisposte_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, risposte_.get(i));
+          .computeMessageSize(2, getListaRisposte());
       }
       if (punteggio_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -6504,8 +6300,11 @@ public final class Remotemethod {
       boolean result = true;
       result = result && getIdAppello()
           .equals(other.getIdAppello());
-      result = result && getRisposteList()
-          .equals(other.getRisposteList());
+      result = result && (hasListaRisposte() == other.hasListaRisposte());
+      if (hasListaRisposte()) {
+        result = result && getListaRisposte()
+            .equals(other.getListaRisposte());
+      }
       result = result && (getPunteggio()
           == other.getPunteggio());
       result = result && unknownFields.equals(other.unknownFields);
@@ -6521,9 +6320,9 @@ public final class Remotemethod {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + IDAPPELLO_FIELD_NUMBER;
       hash = (53 * hash) + getIdAppello().hashCode();
-      if (getRisposteCount() > 0) {
-        hash = (37 * hash) + RISPOSTE_FIELD_NUMBER;
-        hash = (53 * hash) + getRisposteList().hashCode();
+      if (hasListaRisposte()) {
+        hash = (37 * hash) + LISTARISPOSTE_FIELD_NUMBER;
+        hash = (53 * hash) + getListaRisposte().hashCode();
       }
       hash = (37 * hash) + PUNTEGGIO_FIELD_NUMBER;
       hash = (53 * hash) + getPunteggio();
@@ -6655,7 +6454,6 @@ public final class Remotemethod {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getRisposteFieldBuilder();
         }
       }
       @java.lang.Override
@@ -6663,11 +6461,11 @@ public final class Remotemethod {
         super.clear();
         idAppello_ = "";
 
-        if (risposteBuilder_ == null) {
-          risposte_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (listaRisposteBuilder_ == null) {
+          listaRisposte_ = null;
         } else {
-          risposteBuilder_.clear();
+          listaRisposte_ = null;
+          listaRisposteBuilder_ = null;
         }
         punteggio_ = 0;
 
@@ -6697,20 +6495,13 @@ public final class Remotemethod {
       @java.lang.Override
       public proto.Remotemethod.Modulo buildPartial() {
         proto.Remotemethod.Modulo result = new proto.Remotemethod.Modulo(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.idAppello_ = idAppello_;
-        if (risposteBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            risposte_ = java.util.Collections.unmodifiableList(risposte_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.risposte_ = risposte_;
+        if (listaRisposteBuilder_ == null) {
+          result.listaRisposte_ = listaRisposte_;
         } else {
-          result.risposte_ = risposteBuilder_.build();
+          result.listaRisposte_ = listaRisposteBuilder_.build();
         }
         result.punteggio_ = punteggio_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -6763,31 +6554,8 @@ public final class Remotemethod {
           idAppello_ = other.idAppello_;
           onChanged();
         }
-        if (risposteBuilder_ == null) {
-          if (!other.risposte_.isEmpty()) {
-            if (risposte_.isEmpty()) {
-              risposte_ = other.risposte_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureRisposteIsMutable();
-              risposte_.addAll(other.risposte_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.risposte_.isEmpty()) {
-            if (risposteBuilder_.isEmpty()) {
-              risposteBuilder_.dispose();
-              risposteBuilder_ = null;
-              risposte_ = other.risposte_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              risposteBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRisposteFieldBuilder() : null;
-            } else {
-              risposteBuilder_.addAllMessages(other.risposte_);
-            }
-          }
+        if (other.hasListaRisposte()) {
+          mergeListaRisposte(other.getListaRisposte());
         }
         if (other.getPunteggio() != 0) {
           setPunteggio(other.getPunteggio());
@@ -6820,7 +6588,6 @@ public final class Remotemethod {
         }
         return this;
       }
-      private int bitField0_;
 
       private java.lang.Object idAppello_ = "";
       /**
@@ -6891,244 +6658,121 @@ public final class Remotemethod {
         return this;
       }
 
-      private java.util.List<proto.Remotemethod.Risposta> risposte_ =
-        java.util.Collections.emptyList();
-      private void ensureRisposteIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          risposte_ = new java.util.ArrayList<proto.Remotemethod.Risposta>(risposte_);
-          bitField0_ |= 0x00000002;
-         }
+      private proto.Remotemethod.ListaRisposte listaRisposte_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.Remotemethod.ListaRisposte, proto.Remotemethod.ListaRisposte.Builder, proto.Remotemethod.ListaRisposteOrBuilder> listaRisposteBuilder_;
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public boolean hasListaRisposte() {
+        return listaRisposteBuilder_ != null || listaRisposte_ != null;
       }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public proto.Remotemethod.ListaRisposte getListaRisposte() {
+        if (listaRisposteBuilder_ == null) {
+          return listaRisposte_ == null ? proto.Remotemethod.ListaRisposte.getDefaultInstance() : listaRisposte_;
+        } else {
+          return listaRisposteBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public Builder setListaRisposte(proto.Remotemethod.ListaRisposte value) {
+        if (listaRisposteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          listaRisposte_ = value;
+          onChanged();
+        } else {
+          listaRisposteBuilder_.setMessage(value);
+        }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder> risposteBuilder_;
+        return this;
+      }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public Builder setListaRisposte(
+          proto.Remotemethod.ListaRisposte.Builder builderForValue) {
+        if (listaRisposteBuilder_ == null) {
+          listaRisposte_ = builderForValue.build();
+          onChanged();
+        } else {
+          listaRisposteBuilder_.setMessage(builderForValue.build());
+        }
 
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public java.util.List<proto.Remotemethod.Risposta> getRisposteList() {
-        if (risposteBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(risposte_);
-        } else {
-          return risposteBuilder_.getMessageList();
-        }
+        return this;
       }
       /**
-       * <code>repeated .Risposta risposte = 2;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public int getRisposteCount() {
-        if (risposteBuilder_ == null) {
-          return risposte_.size();
-        } else {
-          return risposteBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public proto.Remotemethod.Risposta getRisposte(int index) {
-        if (risposteBuilder_ == null) {
-          return risposte_.get(index);
-        } else {
-          return risposteBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder setRisposte(
-          int index, proto.Remotemethod.Risposta value) {
-        if (risposteBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+      public Builder mergeListaRisposte(proto.Remotemethod.ListaRisposte value) {
+        if (listaRisposteBuilder_ == null) {
+          if (listaRisposte_ != null) {
+            listaRisposte_ =
+              proto.Remotemethod.ListaRisposte.newBuilder(listaRisposte_).mergeFrom(value).buildPartial();
+          } else {
+            listaRisposte_ = value;
           }
-          ensureRisposteIsMutable();
-          risposte_.set(index, value);
           onChanged();
         } else {
-          risposteBuilder_.setMessage(index, value);
+          listaRisposteBuilder_.mergeFrom(value);
         }
+
         return this;
       }
       /**
-       * <code>repeated .Risposta risposte = 2;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public Builder setRisposte(
-          int index, proto.Remotemethod.Risposta.Builder builderForValue) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.set(index, builderForValue.build());
+      public Builder clearListaRisposte() {
+        if (listaRisposteBuilder_ == null) {
+          listaRisposte_ = null;
           onChanged();
         } else {
-          risposteBuilder_.setMessage(index, builderForValue.build());
+          listaRisposte_ = null;
+          listaRisposteBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>repeated .Risposta risposte = 2;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public Builder addRisposte(proto.Remotemethod.Risposta value) {
-        if (risposteBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRisposteIsMutable();
-          risposte_.add(value);
-          onChanged();
+      public proto.Remotemethod.ListaRisposte.Builder getListaRisposteBuilder() {
+        
+        onChanged();
+        return getListaRisposteFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.ListaRisposte listaRisposte = 2;</code>
+       */
+      public proto.Remotemethod.ListaRisposteOrBuilder getListaRisposteOrBuilder() {
+        if (listaRisposteBuilder_ != null) {
+          return listaRisposteBuilder_.getMessageOrBuilder();
         } else {
-          risposteBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder addRisposte(
-          int index, proto.Remotemethod.Risposta value) {
-        if (risposteBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRisposteIsMutable();
-          risposte_.add(index, value);
-          onChanged();
-        } else {
-          risposteBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder addRisposte(
-          proto.Remotemethod.Risposta.Builder builderForValue) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.add(builderForValue.build());
-          onChanged();
-        } else {
-          risposteBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder addRisposte(
-          int index, proto.Remotemethod.Risposta.Builder builderForValue) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          risposteBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder addAllRisposte(
-          java.lang.Iterable<? extends proto.Remotemethod.Risposta> values) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, risposte_);
-          onChanged();
-        } else {
-          risposteBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder clearRisposte() {
-        if (risposteBuilder_ == null) {
-          risposte_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          risposteBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public Builder removeRisposte(int index) {
-        if (risposteBuilder_ == null) {
-          ensureRisposteIsMutable();
-          risposte_.remove(index);
-          onChanged();
-        } else {
-          risposteBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public proto.Remotemethod.Risposta.Builder getRisposteBuilder(
-          int index) {
-        return getRisposteFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
-          int index) {
-        if (risposteBuilder_ == null) {
-          return risposte_.get(index);  } else {
-          return risposteBuilder_.getMessageOrBuilder(index);
+          return listaRisposte_ == null ?
+              proto.Remotemethod.ListaRisposte.getDefaultInstance() : listaRisposte_;
         }
       }
       /**
-       * <code>repeated .Risposta risposte = 2;</code>
+       * <code>.ListaRisposte listaRisposte = 2;</code>
        */
-      public java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
-           getRisposteOrBuilderList() {
-        if (risposteBuilder_ != null) {
-          return risposteBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(risposte_);
-        }
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public proto.Remotemethod.Risposta.Builder addRisposteBuilder() {
-        return getRisposteFieldBuilder().addBuilder(
-            proto.Remotemethod.Risposta.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public proto.Remotemethod.Risposta.Builder addRisposteBuilder(
-          int index) {
-        return getRisposteFieldBuilder().addBuilder(
-            index, proto.Remotemethod.Risposta.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .Risposta risposte = 2;</code>
-       */
-      public java.util.List<proto.Remotemethod.Risposta.Builder> 
-           getRisposteBuilderList() {
-        return getRisposteFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder> 
-          getRisposteFieldBuilder() {
-        if (risposteBuilder_ == null) {
-          risposteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder>(
-                  risposte_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.Remotemethod.ListaRisposte, proto.Remotemethod.ListaRisposte.Builder, proto.Remotemethod.ListaRisposteOrBuilder> 
+          getListaRisposteFieldBuilder() {
+        if (listaRisposteBuilder_ == null) {
+          listaRisposteBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              proto.Remotemethod.ListaRisposte, proto.Remotemethod.ListaRisposte.Builder, proto.Remotemethod.ListaRisposteOrBuilder>(
+                  getListaRisposte(),
                   getParentForChildren(),
                   isClean());
-          risposte_ = null;
+          listaRisposte_ = null;
         }
-        return risposteBuilder_;
+        return listaRisposteBuilder_;
       }
 
       private int punteggio_ ;
@@ -7209,6 +6853,788 @@ public final class Remotemethod {
 
   }
 
+  public interface ListaRisposteOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ListaRisposte)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    java.util.List<proto.Remotemethod.Risposta> 
+        getRisposteList();
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    proto.Remotemethod.Risposta getRisposte(int index);
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    int getRisposteCount();
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
+        getRisposteOrBuilderList();
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code ListaRisposte}
+   */
+  public  static final class ListaRisposte extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ListaRisposte)
+      ListaRisposteOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ListaRisposte.newBuilder() to construct.
+    private ListaRisposte(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ListaRisposte() {
+      risposte_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ListaRisposte(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                risposte_ = new java.util.ArrayList<proto.Remotemethod.Risposta>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              risposte_.add(
+                  input.readMessage(proto.Remotemethod.Risposta.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          risposte_ = java.util.Collections.unmodifiableList(risposte_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Remotemethod.internal_static_ListaRisposte_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Remotemethod.internal_static_ListaRisposte_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Remotemethod.ListaRisposte.class, proto.Remotemethod.ListaRisposte.Builder.class);
+    }
+
+    public static final int RISPOSTE_FIELD_NUMBER = 1;
+    private java.util.List<proto.Remotemethod.Risposta> risposte_;
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    public java.util.List<proto.Remotemethod.Risposta> getRisposteList() {
+      return risposte_;
+    }
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    public java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
+        getRisposteOrBuilderList() {
+      return risposte_;
+    }
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    public int getRisposteCount() {
+      return risposte_.size();
+    }
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    public proto.Remotemethod.Risposta getRisposte(int index) {
+      return risposte_.get(index);
+    }
+    /**
+     * <code>repeated .Risposta risposte = 1;</code>
+     */
+    public proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
+        int index) {
+      return risposte_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < risposte_.size(); i++) {
+        output.writeMessage(1, risposte_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < risposte_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, risposte_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Remotemethod.ListaRisposte)) {
+        return super.equals(obj);
+      }
+      proto.Remotemethod.ListaRisposte other = (proto.Remotemethod.ListaRisposte) obj;
+
+      boolean result = true;
+      result = result && getRisposteList()
+          .equals(other.getRisposteList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getRisposteCount() > 0) {
+        hash = (37 * hash) + RISPOSTE_FIELD_NUMBER;
+        hash = (53 * hash) + getRisposteList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Remotemethod.ListaRisposte parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static proto.Remotemethod.ListaRisposte parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Remotemethod.ListaRisposte parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Remotemethod.ListaRisposte prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ListaRisposte}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ListaRisposte)
+        proto.Remotemethod.ListaRisposteOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Remotemethod.internal_static_ListaRisposte_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Remotemethod.internal_static_ListaRisposte_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Remotemethod.ListaRisposte.class, proto.Remotemethod.ListaRisposte.Builder.class);
+      }
+
+      // Construct using proto.Remotemethod.ListaRisposte.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getRisposteFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (risposteBuilder_ == null) {
+          risposte_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          risposteBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Remotemethod.internal_static_ListaRisposte_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Remotemethod.ListaRisposte getDefaultInstanceForType() {
+        return proto.Remotemethod.ListaRisposte.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Remotemethod.ListaRisposte build() {
+        proto.Remotemethod.ListaRisposte result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Remotemethod.ListaRisposte buildPartial() {
+        proto.Remotemethod.ListaRisposte result = new proto.Remotemethod.ListaRisposte(this);
+        int from_bitField0_ = bitField0_;
+        if (risposteBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            risposte_ = java.util.Collections.unmodifiableList(risposte_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.risposte_ = risposte_;
+        } else {
+          result.risposte_ = risposteBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Remotemethod.ListaRisposte) {
+          return mergeFrom((proto.Remotemethod.ListaRisposte)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Remotemethod.ListaRisposte other) {
+        if (other == proto.Remotemethod.ListaRisposte.getDefaultInstance()) return this;
+        if (risposteBuilder_ == null) {
+          if (!other.risposte_.isEmpty()) {
+            if (risposte_.isEmpty()) {
+              risposte_ = other.risposte_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureRisposteIsMutable();
+              risposte_.addAll(other.risposte_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.risposte_.isEmpty()) {
+            if (risposteBuilder_.isEmpty()) {
+              risposteBuilder_.dispose();
+              risposteBuilder_ = null;
+              risposte_ = other.risposte_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              risposteBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getRisposteFieldBuilder() : null;
+            } else {
+              risposteBuilder_.addAllMessages(other.risposte_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        proto.Remotemethod.ListaRisposte parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (proto.Remotemethod.ListaRisposte) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<proto.Remotemethod.Risposta> risposte_ =
+        java.util.Collections.emptyList();
+      private void ensureRisposteIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          risposte_ = new java.util.ArrayList<proto.Remotemethod.Risposta>(risposte_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder> risposteBuilder_;
+
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public java.util.List<proto.Remotemethod.Risposta> getRisposteList() {
+        if (risposteBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(risposte_);
+        } else {
+          return risposteBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public int getRisposteCount() {
+        if (risposteBuilder_ == null) {
+          return risposte_.size();
+        } else {
+          return risposteBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public proto.Remotemethod.Risposta getRisposte(int index) {
+        if (risposteBuilder_ == null) {
+          return risposte_.get(index);
+        } else {
+          return risposteBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder setRisposte(
+          int index, proto.Remotemethod.Risposta value) {
+        if (risposteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRisposteIsMutable();
+          risposte_.set(index, value);
+          onChanged();
+        } else {
+          risposteBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder setRisposte(
+          int index, proto.Remotemethod.Risposta.Builder builderForValue) {
+        if (risposteBuilder_ == null) {
+          ensureRisposteIsMutable();
+          risposte_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          risposteBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder addRisposte(proto.Remotemethod.Risposta value) {
+        if (risposteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRisposteIsMutable();
+          risposte_.add(value);
+          onChanged();
+        } else {
+          risposteBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder addRisposte(
+          int index, proto.Remotemethod.Risposta value) {
+        if (risposteBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRisposteIsMutable();
+          risposte_.add(index, value);
+          onChanged();
+        } else {
+          risposteBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder addRisposte(
+          proto.Remotemethod.Risposta.Builder builderForValue) {
+        if (risposteBuilder_ == null) {
+          ensureRisposteIsMutable();
+          risposte_.add(builderForValue.build());
+          onChanged();
+        } else {
+          risposteBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder addRisposte(
+          int index, proto.Remotemethod.Risposta.Builder builderForValue) {
+        if (risposteBuilder_ == null) {
+          ensureRisposteIsMutable();
+          risposte_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          risposteBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder addAllRisposte(
+          java.lang.Iterable<? extends proto.Remotemethod.Risposta> values) {
+        if (risposteBuilder_ == null) {
+          ensureRisposteIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, risposte_);
+          onChanged();
+        } else {
+          risposteBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder clearRisposte() {
+        if (risposteBuilder_ == null) {
+          risposte_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          risposteBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public Builder removeRisposte(int index) {
+        if (risposteBuilder_ == null) {
+          ensureRisposteIsMutable();
+          risposte_.remove(index);
+          onChanged();
+        } else {
+          risposteBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public proto.Remotemethod.Risposta.Builder getRisposteBuilder(
+          int index) {
+        return getRisposteFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public proto.Remotemethod.RispostaOrBuilder getRisposteOrBuilder(
+          int index) {
+        if (risposteBuilder_ == null) {
+          return risposte_.get(index);  } else {
+          return risposteBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public java.util.List<? extends proto.Remotemethod.RispostaOrBuilder> 
+           getRisposteOrBuilderList() {
+        if (risposteBuilder_ != null) {
+          return risposteBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(risposte_);
+        }
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public proto.Remotemethod.Risposta.Builder addRisposteBuilder() {
+        return getRisposteFieldBuilder().addBuilder(
+            proto.Remotemethod.Risposta.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public proto.Remotemethod.Risposta.Builder addRisposteBuilder(
+          int index) {
+        return getRisposteFieldBuilder().addBuilder(
+            index, proto.Remotemethod.Risposta.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Risposta risposte = 1;</code>
+       */
+      public java.util.List<proto.Remotemethod.Risposta.Builder> 
+           getRisposteBuilderList() {
+        return getRisposteFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder> 
+          getRisposteFieldBuilder() {
+        if (risposteBuilder_ == null) {
+          risposteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              proto.Remotemethod.Risposta, proto.Remotemethod.Risposta.Builder, proto.Remotemethod.RispostaOrBuilder>(
+                  risposte_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          risposte_ = null;
+        }
+        return risposteBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ListaRisposte)
+    }
+
+    // @@protoc_insertion_point(class_scope:ListaRisposte)
+    private static final proto.Remotemethod.ListaRisposte DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Remotemethod.ListaRisposte();
+    }
+
+    public static proto.Remotemethod.ListaRisposte getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ListaRisposte>
+        PARSER = new com.google.protobuf.AbstractParser<ListaRisposte>() {
+      @java.lang.Override
+      public ListaRisposte parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ListaRisposte(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ListaRisposte> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListaRisposte> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Remotemethod.ListaRisposte getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Info_descriptor;
   private static final 
@@ -7259,6 +7685,11 @@ public final class Remotemethod {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Modulo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ListaRisposte_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ListaRisposte_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -7276,16 +7707,18 @@ public final class Remotemethod {
       "\002 \001(\t\022\021\n\tidAppello\030\003 \001(\005\"\037\n\rCodiceAppell" +
       "o\022\016\n\006codice\030\001 \001(\t\")\n\014ListaDomande\022\031\n\007dom" +
       "ande\030\001 \003(\0132\010.Domanda\"\030\n\007Domanda\022\r\n\005testo" +
-      "\030\001 \001(\t\"A\n\017RispostaAppello\022\021\n\tidAppello\030\001" +
-      " \001(\t\022\033\n\010risposte\030\003 \003(\0132\t.Risposta\"\034\n\010Ris" +
-      "posta\022\020\n\010risposta\030\001 \001(\005\"K\n\006Modulo\022\021\n\tidA" +
-      "ppello\030\001 \001(\t\022\033\n\010risposte\030\002 \003(\0132\t.Rispost" +
-      "a\022\021\n\tpunteggio\030\003 \001(\0052\300\001\n\006Sender\022\'\n\rCaric" +
-      "aAppelli\022\005.Info\032\r.ListaAppelli\"\000\022/\n\020Regi" +
-      "straStudente\022\t.Studente\032\016.CodiceAppello\"" +
-      "\000\022.\n\024CaricaDomandeAppello\022\005.Info\032\r.Lista" +
-      "Domande\"\000\022,\n\rInviaRisposte\022\020.RispostaApp" +
-      "ello\032\007.Modulo\"\000B\007\n\005protob\006proto3"
+      "\030\001 \001(\t\"K\n\017RispostaAppello\022\021\n\tidAppello\030\001" +
+      " \001(\t\022%\n\rlistaRisposte\030\002 \001(\0132\016.ListaRispo" +
+      "ste\"\034\n\010Risposta\022\020\n\010risposta\030\001 \001(\005\"U\n\006Mod" +
+      "ulo\022\021\n\tidAppello\030\001 \001(\t\022%\n\rlistaRisposte\030" +
+      "\002 \001(\0132\016.ListaRisposte\022\021\n\tpunteggio\030\003 \001(\005" +
+      "\",\n\rListaRisposte\022\033\n\010risposte\030\001 \003(\0132\t.Ri" +
+      "sposta2\300\001\n\006Sender\022\'\n\rCaricaAppelli\022\005.Inf" +
+      "o\032\r.ListaAppelli\"\000\022/\n\020RegistraStudente\022\t" +
+      ".Studente\032\016.CodiceAppello\"\000\022.\n\024CaricaDom" +
+      "andeAppello\022\005.Info\032\r.ListaDomande\"\000\022,\n\rI" +
+      "nviaRisposte\022\020.RispostaAppello\032\007.Modulo\"" +
+      "\000B\007\n\005protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7346,7 +7779,7 @@ public final class Remotemethod {
     internal_static_RispostaAppello_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RispostaAppello_descriptor,
-        new java.lang.String[] { "IdAppello", "Risposte", });
+        new java.lang.String[] { "IdAppello", "ListaRisposte", });
     internal_static_Risposta_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_Risposta_fieldAccessorTable = new
@@ -7358,7 +7791,13 @@ public final class Remotemethod {
     internal_static_Modulo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Modulo_descriptor,
-        new java.lang.String[] { "IdAppello", "Risposte", "Punteggio", });
+        new java.lang.String[] { "IdAppello", "ListaRisposte", "Punteggio", });
+    internal_static_ListaRisposte_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_ListaRisposte_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ListaRisposte_descriptor,
+        new java.lang.String[] { "Risposte", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

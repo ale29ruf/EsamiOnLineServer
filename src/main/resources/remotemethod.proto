@@ -58,7 +58,7 @@ message Domanda {
 
 message RispostaAppello {
   string idAppello = 1;
-  repeated Risposta risposte = 3;
+  ListaRisposte listaRisposte = 2;
 }
 
 message Risposta {
@@ -67,6 +67,10 @@ message Risposta {
 
 message Modulo {
   string idAppello = 1;
-  repeated Risposta risposte = 2;
+  ListaRisposte listaRisposte = 2;
   int32 punteggio = 3;
+}
+
+message ListaRisposte {
+  repeated Risposta risposte = 1;
 }
