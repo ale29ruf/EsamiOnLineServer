@@ -6,21 +6,34 @@ import proto.SenderGrpc;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.*;
 
-public class SenderImpl extends SenderGrpc.SenderImplBase {
+public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
 
+    ScheduledExecutorService esecutore;
     GestoreDB g_DB;
     final UUID uuid = UUID.randomUUID();
 
     public SenderImpl(GestoreDB g_DB){
         this.g_DB = g_DB;
+        esecutore = Executors.newScheduledThreadPool(30);
     }
 
     @Override
     public void caricaAppelli(proto.Remotemethod.Info request,
                               io.grpc.stub.StreamObserver<proto.Remotemethod.ListaAppelli> responseObserver) {
-        List<Remotemethod.Appello> appelloList = g_DB.caricaAppelli();
-        Remotemethod.ListaAppelli response = Remotemethod.ListaAppelli.newBuilder().addAllAppelli(appelloList).build();
+        List<Remotemethod.Appello> appelli;
+        Callable<List<Remotemethod.Appello>> task = () -> {
+            List<Remotemethod.Appello> appelloList = g_DB.caricaAppelli();
+            return appelloList;
+        };
+        Future<List<Remotemethod.Appello>> result = esecutore.submit(task);
+        try {
+            appelli = result.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        Remotemethod.ListaAppelli response = Remotemethod.ListaAppelli.newBuilder().addAllAppelli(appelli).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
