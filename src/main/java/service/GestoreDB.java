@@ -6,8 +6,9 @@ import java.util.List;
 
 public final class GestoreDB {
 
-        public boolean addStudent(Remotemethod.Studente studente){
-            //QUERY
+        public boolean addStudent(int appello, Remotemethod.CodiceAppello cod){
+            String codice = cod.getCodice();
+
             return true;
         }
 

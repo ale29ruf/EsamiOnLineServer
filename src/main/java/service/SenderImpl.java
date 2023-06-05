@@ -28,8 +28,10 @@ public class SenderImpl extends SenderGrpc.SenderImplBase {
     @Override
     public void registraStudente(proto.Remotemethod.Studente request,
                                  io.grpc.stub.StreamObserver<proto.Remotemethod.CodiceAppello> responseObserver) {
-        boolean aggiunto = g_DB.addStudent(request.getDefaultInstanceForType());
         Remotemethod.CodiceAppello cod = Remotemethod.CodiceAppello.newBuilder().setCodice(uuid.toString().replace("-", "")).build();
+        if( ! g_DB.addStudent(request.getIdAppello(),cod))
+            cod = Remotemethod.CodiceAppello.newBuilder().setCodice("Errore registrazione").build();
+
         responseObserver.onNext(cod);
         responseObserver.onCompleted();
     }

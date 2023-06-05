@@ -1,12 +1,7 @@
-syntax = "proto3"; /* default is proto2 */
+syntax = "proto3";
 
-/* *
- * If no explicit java_package option is given in the .proto file, then by default the proto package
- * (specified using the “package” keyword) will be used
- * */
 option java_package = "proto";
 
-/* The greeting service definition. */
 service Sender {
 
   rpc CaricaAppelli (Info) returns (ListaAppelli) {}
@@ -25,6 +20,7 @@ message Info {
    * int32, boolean, enum etc.
    * */
   int32 comment = 1;
+  string codStudente = 2; //necessario per far ottenere le domande di un appello ad un utente registrato
 }
 
 message ListaAppelli {

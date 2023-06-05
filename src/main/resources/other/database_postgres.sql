@@ -25,3 +25,10 @@ CREATE TABLE "risposte" (
                             FOREIGN KEY (idDomanda) REFERENCES domande (id)
 
 );
+
+CREATE TABLE "studenti" (
+                            id VARCHAR(50) PRIMARY KEY,
+                            idAppello INTEGER,
+                            FOREIGN KEY (idAppello) REFERENCES appelli (id)
+
+);
