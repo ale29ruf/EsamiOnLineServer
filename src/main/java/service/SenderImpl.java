@@ -1,6 +1,7 @@
 package service;
 
 
+import gestionedatabase.HandlerDB;
 import proto.Remotemethod;
 import proto.SenderGrpc;
 
@@ -11,10 +12,10 @@ import java.util.concurrent.*;
 public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
 
     ScheduledExecutorService esecutore;
-    GestoreDB g_DB;
+    HandlerDB g_DB;
     final UUID uuid = UUID.randomUUID();
 
-    public SenderImpl(GestoreDB g_DB){
+    public SenderImpl(HandlerDB g_DB){
         this.g_DB = g_DB;
         esecutore = Executors.newScheduledThreadPool(30);
     }
@@ -38,6 +39,7 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
         responseObserver.onCompleted();
     }
 
+    /*
     @Override
     public void registraStudente(proto.Remotemethod.Studente request,
                                  io.grpc.stub.StreamObserver<proto.Remotemethod.CodiceAppello> responseObserver) {
@@ -80,4 +82,6 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
         }
         return punteggio;
     }
+
+     */
 }

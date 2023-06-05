@@ -13,7 +13,7 @@ CREATE TABLE "domande" (
                            id INTEGER DEFAULT NEXTVAL ('domande_seq') PRIMARY KEY,
                            testo VARCHAR(50),
                            appello INTEGER,
-                           FOREIGN KEY (appello) REFERENCES appelli (id)
+                           FOREIGN KEY (appello) REFERENCES Appelli (id)
 );
 
 CREATE SEQUENCE risposte_seq;
@@ -29,6 +29,6 @@ CREATE TABLE "risposte" (
 CREATE TABLE "studenti" (
                             id VARCHAR(50) PRIMARY KEY,
                             idAppello INTEGER,
-                            FOREIGN KEY (idAppello) REFERENCES appelli (id)
+                            FOREIGN KEY (idAppello) REFERENCES Appelli (id)
 
 );

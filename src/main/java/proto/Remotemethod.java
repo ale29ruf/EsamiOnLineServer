@@ -703,25 +703,25 @@ public final class Remotemethod {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     java.util.List<proto.Remotemethod.Appello> 
         getAppelliList();
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     proto.Remotemethod.Appello getAppelli(int index);
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     int getAppelliCount();
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     java.util.List<? extends proto.Remotemethod.AppelloOrBuilder> 
         getAppelliOrBuilderList();
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     proto.Remotemethod.AppelloOrBuilder getAppelliOrBuilder(
         int index);
@@ -813,32 +813,32 @@ public final class Remotemethod {
     public static final int APPELLI_FIELD_NUMBER = 1;
     private java.util.List<proto.Remotemethod.Appello> appelli_;
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     public java.util.List<proto.Remotemethod.Appello> getAppelliList() {
       return appelli_;
     }
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     public java.util.List<? extends proto.Remotemethod.AppelloOrBuilder> 
         getAppelliOrBuilderList() {
       return appelli_;
     }
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     public int getAppelliCount() {
       return appelli_.size();
     }
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     public proto.Remotemethod.Appello getAppelli(int index) {
       return appelli_.get(index);
     }
     /**
-     * <code>repeated .Appello appelli = 1;</code>
+     * <code>repeated .Appelli appelli = 1;</code>
      */
     public proto.Remotemethod.AppelloOrBuilder getAppelliOrBuilder(
         int index) {
@@ -1201,7 +1201,7 @@ public final class Remotemethod {
           proto.Remotemethod.Appello, proto.Remotemethod.Appello.Builder, proto.Remotemethod.AppelloOrBuilder> appelliBuilder_;
 
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public java.util.List<proto.Remotemethod.Appello> getAppelliList() {
         if (appelliBuilder_ == null) {
@@ -1211,7 +1211,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public int getAppelliCount() {
         if (appelliBuilder_ == null) {
@@ -1221,7 +1221,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public proto.Remotemethod.Appello getAppelli(int index) {
         if (appelliBuilder_ == null) {
@@ -1231,7 +1231,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder setAppelli(
           int index, proto.Remotemethod.Appello value) {
@@ -1248,7 +1248,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder setAppelli(
           int index, proto.Remotemethod.Appello.Builder builderForValue) {
@@ -1262,7 +1262,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder addAppelli(proto.Remotemethod.Appello value) {
         if (appelliBuilder_ == null) {
@@ -1278,7 +1278,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder addAppelli(
           int index, proto.Remotemethod.Appello value) {
@@ -1295,7 +1295,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder addAppelli(
           proto.Remotemethod.Appello.Builder builderForValue) {
@@ -1309,7 +1309,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder addAppelli(
           int index, proto.Remotemethod.Appello.Builder builderForValue) {
@@ -1323,7 +1323,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder addAllAppelli(
           java.lang.Iterable<? extends proto.Remotemethod.Appello> values) {
@@ -1338,7 +1338,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder clearAppelli() {
         if (appelliBuilder_ == null) {
@@ -1351,7 +1351,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public Builder removeAppelli(int index) {
         if (appelliBuilder_ == null) {
@@ -1364,14 +1364,14 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public proto.Remotemethod.Appello.Builder getAppelliBuilder(
           int index) {
         return getAppelliFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public proto.Remotemethod.AppelloOrBuilder getAppelliOrBuilder(
           int index) {
@@ -1381,7 +1381,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public java.util.List<? extends proto.Remotemethod.AppelloOrBuilder> 
            getAppelliOrBuilderList() {
@@ -1392,14 +1392,14 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public proto.Remotemethod.Appello.Builder addAppelliBuilder() {
         return getAppelliFieldBuilder().addBuilder(
             proto.Remotemethod.Appello.getDefaultInstance());
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public proto.Remotemethod.Appello.Builder addAppelliBuilder(
           int index) {
@@ -1407,7 +1407,7 @@ public final class Remotemethod {
             index, proto.Remotemethod.Appello.getDefaultInstance());
       }
       /**
-       * <code>repeated .Appello appelli = 1;</code>
+       * <code>repeated .Appelli appelli = 1;</code>
        */
       public java.util.List<proto.Remotemethod.Appello.Builder> 
            getAppelliBuilderList() {
@@ -1481,7 +1481,7 @@ public final class Remotemethod {
   }
 
   public interface AppelloOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Appello)
+      // @@protoc_insertion_point(interface_extends:Appelli)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1520,14 +1520,14 @@ public final class Remotemethod {
         getDurataBytes();
   }
   /**
-   * Protobuf type {@code Appello}
+   * Protobuf type {@code Appelli}
    */
   public  static final class Appello extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Appello)
+      // @@protoc_insertion_point(message_implements:Appelli)
       AppelloOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Appello.newBuilder() to construct.
+    // Use Appelli.newBuilder() to construct.
     private Appello(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
@@ -1915,11 +1915,11 @@ public final class Remotemethod {
       return builder;
     }
     /**
-     * Protobuf type {@code Appello}
+     * Protobuf type {@code Appelli}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Appello)
+        // @@protoc_insertion_point(builder_implements:Appelli)
         proto.Remotemethod.AppelloOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1934,7 +1934,7 @@ public final class Remotemethod {
                 proto.Remotemethod.Appello.class, proto.Remotemethod.Appello.Builder.class);
       }
 
-      // Construct using proto.Remotemethod.Appello.newBuilder()
+      // Construct using proto.Remotemethod.Appelli.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2327,10 +2327,10 @@ public final class Remotemethod {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:Appello)
+      // @@protoc_insertion_point(builder_scope:Appelli)
     }
 
-    // @@protoc_insertion_point(class_scope:Appello)
+    // @@protoc_insertion_point(class_scope:Appelli)
     private static final proto.Remotemethod.Appello DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new proto.Remotemethod.Appello();
@@ -7874,7 +7874,7 @@ public final class Remotemethod {
     java.lang.String[] descriptorData = {
       "\n\022remotemethod.proto\",\n\004Info\022\017\n\007comment\030" +
       "\001 \001(\005\022\023\n\013codStudente\030\002 \001(\t\")\n\014ListaAppel" +
-      "li\022\031\n\007appelli\030\001 \003(\0132\010.Appello\"@\n\007Appello" +
+      "li\022\031\n\007appelli\030\001 \003(\0132\010.Appelli\"@\n\007Appello" +
       "\022\n\n\002id\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\022\013\n\003ora\030\003 \001(\t\022" +
       "\016\n\006durata\030\004 \001(\t\"D\n\010Studente\022\021\n\tmatricola" +
       "\030\001 \001(\t\022\022\n\ncodFiscale\030\002 \001(\t\022\021\n\tidAppello\030" +
