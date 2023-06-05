@@ -4,8 +4,8 @@ package model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Appelli")
-public class Appelli {
+@Table(name = "appelli")
+public class Appello {
 
     @Id
     @Column(name = "id")
@@ -20,7 +20,7 @@ public class Appelli {
     @Column(name = "durata")
     String durata;
 
-    public Appelli(int id, String data, String ora, String durata) {
+    public Appello(int id, String data, String ora, String durata) {
         this.id = id;
         this.data = data;
         this.ora = ora;
@@ -28,7 +28,7 @@ public class Appelli {
     }
 
 
-    public Appelli() {
+    public Appello() {
 
     }
 

@@ -1,6 +1,6 @@
 package gestionedatabase;
 
-import model.Appelli;
+import model.Appello;
 import proto.Remotemethod;
 
 import javax.persistence.EntityManager;
@@ -39,17 +39,18 @@ public final class Handler implements HandlerDB{
     }
 
     public static void main(String[] args){
+
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         EntityManager em = emf.createEntityManager();
 
         // Esegui la query per ottenere tutte le tuple della tabella
-        String queryString = "SELECT e FROM Appelli e";
-        TypedQuery<Appelli> query = em.createQuery(queryString, Appelli.class);
-        List<Appelli> risultati = query.getResultList();
+        String queryString = "SELECT e FROM Appello e";
+        TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
+        List<Appello> risultati = query.getResultList();
         System.out.println("Query eseguita");
         System.out.println(risultati.size());
         // Itera sui risultati
-        for (Appelli ap : risultati) {
+        for (Appello ap : risultati) {
             // Fai qualcosa con ogni tupla ottenuta
             System.out.println(ap.getId() + ap.getData() + ap.getDurata() + ap.getOra());
         }
