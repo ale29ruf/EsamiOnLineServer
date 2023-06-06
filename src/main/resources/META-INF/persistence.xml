@@ -6,7 +6,6 @@
              version="2.2">
 
     <persistence-unit name="MyPersistenceUnit">
-        <!-- Configurazioni dell'unità di persistenza -->
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Db_esamiOnLine"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>

@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "appelli")
-public class Appello {
+public class Appello implements Models {
 
     @Id
     @Column(name = "id")
@@ -32,6 +32,11 @@ public class Appello {
 
     }
 
+    @Override
+    public boolean isAppello() { //evito runtime type identification
+        return true;
+    }
+
     public int getId() {
         return id;
     }
@@ -46,5 +51,21 @@ public class Appello {
 
     public String getDurata() {
         return durata;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public void setOra(String ora) {
+        this.ora = ora;
+    }
+
+    public void setDurata(String durata) {
+        this.durata = durata;
     }
 }

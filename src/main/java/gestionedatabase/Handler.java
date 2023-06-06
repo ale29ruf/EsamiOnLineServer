@@ -1,5 +1,7 @@
 package gestionedatabase;
 
+import abstractfactory.AbstractFactory;
+import abstractfactory.AppelloFactory;
 import model.Appello;
 import proto.Remotemethod;
 
@@ -7,14 +9,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.LinkedList;
 import java.util.List;
 
 public final class Handler implements HandlerDB{
 
+    EntityManagerFactory emf;
+    EntityManager em;
+
+    AbstractFactory af = AppelloFactory.FACTORY;
 
     public Handler(){
-
-
+        emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
+        em = emf.createEntityManager();
     }
 
     public boolean addStudent(int appello, Remotemethod.CodiceAppello cod){
@@ -24,8 +31,14 @@ public final class Handler implements HandlerDB{
     }
 
     public List<Remotemethod.Appello> caricaAppelli(){
-
-        return null;
+        String queryString = "SELECT e FROM Appello e";
+        TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
+        List<Appello> appelli = query.getResultList();
+        List<Remotemethod.Appello> result = new LinkedList<>();
+        for(Appello ap : appelli)
+            result.add((Remotemethod.Appello)af.createProto(ap));
+        //Remotemethod.ListaAppelli output = Remotemethod.ListaAppelli.newBuilder().addAllAppelli(result).build();
+        return result;
     }
 
     public List<Remotemethod.Domanda> caricaDomandeAppello(int idAppello){
@@ -38,24 +51,9 @@ public final class Handler implements HandlerDB{
         return null;
     }
 
-    public static void main(String[] args){
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        EntityManager em = emf.createEntityManager();
-
-        // Esegui la query per ottenere tutte le tuple della tabella
-        String queryString = "SELECT e FROM Appello e";
-        TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
-        List<Appello> risultati = query.getResultList();
-        System.out.println("Query eseguita");
-        System.out.println(risultati.size());
-        // Itera sui risultati
-        for (Appello ap : risultati) {
-            // Fai qualcosa con ogni tupla ottenuta
-            System.out.println(ap.getId() + ap.getData() + ap.getDurata() + ap.getOra());
-        }
-
+    public void closeHandler(){
         em.close();
         emf.close();
     }
+
 }
