@@ -5,5 +5,13 @@ public interface Models {
         return false;
     }
 
+    default boolean isDomanda(){
+        return false;
+    }
+
+    default boolean isStudente() {
+        return false;
+    }
+
 
 }

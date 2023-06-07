@@ -1,8 +1,9 @@
 package gestionedatabase;
 
-import abstractfactory.AbstractFactory;
-import abstractfactory.AppelloFactory;
+import converter.ConverterFactory;
+import converter.ProtoToModelStudente;
 import model.Appello;
+import model.Domanda;
 import model.Studente;
 import proto.Remotemethod;
 
@@ -18,7 +19,7 @@ public class Repository { //opera sul DB
     EntityManagerFactory emf;
     EntityManager em;
 
-    AbstractFactory af = AppelloFactory.FACTORY;
+    ConverterFactory af = ConverterFactory.FACTORY;
 
     public Repository(){
         emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
@@ -47,11 +48,12 @@ public class Repository { //opera sul DB
     }
 
     public Studente aggiungiUtente(Remotemethod.Studente studente){
-        Studente s = null;
+        Studente s;
         try {
             em.getTransaction().begin();
             Appello p = cercaAppello(studente.getIdAppello()).get(0); //oggetto persistente
-            s = (Studente) af.createModel(studente,p, UUID.randomUUID().toString().replace("-", ""));
+            ProtoToModelStudente conv = (ProtoToModelStudente) af.createConverterProto(Remotemethod.Studente.class);
+            s = (Studente) conv.convert(studente,p, UUID.randomUUID().toString().replace("-", ""));
             em.persist(s);
             em.getTransaction().commit();
         } catch (Exception e) {
@@ -61,5 +63,20 @@ public class Repository { //opera sul DB
             em.close();
         }
         return s;
+    }
+
+    public List<Appello> ottieniAppello(String codiceAppello) {
+        String queryString = "SELECT s.idappello FROM Studente s WHERE s.codiceappello = :codAp";
+        TypedQuery<Appello> queryA = em.createQuery(queryString, Appello.class);
+        queryA.setParameter("codAp", codiceAppello);
+        return queryA.getResultList();
+
+    }
+
+    public List<Domanda> ottieniDomande(Appello p) {
+        String queryString = "SELECT d FROM Domanda d WHERE d.appello = :idAppello";
+        TypedQuery<Domanda> queryD = em.createQuery(queryString, Domanda.class);
+        queryD.setParameter("idAppello", p.getId());
+        return queryD.getResultList();
     }
 }

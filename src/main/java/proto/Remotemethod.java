@@ -26,27 +26,21 @@ public final class Remotemethod {
      * 
      * </pre>
      *
-     * <code>int32 comment = 1;</code>
+     * <code>string testo = 1;</code>
      */
-    int getComment();
-
+    java.lang.String getTesto();
     /**
      * <pre>
-     *necessario per far ottenere le domande di un appello ad un utente registrato
+     * *
+     * Messages have field that start from 1 (zero is not allowed. Example of others types are:
+     * int32, boolean, enum etc.
+     * 
      * </pre>
      *
-     * <code>string codStudente = 2;</code>
-     */
-    java.lang.String getCodStudente();
-    /**
-     * <pre>
-     *necessario per far ottenere le domande di un appello ad un utente registrato
-     * </pre>
-     *
-     * <code>string codStudente = 2;</code>
+     * <code>string testo = 1;</code>
      */
     com.google.protobuf.ByteString
-        getCodStudenteBytes();
+        getTestoBytes();
   }
   /**
    * Protobuf type {@code Info}
@@ -61,8 +55,7 @@ public final class Remotemethod {
       super(builder);
     }
     private Info() {
-      comment_ = 0;
-      codStudente_ = "";
+      testo_ = "";
     }
 
     @java.lang.Override
@@ -89,15 +82,10 @@ public final class Remotemethod {
             case 0:
               done = true;
               break;
-            case 8: {
-
-              comment_ = input.readInt32();
-              break;
-            }
-            case 18: {
+            case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              codStudente_ = s;
+              testo_ = s;
               break;
             }
             default: {
@@ -132,8 +120,8 @@ public final class Remotemethod {
               proto.Remotemethod.Info.class, proto.Remotemethod.Info.Builder.class);
     }
 
-    public static final int COMMENT_FIELD_NUMBER = 1;
-    private int comment_;
+    public static final int TESTO_FIELD_NUMBER = 1;
+    private volatile java.lang.Object testo_;
     /**
      * <pre>
      * *
@@ -142,48 +130,38 @@ public final class Remotemethod {
      * 
      * </pre>
      *
-     * <code>int32 comment = 1;</code>
+     * <code>string testo = 1;</code>
      */
-    public int getComment() {
-      return comment_;
-    }
-
-    public static final int CODSTUDENTE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object codStudente_;
-    /**
-     * <pre>
-     *necessario per far ottenere le domande di un appello ad un utente registrato
-     * </pre>
-     *
-     * <code>string codStudente = 2;</code>
-     */
-    public java.lang.String getCodStudente() {
-      java.lang.Object ref = codStudente_;
+    public java.lang.String getTesto() {
+      java.lang.Object ref = testo_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        codStudente_ = s;
+        testo_ = s;
         return s;
       }
     }
     /**
      * <pre>
-     *necessario per far ottenere le domande di un appello ad un utente registrato
+     * *
+     * Messages have field that start from 1 (zero is not allowed. Example of others types are:
+     * int32, boolean, enum etc.
+     * 
      * </pre>
      *
-     * <code>string codStudente = 2;</code>
+     * <code>string testo = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getCodStudenteBytes() {
-      java.lang.Object ref = codStudente_;
+        getTestoBytes() {
+      java.lang.Object ref = testo_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        codStudente_ = b;
+        testo_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -204,11 +182,8 @@ public final class Remotemethod {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (comment_ != 0) {
-        output.writeInt32(1, comment_);
-      }
-      if (!getCodStudenteBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, codStudente_);
+      if (!getTestoBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, testo_);
       }
       unknownFields.writeTo(output);
     }
@@ -219,12 +194,8 @@ public final class Remotemethod {
       if (size != -1) return size;
 
       size = 0;
-      if (comment_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, comment_);
-      }
-      if (!getCodStudenteBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, codStudente_);
+      if (!getTestoBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, testo_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -242,10 +213,8 @@ public final class Remotemethod {
       proto.Remotemethod.Info other = (proto.Remotemethod.Info) obj;
 
       boolean result = true;
-      result = result && (getComment()
-          == other.getComment());
-      result = result && getCodStudente()
-          .equals(other.getCodStudente());
+      result = result && getTesto()
+          .equals(other.getTesto());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -257,10 +226,8 @@ public final class Remotemethod {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + COMMENT_FIELD_NUMBER;
-      hash = (53 * hash) + getComment();
-      hash = (37 * hash) + CODSTUDENTE_FIELD_NUMBER;
-      hash = (53 * hash) + getCodStudente().hashCode();
+      hash = (37 * hash) + TESTO_FIELD_NUMBER;
+      hash = (53 * hash) + getTesto().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -394,9 +361,7 @@ public final class Remotemethod {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        comment_ = 0;
-
-        codStudente_ = "";
+        testo_ = "";
 
         return this;
       }
@@ -424,8 +389,7 @@ public final class Remotemethod {
       @java.lang.Override
       public proto.Remotemethod.Info buildPartial() {
         proto.Remotemethod.Info result = new proto.Remotemethod.Info(this);
-        result.comment_ = comment_;
-        result.codStudente_ = codStudente_;
+        result.testo_ = testo_;
         onBuilt();
         return result;
       }
@@ -474,11 +438,8 @@ public final class Remotemethod {
 
       public Builder mergeFrom(proto.Remotemethod.Info other) {
         if (other == proto.Remotemethod.Info.getDefaultInstance()) return this;
-        if (other.getComment() != 0) {
-          setComment(other.getComment());
-        }
-        if (!other.getCodStudente().isEmpty()) {
-          codStudente_ = other.codStudente_;
+        if (!other.getTesto().isEmpty()) {
+          testo_ = other.testo_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -510,7 +471,7 @@ public final class Remotemethod {
         return this;
       }
 
-      private int comment_ ;
+      private java.lang.Object testo_ = "";
       /**
        * <pre>
        * *
@@ -519,59 +480,15 @@ public final class Remotemethod {
        * 
        * </pre>
        *
-       * <code>int32 comment = 1;</code>
+       * <code>string testo = 1;</code>
        */
-      public int getComment() {
-        return comment_;
-      }
-      /**
-       * <pre>
-       * *
-       * Messages have field that start from 1 (zero is not allowed. Example of others types are:
-       * int32, boolean, enum etc.
-       * 
-       * </pre>
-       *
-       * <code>int32 comment = 1;</code>
-       */
-      public Builder setComment(int value) {
-        
-        comment_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * *
-       * Messages have field that start from 1 (zero is not allowed. Example of others types are:
-       * int32, boolean, enum etc.
-       * 
-       * </pre>
-       *
-       * <code>int32 comment = 1;</code>
-       */
-      public Builder clearComment() {
-        
-        comment_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object codStudente_ = "";
-      /**
-       * <pre>
-       *necessario per far ottenere le domande di un appello ad un utente registrato
-       * </pre>
-       *
-       * <code>string codStudente = 2;</code>
-       */
-      public java.lang.String getCodStudente() {
-        java.lang.Object ref = codStudente_;
+      public java.lang.String getTesto() {
+        java.lang.Object ref = testo_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          codStudente_ = s;
+          testo_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
@@ -579,19 +496,22 @@ public final class Remotemethod {
       }
       /**
        * <pre>
-       *necessario per far ottenere le domande di un appello ad un utente registrato
+       * *
+       * Messages have field that start from 1 (zero is not allowed. Example of others types are:
+       * int32, boolean, enum etc.
+       * 
        * </pre>
        *
-       * <code>string codStudente = 2;</code>
+       * <code>string testo = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getCodStudenteBytes() {
-        java.lang.Object ref = codStudente_;
+          getTestoBytes() {
+        java.lang.Object ref = testo_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          codStudente_ = b;
+          testo_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
@@ -599,49 +519,58 @@ public final class Remotemethod {
       }
       /**
        * <pre>
-       *necessario per far ottenere le domande di un appello ad un utente registrato
+       * *
+       * Messages have field that start from 1 (zero is not allowed. Example of others types are:
+       * int32, boolean, enum etc.
+       * 
        * </pre>
        *
-       * <code>string codStudente = 2;</code>
+       * <code>string testo = 1;</code>
        */
-      public Builder setCodStudente(
+      public Builder setTesto(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        codStudente_ = value;
+        testo_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *necessario per far ottenere le domande di un appello ad un utente registrato
+       * *
+       * Messages have field that start from 1 (zero is not allowed. Example of others types are:
+       * int32, boolean, enum etc.
+       * 
        * </pre>
        *
-       * <code>string codStudente = 2;</code>
+       * <code>string testo = 1;</code>
        */
-      public Builder clearCodStudente() {
+      public Builder clearTesto() {
         
-        codStudente_ = getDefaultInstance().getCodStudente();
+        testo_ = getDefaultInstance().getTesto();
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *necessario per far ottenere le domande di un appello ad un utente registrato
+       * *
+       * Messages have field that start from 1 (zero is not allowed. Example of others types are:
+       * int32, boolean, enum etc.
+       * 
        * </pre>
        *
-       * <code>string codStudente = 2;</code>
+       * <code>string testo = 1;</code>
        */
-      public Builder setCodStudenteBytes(
+      public Builder setTestoBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        codStudente_ = value;
+        testo_ = value;
         onChanged();
         return this;
       }
@@ -8684,29 +8613,29 @@ public final class Remotemethod {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022remotemethod.proto\",\n\004Info\022\017\n\007comment\030" +
-      "\001 \001(\005\022\023\n\013codStudente\030\002 \001(\t\")\n\014ListaAppel" +
-      "li\022\031\n\007appelli\030\001 \003(\0132\010.Appello\"@\n\007Appello" +
-      "\022\n\n\002id\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\022\013\n\003ora\030\003 \001(\t\022" +
-      "\016\n\006durata\030\004 \001(\t\"D\n\010Studente\022\021\n\tmatricola" +
-      "\030\001 \001(\t\022\022\n\ncodFiscale\030\002 \001(\t\022\021\n\tidAppello\030" +
-      "\003 \001(\005\"\037\n\rCodiceAppello\022\016\n\006codice\030\001 \001(\t\")" +
-      "\n\014ListaDomande\022\031\n\007domande\030\001 \003(\0132\010.Domand" +
-      "a\"\030\n\007Domanda\022\r\n\005testo\030\001 \001(\t\"K\n\017RispostaA" +
-      "ppello\022\021\n\tidAppello\030\001 \001(\t\022%\n\rlistaRispos" +
-      "te\030\002 \001(\0132\016.ListaRisposte\"\034\n\010Risposta\022\020\n\010" +
-      "risposta\030\001 \001(\005\"N\n\010pRequest\022!\n\tcodApello\030" +
-      "\001 \001(\0132\016.CodiceAppello\022\021\n\thostaname\030\002 \001(\t" +
-      "\022\014\n\004port\030\003 \001(\005\"U\n\006Modulo\022\021\n\tidAppello\030\001 " +
-      "\001(\t\022%\n\rlistaRisposte\030\002 \001(\0132\016.ListaRispos" +
-      "te\022\021\n\tpunteggio\030\003 \001(\005\",\n\rListaRisposte\022\033" +
-      "\n\010risposte\030\001 \003(\0132\t.Risposta2\336\001\n\006Sender\022\'" +
-      "\n\rCaricaAppelli\022\005.Info\032\r.ListaAppelli\"\000\022" +
-      "/\n\020RegistraStudente\022\t.Studente\032\016.CodiceA" +
-      "ppello\"\000\022$\n\016PartecipaEsame\022\t.pRequest\032\005." +
-      "Info\"\000\022&\n\014inviaDomande\022\r.ListaDomande\032\005." +
-      "Info\"\000\022,\n\rInviaRisposte\022\020.RispostaAppell" +
-      "o\032\007.Modulo\"\000B\007\n\005protob\006proto3"
+      "\n\022remotemethod.proto\"\025\n\004Info\022\r\n\005testo\030\001 " +
+      "\001(\t\")\n\014ListaAppelli\022\031\n\007appelli\030\001 \003(\0132\010.A" +
+      "ppello\"@\n\007Appello\022\n\n\002id\030\001 \001(\005\022\014\n\004data\030\002 " +
+      "\001(\t\022\013\n\003ora\030\003 \001(\t\022\016\n\006durata\030\004 \001(\t\"D\n\010Stud" +
+      "ente\022\021\n\tmatricola\030\001 \001(\t\022\022\n\ncodFiscale\030\002 " +
+      "\001(\t\022\021\n\tidAppello\030\003 \001(\005\"\037\n\rCodiceAppello\022" +
+      "\016\n\006codice\030\001 \001(\t\")\n\014ListaDomande\022\031\n\007doman" +
+      "de\030\001 \003(\0132\010.Domanda\"\030\n\007Domanda\022\r\n\005testo\030\001" +
+      " \001(\t\"K\n\017RispostaAppello\022\021\n\tidAppello\030\001 \001" +
+      "(\t\022%\n\rlistaRisposte\030\002 \001(\0132\016.ListaRispost" +
+      "e\"\034\n\010Risposta\022\020\n\010risposta\030\001 \001(\005\"N\n\010pRequ" +
+      "est\022!\n\tcodApello\030\001 \001(\0132\016.CodiceAppello\022\021" +
+      "\n\thostaname\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\"U\n\006Modul" +
+      "o\022\021\n\tidAppello\030\001 \001(\t\022%\n\rlistaRisposte\030\002 " +
+      "\001(\0132\016.ListaRisposte\022\021\n\tpunteggio\030\003 \001(\005\"," +
+      "\n\rListaRisposte\022\033\n\010risposte\030\001 \003(\0132\t.Risp" +
+      "osta2\336\001\n\006Sender\022\'\n\rCaricaAppelli\022\005.Info\032" +
+      "\r.ListaAppelli\"\000\022/\n\020RegistraStudente\022\t.S" +
+      "tudente\032\016.CodiceAppello\"\000\022$\n\016PartecipaEs" +
+      "ame\022\t.pRequest\032\005.Info\"\000\022&\n\014inviaDomande\022" +
+      "\r.ListaDomande\032\005.Info\"\000\022,\n\rInviaRisposte" +
+      "\022\020.RispostaAppello\032\007.Modulo\"\000B\007\n\005protob\006" +
+      "proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8725,7 +8654,7 @@ public final class Remotemethod {
     internal_static_Info_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Info_descriptor,
-        new java.lang.String[] { "Comment", "CodStudente", });
+        new java.lang.String[] { "Testo", });
     internal_static_ListaAppelli_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_ListaAppelli_fieldAccessorTable = new

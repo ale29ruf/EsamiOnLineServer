@@ -21,8 +21,7 @@ message Info {
    * Messages have field that start from 1 (zero is not allowed. Example of others types are:
    * int32, boolean, enum etc.
    * */
-  int32 comment = 1;
-  string codStudente = 2; //necessario per far ottenere le domande di un appello ad un utente registrato
+  string testo = 1;
 }
 
 message ListaAppelli {

@@ -1,12 +1,13 @@
 package service;
 
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import gestionedatabase.HandlerDB;
+import io.grpc.stub.StreamObserver;
 import proto.Remotemethod;
 import proto.SenderGrpc;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.*;
 
 public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
@@ -40,7 +41,6 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
     @Override
     public void registraStudente(proto.Remotemethod.Studente request,
                                  io.grpc.stub.StreamObserver<proto.Remotemethod.CodiceAppello> responseObserver) {
-        //Remotemethod.CodiceAppello cod = Remotemethod.CodiceAppello.newBuilder().setCodice(uuid.toString().replace("-", "")).build();
 
         Callable<String> task = () -> g_DB.addStudent(request);
         Future<String> result = esecutore.submit(task);
@@ -56,10 +56,34 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
         responseObserver.onNext(codiceAppello);
         responseObserver.onCompleted();
     }
-/*
+
     @Override
-    public void caricaDomandeAppello(proto.Remotemethod.Info request,
-                                     io.grpc.stub.StreamObserver<proto.Remotemethod.ListaDomande> responseObserver) {
+    public void partecipaEsame(Remotemethod.pRequest request, StreamObserver<Remotemethod.Info> responseObserver) {
+        Callable<Boolean> task = () -> g_DB.partecipaEsame(request);
+        Future<Boolean> result = esecutore.submit(task);
+        boolean esito;
+        try{
+            esito = result.get(20,TimeUnit.SECONDS);
+        }catch (InterruptedException | ExecutionException | TimeoutException e) {
+            throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
+        }
+
+        String testo;
+        if(esito){
+            testo = "Attendere inizio prova.";
+            // avviare thread
+        } else {
+            testo = "Tempo di partecipazione alla prova scaduto.";
+        }
+        Remotemethod.Info risposta = Remotemethod.Info.newBuilder().setTesto(testo).build();
+
+        responseObserver.onNext(risposta);
+        responseObserver.onCompleted();
+    }
+
+    /*
+    public void partecipaEsame(proto.Remotemethod.Info request,
+                               io.grpc.stub.StreamObserver<proto.Remotemethod.ListaDomande> responseObserver) {
         List<Remotemethod.Domanda> domande = g_DB.caricaDomandeAppello(request.getComment());
         Remotemethod.ListaDomande response = Remotemethod.ListaDomande.newBuilder().addAllDomande(domande).build();
         responseObserver.onNext(response);

@@ -8,4 +8,6 @@ public interface HandlerDB {
     List<Remotemethod.Appello> caricaAppelli();
 
     String addStudent(Remotemethod.Studente studente);
+
+    boolean partecipaEsame(Remotemethod.pRequest richiesta);
 }
