@@ -74,19 +74,34 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void inviaRisposte(Remotemethod.RispostaAppello request, StreamObserver<Remotemethod.Modulo> responseObserver) {
+        Callable<List<Remotemethod.Risposta>> task = () -> g_DB.inviaRisposte(request.getIdAppello());
+        Future<List<Remotemethod.Risposta>> result = esecutore.submit(task);
+        List<Remotemethod.Risposta> risposte;
+        try{
+            risposte = result.get(20,TimeUnit.SECONDS);
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
+        }
+        Remotemethod.ListaRisposte listaR = Remotemethod.ListaRisposte.newBuilder().addAllRisposte(risposte).build();
+        int punteggio = calcolaPunteggio(request.getListaRisposte().getRisposteList(), risposte);
+        Remotemethod.Modulo modulo = Remotemethod.Modulo.newBuilder().setIdAppello(request.getIdAppello()).setListaRisposte(listaR).setPunteggio(punteggio).build();
+        responseObserver.onNext(modulo);
+        responseObserver.onCompleted();
+    }
 
-/*
-    private int calcolaPunteggio(List<Remotemethod.Risposta> risposteList, List<Remotemethod.Risposta> rispostaList) {
+    private int calcolaPunteggio(List<Remotemethod.Risposta> daVerificare, List<Remotemethod.Risposta> corrette) {
         int punteggio = 0;
-        for (int i=0; i<risposteList.size(); i++){
-            int risposta = risposteList.get(i).getRisposta();
+        for (int i=0; i<daVerificare.size(); i++){
+            int risposta = daVerificare.get(i).getRisposta();
             if (risposta == -1) //risposta non data
                 punteggio += -1;
-            else if (risposteList.get(i).getRisposta() == rispostaList.get(i).getRisposta())
+            else if (risposta == corrette.get(i).getRisposta())
                 punteggio += 3;
         }
         return punteggio;
     }
 
-     */
+
 }

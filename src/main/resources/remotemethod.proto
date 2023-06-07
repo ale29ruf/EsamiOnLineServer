@@ -53,7 +53,7 @@ message Domanda {
 }
 
 message RispostaAppello {
-  string idAppello = 1;
+  int32 idAppello = 1;
   ListaRisposte listaRisposte = 2;
 }
 
@@ -68,7 +68,7 @@ message pRequest {
 }
 
 message Modulo {
-  string idAppello = 1;
+  int32 idAppello = 1;
   ListaRisposte listaRisposte = 2;
   int32 punteggio = 3;
 }

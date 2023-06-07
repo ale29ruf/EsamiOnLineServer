@@ -5,7 +5,9 @@ import exception.AppelloNotFoundException;
 import exception.UtenteAlreadyRegisteredException;
 import proto.Remotemethod;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
 
@@ -15,6 +17,7 @@ public class ProxyHandler implements HandlerDB{
     Handler gestore;
     boolean changed = true;
     ReentrantLock lock = new ReentrantLock();
+    Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
 
 
     public ProxyHandler(Handler gestore){
@@ -60,6 +63,14 @@ public class ProxyHandler implements HandlerDB{
         }
 
         return risposta;
+    }
+
+    @Override
+    public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
+        List<Remotemethod.Risposta> risposte = risposteCached.get(idAppello);
+        if(risposte == null)
+            risposteCached.put(idAppello,gestore.inviaRisposte(idAppello));
+        return risposte;
     }
 
 

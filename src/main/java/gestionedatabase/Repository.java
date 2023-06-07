@@ -4,6 +4,7 @@ import converter.ConverterFactory;
 import converter.ProtoToModelStudente;
 import model.Appello;
 import model.Domanda;
+import model.Risposta;
 import model.Studente;
 import proto.Remotemethod;
 
@@ -78,5 +79,9 @@ public class Repository { //opera sul DB
         TypedQuery<Domanda> queryD = em.createQuery(queryString, Domanda.class);
         queryD.setParameter("idAppello", p.getId());
         return queryD.getResultList();
+    }
+
+    public List<Risposta> caricaRisposte(int idAppello){
+        return null;
     }
 }

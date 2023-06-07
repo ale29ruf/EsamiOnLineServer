@@ -10,4 +10,6 @@ public interface HandlerDB {
     String addStudent(Remotemethod.Studente studente);
 
     String partecipaEsame(Remotemethod.pRequest richiesta);
+
+    List<Remotemethod.Risposta> inviaRisposte(int idAppello);
 }

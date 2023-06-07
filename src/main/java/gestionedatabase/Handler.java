@@ -130,5 +130,9 @@ public final class Handler implements HandlerDB{ //service
         return notificatoreMap.get(p);
     }
 
+    @Override
+    public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
+        return null;
+    }
 
 }

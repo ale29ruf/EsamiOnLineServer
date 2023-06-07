@@ -4796,14 +4796,9 @@ public final class Remotemethod {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string idAppello = 1;</code>
+     * <code>int32 idAppello = 1;</code>
      */
-    java.lang.String getIdAppello();
-    /**
-     * <code>string idAppello = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getIdAppelloBytes();
+    int getIdAppello();
 
     /**
      * <code>.ListaRisposte listaRisposte = 2;</code>
@@ -4831,7 +4826,7 @@ public final class Remotemethod {
       super(builder);
     }
     private RispostaAppello() {
-      idAppello_ = "";
+      idAppello_ = 0;
     }
 
     @java.lang.Override
@@ -4858,10 +4853,9 @@ public final class Remotemethod {
             case 0:
               done = true;
               break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 8: {
 
-              idAppello_ = s;
+              idAppello_ = input.readInt32();
               break;
             }
             case 18: {
@@ -4910,37 +4904,12 @@ public final class Remotemethod {
     }
 
     public static final int IDAPPELLO_FIELD_NUMBER = 1;
-    private volatile java.lang.Object idAppello_;
+    private int idAppello_;
     /**
-     * <code>string idAppello = 1;</code>
+     * <code>int32 idAppello = 1;</code>
      */
-    public java.lang.String getIdAppello() {
-      java.lang.Object ref = idAppello_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        idAppello_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string idAppello = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIdAppelloBytes() {
-      java.lang.Object ref = idAppello_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        idAppello_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getIdAppello() {
+      return idAppello_;
     }
 
     public static final int LISTARISPOSTE_FIELD_NUMBER = 2;
@@ -4978,8 +4947,8 @@ public final class Remotemethod {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getIdAppelloBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idAppello_);
+      if (idAppello_ != 0) {
+        output.writeInt32(1, idAppello_);
       }
       if (listaRisposte_ != null) {
         output.writeMessage(2, getListaRisposte());
@@ -4993,8 +4962,9 @@ public final class Remotemethod {
       if (size != -1) return size;
 
       size = 0;
-      if (!getIdAppelloBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idAppello_);
+      if (idAppello_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, idAppello_);
       }
       if (listaRisposte_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -5016,8 +4986,8 @@ public final class Remotemethod {
       proto.Remotemethod.RispostaAppello other = (proto.Remotemethod.RispostaAppello) obj;
 
       boolean result = true;
-      result = result && getIdAppello()
-          .equals(other.getIdAppello());
+      result = result && (getIdAppello()
+          == other.getIdAppello());
       result = result && (hasListaRisposte() == other.hasListaRisposte());
       if (hasListaRisposte()) {
         result = result && getListaRisposte()
@@ -5035,7 +5005,7 @@ public final class Remotemethod {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + IDAPPELLO_FIELD_NUMBER;
-      hash = (53 * hash) + getIdAppello().hashCode();
+      hash = (53 * hash) + getIdAppello();
       if (hasListaRisposte()) {
         hash = (37 * hash) + LISTARISPOSTE_FIELD_NUMBER;
         hash = (53 * hash) + getListaRisposte().hashCode();
@@ -5173,7 +5143,7 @@ public final class Remotemethod {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        idAppello_ = "";
+        idAppello_ = 0;
 
         if (listaRisposteBuilder_ == null) {
           listaRisposte_ = null;
@@ -5261,9 +5231,8 @@ public final class Remotemethod {
 
       public Builder mergeFrom(proto.Remotemethod.RispostaAppello other) {
         if (other == proto.Remotemethod.RispostaAppello.getDefaultInstance()) return this;
-        if (!other.getIdAppello().isEmpty()) {
-          idAppello_ = other.idAppello_;
-          onChanged();
+        if (other.getIdAppello() != 0) {
+          setIdAppello(other.getIdAppello());
         }
         if (other.hasListaRisposte()) {
           mergeListaRisposte(other.getListaRisposte());
@@ -5297,71 +5266,28 @@ public final class Remotemethod {
         return this;
       }
 
-      private java.lang.Object idAppello_ = "";
+      private int idAppello_ ;
       /**
-       * <code>string idAppello = 1;</code>
+       * <code>int32 idAppello = 1;</code>
        */
-      public java.lang.String getIdAppello() {
-        java.lang.Object ref = idAppello_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          idAppello_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getIdAppello() {
+        return idAppello_;
       }
       /**
-       * <code>string idAppello = 1;</code>
+       * <code>int32 idAppello = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdAppelloBytes() {
-        java.lang.Object ref = idAppello_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          idAppello_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string idAppello = 1;</code>
-       */
-      public Builder setIdAppello(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setIdAppello(int value) {
+        
         idAppello_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string idAppello = 1;</code>
+       * <code>int32 idAppello = 1;</code>
        */
       public Builder clearIdAppello() {
         
-        idAppello_ = getDefaultInstance().getIdAppello();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string idAppello = 1;</code>
-       */
-      public Builder setIdAppelloBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        idAppello_ = value;
+        idAppello_ = 0;
         onChanged();
         return this;
       }
@@ -6823,14 +6749,9 @@ public final class Remotemethod {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string idAppello = 1;</code>
+     * <code>int32 idAppello = 1;</code>
      */
-    java.lang.String getIdAppello();
-    /**
-     * <code>string idAppello = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getIdAppelloBytes();
+    int getIdAppello();
 
     /**
      * <code>.ListaRisposte listaRisposte = 2;</code>
@@ -6863,7 +6784,7 @@ public final class Remotemethod {
       super(builder);
     }
     private Modulo() {
-      idAppello_ = "";
+      idAppello_ = 0;
       punteggio_ = 0;
     }
 
@@ -6891,10 +6812,9 @@ public final class Remotemethod {
             case 0:
               done = true;
               break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 8: {
 
-              idAppello_ = s;
+              idAppello_ = input.readInt32();
               break;
             }
             case 18: {
@@ -6948,37 +6868,12 @@ public final class Remotemethod {
     }
 
     public static final int IDAPPELLO_FIELD_NUMBER = 1;
-    private volatile java.lang.Object idAppello_;
+    private int idAppello_;
     /**
-     * <code>string idAppello = 1;</code>
+     * <code>int32 idAppello = 1;</code>
      */
-    public java.lang.String getIdAppello() {
-      java.lang.Object ref = idAppello_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        idAppello_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string idAppello = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIdAppelloBytes() {
-      java.lang.Object ref = idAppello_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        idAppello_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getIdAppello() {
+      return idAppello_;
     }
 
     public static final int LISTARISPOSTE_FIELD_NUMBER = 2;
@@ -7025,8 +6920,8 @@ public final class Remotemethod {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getIdAppelloBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, idAppello_);
+      if (idAppello_ != 0) {
+        output.writeInt32(1, idAppello_);
       }
       if (listaRisposte_ != null) {
         output.writeMessage(2, getListaRisposte());
@@ -7043,8 +6938,9 @@ public final class Remotemethod {
       if (size != -1) return size;
 
       size = 0;
-      if (!getIdAppelloBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, idAppello_);
+      if (idAppello_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, idAppello_);
       }
       if (listaRisposte_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -7070,8 +6966,8 @@ public final class Remotemethod {
       proto.Remotemethod.Modulo other = (proto.Remotemethod.Modulo) obj;
 
       boolean result = true;
-      result = result && getIdAppello()
-          .equals(other.getIdAppello());
+      result = result && (getIdAppello()
+          == other.getIdAppello());
       result = result && (hasListaRisposte() == other.hasListaRisposte());
       if (hasListaRisposte()) {
         result = result && getListaRisposte()
@@ -7091,7 +6987,7 @@ public final class Remotemethod {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + IDAPPELLO_FIELD_NUMBER;
-      hash = (53 * hash) + getIdAppello().hashCode();
+      hash = (53 * hash) + getIdAppello();
       if (hasListaRisposte()) {
         hash = (37 * hash) + LISTARISPOSTE_FIELD_NUMBER;
         hash = (53 * hash) + getListaRisposte().hashCode();
@@ -7231,7 +7127,7 @@ public final class Remotemethod {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        idAppello_ = "";
+        idAppello_ = 0;
 
         if (listaRisposteBuilder_ == null) {
           listaRisposte_ = null;
@@ -7322,9 +7218,8 @@ public final class Remotemethod {
 
       public Builder mergeFrom(proto.Remotemethod.Modulo other) {
         if (other == proto.Remotemethod.Modulo.getDefaultInstance()) return this;
-        if (!other.getIdAppello().isEmpty()) {
-          idAppello_ = other.idAppello_;
-          onChanged();
+        if (other.getIdAppello() != 0) {
+          setIdAppello(other.getIdAppello());
         }
         if (other.hasListaRisposte()) {
           mergeListaRisposte(other.getListaRisposte());
@@ -7361,71 +7256,28 @@ public final class Remotemethod {
         return this;
       }
 
-      private java.lang.Object idAppello_ = "";
+      private int idAppello_ ;
       /**
-       * <code>string idAppello = 1;</code>
+       * <code>int32 idAppello = 1;</code>
        */
-      public java.lang.String getIdAppello() {
-        java.lang.Object ref = idAppello_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          idAppello_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getIdAppello() {
+        return idAppello_;
       }
       /**
-       * <code>string idAppello = 1;</code>
+       * <code>int32 idAppello = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getIdAppelloBytes() {
-        java.lang.Object ref = idAppello_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          idAppello_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string idAppello = 1;</code>
-       */
-      public Builder setIdAppello(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setIdAppello(int value) {
+        
         idAppello_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string idAppello = 1;</code>
+       * <code>int32 idAppello = 1;</code>
        */
       public Builder clearIdAppello() {
         
-        idAppello_ = getDefaultInstance().getIdAppello();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string idAppello = 1;</code>
-       */
-      public Builder setIdAppelloBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        idAppello_ = value;
+        idAppello_ = 0;
         onChanged();
         return this;
       }
@@ -8484,12 +8336,12 @@ public final class Remotemethod {
       "lo\030\003 \001(\005\"\037\n\rCodiceAppello\022\016\n\006codice\030\001 \001(" +
       "\t\")\n\014ListaDomande\022\031\n\007domande\030\001 \003(\0132\010.Dom" +
       "anda\"\030\n\007Domanda\022\r\n\005testo\030\001 \001(\t\"K\n\017Rispos" +
-      "taAppello\022\021\n\tidAppello\030\001 \001(\t\022%\n\rlistaRis" +
+      "taAppello\022\021\n\tidAppello\030\001 \001(\005\022%\n\rlistaRis" +
       "poste\030\002 \001(\0132\016.ListaRisposte\"\034\n\010Risposta\022" +
       "\020\n\010risposta\030\001 \001(\005\"N\n\010pRequest\022!\n\tcodApel" +
       "lo\030\001 \001(\0132\016.CodiceAppello\022\021\n\thostaname\030\002 " +
       "\001(\t\022\014\n\004port\030\003 \001(\005\"U\n\006Modulo\022\021\n\tidAppello" +
-      "\030\001 \001(\t\022%\n\rlistaRisposte\030\002 \001(\0132\016.ListaRis" +
+      "\030\001 \001(\005\022%\n\rlistaRisposte\030\002 \001(\0132\016.ListaRis" +
       "poste\022\021\n\tpunteggio\030\003 \001(\005\",\n\rListaRispost" +
       "e\022\033\n\010risposte\030\001 \003(\0132\t.Risposta2\336\001\n\006Sende" +
       "r\022\'\n\rCaricaAppelli\022\005.Info\032\r.ListaAppelli" +
