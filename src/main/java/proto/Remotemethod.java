@@ -703,25 +703,25 @@ public final class Remotemethod {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     java.util.List<proto.Remotemethod.Appello> 
         getAppelliList();
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     proto.Remotemethod.Appello getAppelli(int index);
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     int getAppelliCount();
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     java.util.List<? extends proto.Remotemethod.AppelloOrBuilder> 
         getAppelliOrBuilderList();
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     proto.Remotemethod.AppelloOrBuilder getAppelliOrBuilder(
         int index);
@@ -813,32 +813,32 @@ public final class Remotemethod {
     public static final int APPELLI_FIELD_NUMBER = 1;
     private java.util.List<proto.Remotemethod.Appello> appelli_;
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     public java.util.List<proto.Remotemethod.Appello> getAppelliList() {
       return appelli_;
     }
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     public java.util.List<? extends proto.Remotemethod.AppelloOrBuilder> 
         getAppelliOrBuilderList() {
       return appelli_;
     }
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     public int getAppelliCount() {
       return appelli_.size();
     }
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     public proto.Remotemethod.Appello getAppelli(int index) {
       return appelli_.get(index);
     }
     /**
-     * <code>repeated .Appelli appelli = 1;</code>
+     * <code>repeated .Appello appelli = 1;</code>
      */
     public proto.Remotemethod.AppelloOrBuilder getAppelliOrBuilder(
         int index) {
@@ -1201,7 +1201,7 @@ public final class Remotemethod {
           proto.Remotemethod.Appello, proto.Remotemethod.Appello.Builder, proto.Remotemethod.AppelloOrBuilder> appelliBuilder_;
 
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public java.util.List<proto.Remotemethod.Appello> getAppelliList() {
         if (appelliBuilder_ == null) {
@@ -1211,7 +1211,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public int getAppelliCount() {
         if (appelliBuilder_ == null) {
@@ -1221,7 +1221,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public proto.Remotemethod.Appello getAppelli(int index) {
         if (appelliBuilder_ == null) {
@@ -1231,7 +1231,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder setAppelli(
           int index, proto.Remotemethod.Appello value) {
@@ -1248,7 +1248,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder setAppelli(
           int index, proto.Remotemethod.Appello.Builder builderForValue) {
@@ -1262,7 +1262,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder addAppelli(proto.Remotemethod.Appello value) {
         if (appelliBuilder_ == null) {
@@ -1278,7 +1278,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder addAppelli(
           int index, proto.Remotemethod.Appello value) {
@@ -1295,7 +1295,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder addAppelli(
           proto.Remotemethod.Appello.Builder builderForValue) {
@@ -1309,7 +1309,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder addAppelli(
           int index, proto.Remotemethod.Appello.Builder builderForValue) {
@@ -1323,7 +1323,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder addAllAppelli(
           java.lang.Iterable<? extends proto.Remotemethod.Appello> values) {
@@ -1338,7 +1338,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder clearAppelli() {
         if (appelliBuilder_ == null) {
@@ -1351,7 +1351,7 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public Builder removeAppelli(int index) {
         if (appelliBuilder_ == null) {
@@ -1364,14 +1364,14 @@ public final class Remotemethod {
         return this;
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public proto.Remotemethod.Appello.Builder getAppelliBuilder(
           int index) {
         return getAppelliFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public proto.Remotemethod.AppelloOrBuilder getAppelliOrBuilder(
           int index) {
@@ -1381,7 +1381,7 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public java.util.List<? extends proto.Remotemethod.AppelloOrBuilder> 
            getAppelliOrBuilderList() {
@@ -1392,14 +1392,14 @@ public final class Remotemethod {
         }
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public proto.Remotemethod.Appello.Builder addAppelliBuilder() {
         return getAppelliFieldBuilder().addBuilder(
             proto.Remotemethod.Appello.getDefaultInstance());
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public proto.Remotemethod.Appello.Builder addAppelliBuilder(
           int index) {
@@ -1407,7 +1407,7 @@ public final class Remotemethod {
             index, proto.Remotemethod.Appello.getDefaultInstance());
       }
       /**
-       * <code>repeated .Appelli appelli = 1;</code>
+       * <code>repeated .Appello appelli = 1;</code>
        */
       public java.util.List<proto.Remotemethod.Appello.Builder> 
            getAppelliBuilderList() {
@@ -1481,7 +1481,7 @@ public final class Remotemethod {
   }
 
   public interface AppelloOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Appelli)
+      // @@protoc_insertion_point(interface_extends:Appello)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1520,14 +1520,14 @@ public final class Remotemethod {
         getDurataBytes();
   }
   /**
-   * Protobuf type {@code Appelli}
+   * Protobuf type {@code Appello}
    */
   public  static final class Appello extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Appelli)
+      // @@protoc_insertion_point(message_implements:Appello)
       AppelloOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Appelli.newBuilder() to construct.
+    // Use Appello.newBuilder() to construct.
     private Appello(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
@@ -1915,11 +1915,11 @@ public final class Remotemethod {
       return builder;
     }
     /**
-     * Protobuf type {@code Appelli}
+     * Protobuf type {@code Appello}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Appelli)
+        // @@protoc_insertion_point(builder_implements:Appello)
         proto.Remotemethod.AppelloOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1934,7 +1934,7 @@ public final class Remotemethod {
                 proto.Remotemethod.Appello.class, proto.Remotemethod.Appello.Builder.class);
       }
 
-      // Construct using proto.Remotemethod.Appelli.newBuilder()
+      // Construct using proto.Remotemethod.Appello.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2327,10 +2327,10 @@ public final class Remotemethod {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:Appelli)
+      // @@protoc_insertion_point(builder_scope:Appello)
     }
 
-    // @@protoc_insertion_point(class_scope:Appelli)
+    // @@protoc_insertion_point(class_scope:Appello)
     private static final proto.Remotemethod.Appello DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new proto.Remotemethod.Appello();
@@ -6219,6 +6219,813 @@ public final class Remotemethod {
 
   }
 
+  public interface pRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:pRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.CodiceAppello codApello = 1;</code>
+     */
+    boolean hasCodApello();
+    /**
+     * <code>.CodiceAppello codApello = 1;</code>
+     */
+    proto.Remotemethod.CodiceAppello getCodApello();
+    /**
+     * <code>.CodiceAppello codApello = 1;</code>
+     */
+    proto.Remotemethod.CodiceAppelloOrBuilder getCodApelloOrBuilder();
+
+    /**
+     * <code>string hostaname = 2;</code>
+     */
+    java.lang.String getHostaname();
+    /**
+     * <code>string hostaname = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getHostanameBytes();
+
+    /**
+     * <code>int32 port = 3;</code>
+     */
+    int getPort();
+  }
+  /**
+   * Protobuf type {@code pRequest}
+   */
+  public  static final class pRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:pRequest)
+      pRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use pRequest.newBuilder() to construct.
+    private pRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private pRequest() {
+      hostaname_ = "";
+      port_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private pRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              proto.Remotemethod.CodiceAppello.Builder subBuilder = null;
+              if (codApello_ != null) {
+                subBuilder = codApello_.toBuilder();
+              }
+              codApello_ = input.readMessage(proto.Remotemethod.CodiceAppello.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(codApello_);
+                codApello_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              hostaname_ = s;
+              break;
+            }
+            case 24: {
+
+              port_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return proto.Remotemethod.internal_static_pRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return proto.Remotemethod.internal_static_pRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              proto.Remotemethod.pRequest.class, proto.Remotemethod.pRequest.Builder.class);
+    }
+
+    public static final int CODAPELLO_FIELD_NUMBER = 1;
+    private proto.Remotemethod.CodiceAppello codApello_;
+    /**
+     * <code>.CodiceAppello codApello = 1;</code>
+     */
+    public boolean hasCodApello() {
+      return codApello_ != null;
+    }
+    /**
+     * <code>.CodiceAppello codApello = 1;</code>
+     */
+    public proto.Remotemethod.CodiceAppello getCodApello() {
+      return codApello_ == null ? proto.Remotemethod.CodiceAppello.getDefaultInstance() : codApello_;
+    }
+    /**
+     * <code>.CodiceAppello codApello = 1;</code>
+     */
+    public proto.Remotemethod.CodiceAppelloOrBuilder getCodApelloOrBuilder() {
+      return getCodApello();
+    }
+
+    public static final int HOSTANAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object hostaname_;
+    /**
+     * <code>string hostaname = 2;</code>
+     */
+    public java.lang.String getHostaname() {
+      java.lang.Object ref = hostaname_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        hostaname_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string hostaname = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHostanameBytes() {
+      java.lang.Object ref = hostaname_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        hostaname_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PORT_FIELD_NUMBER = 3;
+    private int port_;
+    /**
+     * <code>int32 port = 3;</code>
+     */
+    public int getPort() {
+      return port_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (codApello_ != null) {
+        output.writeMessage(1, getCodApello());
+      }
+      if (!getHostanameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, hostaname_);
+      }
+      if (port_ != 0) {
+        output.writeInt32(3, port_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (codApello_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getCodApello());
+      }
+      if (!getHostanameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, hostaname_);
+      }
+      if (port_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, port_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof proto.Remotemethod.pRequest)) {
+        return super.equals(obj);
+      }
+      proto.Remotemethod.pRequest other = (proto.Remotemethod.pRequest) obj;
+
+      boolean result = true;
+      result = result && (hasCodApello() == other.hasCodApello());
+      if (hasCodApello()) {
+        result = result && getCodApello()
+            .equals(other.getCodApello());
+      }
+      result = result && getHostaname()
+          .equals(other.getHostaname());
+      result = result && (getPort()
+          == other.getPort());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasCodApello()) {
+        hash = (37 * hash) + CODAPELLO_FIELD_NUMBER;
+        hash = (53 * hash) + getCodApello().hashCode();
+      }
+      hash = (37 * hash) + HOSTANAME_FIELD_NUMBER;
+      hash = (53 * hash) + getHostaname().hashCode();
+      hash = (37 * hash) + PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getPort();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static proto.Remotemethod.pRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Remotemethod.pRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static proto.Remotemethod.pRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static proto.Remotemethod.pRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(proto.Remotemethod.pRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code pRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:pRequest)
+        proto.Remotemethod.pRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return proto.Remotemethod.internal_static_pRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return proto.Remotemethod.internal_static_pRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                proto.Remotemethod.pRequest.class, proto.Remotemethod.pRequest.Builder.class);
+      }
+
+      // Construct using proto.Remotemethod.pRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (codApelloBuilder_ == null) {
+          codApello_ = null;
+        } else {
+          codApello_ = null;
+          codApelloBuilder_ = null;
+        }
+        hostaname_ = "";
+
+        port_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return proto.Remotemethod.internal_static_pRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public proto.Remotemethod.pRequest getDefaultInstanceForType() {
+        return proto.Remotemethod.pRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public proto.Remotemethod.pRequest build() {
+        proto.Remotemethod.pRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public proto.Remotemethod.pRequest buildPartial() {
+        proto.Remotemethod.pRequest result = new proto.Remotemethod.pRequest(this);
+        if (codApelloBuilder_ == null) {
+          result.codApello_ = codApello_;
+        } else {
+          result.codApello_ = codApelloBuilder_.build();
+        }
+        result.hostaname_ = hostaname_;
+        result.port_ = port_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof proto.Remotemethod.pRequest) {
+          return mergeFrom((proto.Remotemethod.pRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(proto.Remotemethod.pRequest other) {
+        if (other == proto.Remotemethod.pRequest.getDefaultInstance()) return this;
+        if (other.hasCodApello()) {
+          mergeCodApello(other.getCodApello());
+        }
+        if (!other.getHostaname().isEmpty()) {
+          hostaname_ = other.hostaname_;
+          onChanged();
+        }
+        if (other.getPort() != 0) {
+          setPort(other.getPort());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        proto.Remotemethod.pRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (proto.Remotemethod.pRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private proto.Remotemethod.CodiceAppello codApello_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.Remotemethod.CodiceAppello, proto.Remotemethod.CodiceAppello.Builder, proto.Remotemethod.CodiceAppelloOrBuilder> codApelloBuilder_;
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public boolean hasCodApello() {
+        return codApelloBuilder_ != null || codApello_ != null;
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public proto.Remotemethod.CodiceAppello getCodApello() {
+        if (codApelloBuilder_ == null) {
+          return codApello_ == null ? proto.Remotemethod.CodiceAppello.getDefaultInstance() : codApello_;
+        } else {
+          return codApelloBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public Builder setCodApello(proto.Remotemethod.CodiceAppello value) {
+        if (codApelloBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          codApello_ = value;
+          onChanged();
+        } else {
+          codApelloBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public Builder setCodApello(
+          proto.Remotemethod.CodiceAppello.Builder builderForValue) {
+        if (codApelloBuilder_ == null) {
+          codApello_ = builderForValue.build();
+          onChanged();
+        } else {
+          codApelloBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public Builder mergeCodApello(proto.Remotemethod.CodiceAppello value) {
+        if (codApelloBuilder_ == null) {
+          if (codApello_ != null) {
+            codApello_ =
+              proto.Remotemethod.CodiceAppello.newBuilder(codApello_).mergeFrom(value).buildPartial();
+          } else {
+            codApello_ = value;
+          }
+          onChanged();
+        } else {
+          codApelloBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public Builder clearCodApello() {
+        if (codApelloBuilder_ == null) {
+          codApello_ = null;
+          onChanged();
+        } else {
+          codApello_ = null;
+          codApelloBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public proto.Remotemethod.CodiceAppello.Builder getCodApelloBuilder() {
+        
+        onChanged();
+        return getCodApelloFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      public proto.Remotemethod.CodiceAppelloOrBuilder getCodApelloOrBuilder() {
+        if (codApelloBuilder_ != null) {
+          return codApelloBuilder_.getMessageOrBuilder();
+        } else {
+          return codApello_ == null ?
+              proto.Remotemethod.CodiceAppello.getDefaultInstance() : codApello_;
+        }
+      }
+      /**
+       * <code>.CodiceAppello codApello = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          proto.Remotemethod.CodiceAppello, proto.Remotemethod.CodiceAppello.Builder, proto.Remotemethod.CodiceAppelloOrBuilder> 
+          getCodApelloFieldBuilder() {
+        if (codApelloBuilder_ == null) {
+          codApelloBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              proto.Remotemethod.CodiceAppello, proto.Remotemethod.CodiceAppello.Builder, proto.Remotemethod.CodiceAppelloOrBuilder>(
+                  getCodApello(),
+                  getParentForChildren(),
+                  isClean());
+          codApello_ = null;
+        }
+        return codApelloBuilder_;
+      }
+
+      private java.lang.Object hostaname_ = "";
+      /**
+       * <code>string hostaname = 2;</code>
+       */
+      public java.lang.String getHostaname() {
+        java.lang.Object ref = hostaname_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          hostaname_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string hostaname = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHostanameBytes() {
+        java.lang.Object ref = hostaname_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          hostaname_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string hostaname = 2;</code>
+       */
+      public Builder setHostaname(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        hostaname_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hostaname = 2;</code>
+       */
+      public Builder clearHostaname() {
+        
+        hostaname_ = getDefaultInstance().getHostaname();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string hostaname = 2;</code>
+       */
+      public Builder setHostanameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        hostaname_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int port_ ;
+      /**
+       * <code>int32 port = 3;</code>
+       */
+      public int getPort() {
+        return port_;
+      }
+      /**
+       * <code>int32 port = 3;</code>
+       */
+      public Builder setPort(int value) {
+        
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 port = 3;</code>
+       */
+      public Builder clearPort() {
+        
+        port_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:pRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:pRequest)
+    private static final proto.Remotemethod.pRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new proto.Remotemethod.pRequest();
+    }
+
+    public static proto.Remotemethod.pRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<pRequest>
+        PARSER = new com.google.protobuf.AbstractParser<pRequest>() {
+      @java.lang.Override
+      public pRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new pRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<pRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<pRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public proto.Remotemethod.pRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ModuloOrBuilder extends
       // @@protoc_insertion_point(interface_extends:Modulo)
       com.google.protobuf.MessageOrBuilder {
@@ -7854,6 +8661,11 @@ public final class Remotemethod {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Risposta_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_pRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_pRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Modulo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -7874,7 +8686,7 @@ public final class Remotemethod {
     java.lang.String[] descriptorData = {
       "\n\022remotemethod.proto\",\n\004Info\022\017\n\007comment\030" +
       "\001 \001(\005\022\023\n\013codStudente\030\002 \001(\t\")\n\014ListaAppel" +
-      "li\022\031\n\007appelli\030\001 \003(\0132\010.Appelli\"@\n\007Appello" +
+      "li\022\031\n\007appelli\030\001 \003(\0132\010.Appello\"@\n\007Appello" +
       "\022\n\n\002id\030\001 \001(\005\022\014\n\004data\030\002 \001(\t\022\013\n\003ora\030\003 \001(\t\022" +
       "\016\n\006durata\030\004 \001(\t\"D\n\010Studente\022\021\n\tmatricola" +
       "\030\001 \001(\t\022\022\n\ncodFiscale\030\002 \001(\t\022\021\n\tidAppello\030" +
@@ -7883,15 +8695,18 @@ public final class Remotemethod {
       "a\"\030\n\007Domanda\022\r\n\005testo\030\001 \001(\t\"K\n\017RispostaA" +
       "ppello\022\021\n\tidAppello\030\001 \001(\t\022%\n\rlistaRispos" +
       "te\030\002 \001(\0132\016.ListaRisposte\"\034\n\010Risposta\022\020\n\010" +
-      "risposta\030\001 \001(\005\"U\n\006Modulo\022\021\n\tidAppello\030\001 " +
+      "risposta\030\001 \001(\005\"N\n\010pRequest\022!\n\tcodApello\030" +
+      "\001 \001(\0132\016.CodiceAppello\022\021\n\thostaname\030\002 \001(\t" +
+      "\022\014\n\004port\030\003 \001(\005\"U\n\006Modulo\022\021\n\tidAppello\030\001 " +
       "\001(\t\022%\n\rlistaRisposte\030\002 \001(\0132\016.ListaRispos" +
       "te\022\021\n\tpunteggio\030\003 \001(\005\",\n\rListaRisposte\022\033" +
-      "\n\010risposte\030\001 \003(\0132\t.Risposta2\300\001\n\006Sender\022\'" +
+      "\n\010risposte\030\001 \003(\0132\t.Risposta2\336\001\n\006Sender\022\'" +
       "\n\rCaricaAppelli\022\005.Info\032\r.ListaAppelli\"\000\022" +
       "/\n\020RegistraStudente\022\t.Studente\032\016.CodiceA" +
-      "ppello\"\000\022.\n\024CaricaDomandeAppello\022\005.Info\032" +
-      "\r.ListaDomande\"\000\022,\n\rInviaRisposte\022\020.Risp" +
-      "ostaAppello\032\007.Modulo\"\000B\007\n\005protob\006proto3"
+      "ppello\"\000\022$\n\016PartecipaEsame\022\t.pRequest\032\005." +
+      "Info\"\000\022&\n\014inviaDomande\022\r.ListaDomande\032\005." +
+      "Info\"\000\022,\n\rInviaRisposte\022\020.RispostaAppell" +
+      "o\032\007.Modulo\"\000B\007\n\005protob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7959,14 +8774,20 @@ public final class Remotemethod {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Risposta_descriptor,
         new java.lang.String[] { "Risposta", });
-    internal_static_Modulo_descriptor =
+    internal_static_pRequest_descriptor =
       getDescriptor().getMessageTypes().get(9);
+    internal_static_pRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_pRequest_descriptor,
+        new java.lang.String[] { "CodApello", "Hostaname", "Port", });
+    internal_static_Modulo_descriptor =
+      getDescriptor().getMessageTypes().get(10);
     internal_static_Modulo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Modulo_descriptor,
         new java.lang.String[] { "IdAppello", "ListaRisposte", "Punteggio", });
     internal_static_ListaRisposte_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_ListaRisposte_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ListaRisposte_descriptor,

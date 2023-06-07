@@ -8,7 +8,9 @@ service Sender {
 
   rpc RegistraStudente (Studente) returns (CodiceAppello) {}
 
-  rpc CaricaDomandeAppello (Info) returns (ListaDomande) {}
+  rpc PartecipaEsame (pRequest) returns (Info) {}
+
+  rpc inviaDomande (ListaDomande) returns (Info) {}
 
   rpc InviaRisposte (RispostaAppello) returns (Modulo) {}
 
@@ -59,6 +61,12 @@ message RispostaAppello {
 
 message Risposta {
   int32 risposta = 1;
+}
+
+message pRequest {
+    CodiceAppello codApello = 1;
+    string hostaname = 2;
+    int32 port = 3;
 }
 
 message Modulo {

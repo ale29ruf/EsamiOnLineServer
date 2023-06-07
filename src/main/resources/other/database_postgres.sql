@@ -26,8 +26,13 @@ CREATE TABLE "risposte" (
 
 );
 
+
+CREATE SEQUENCE studenti_seq;
 CREATE TABLE "studenti" (
-                            id VARCHAR(50) PRIMARY KEY,
+                            id INTEGER DEFAULT NEXTVAL ('studenti_seq') PRIMARY KEY,
+                            matricola VARCHAR(10),
+                            codFiscale VARCHAR(20),
+                            codiceAppello VARCHAR(36),
                             idAppello INTEGER,
                             FOREIGN KEY (idAppello) REFERENCES Appelli (id)
 

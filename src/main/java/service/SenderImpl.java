@@ -13,7 +13,7 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
 
     ScheduledExecutorService esecutore;
     HandlerDB g_DB;
-    final UUID uuid = UUID.randomUUID();
+
 
     public SenderImpl(HandlerDB g_DB){
         this.g_DB = g_DB;
@@ -24,10 +24,7 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
     public void caricaAppelli(proto.Remotemethod.Info request,
                               io.grpc.stub.StreamObserver<proto.Remotemethod.ListaAppelli> responseObserver) {
         List<Remotemethod.Appello> appelli;
-        Callable<List<Remotemethod.Appello>> task = () -> {
-            List<Remotemethod.Appello> appelloList = g_DB.caricaAppelli();
-            return appelloList;
-        };
+        Callable<List<Remotemethod.Appello>> task = () -> g_DB.caricaAppelli();
         Future<List<Remotemethod.Appello>> result = esecutore.submit(task);
         try {
             appelli = result.get();
@@ -39,18 +36,27 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
         responseObserver.onCompleted();
     }
 
-    /*
+
     @Override
     public void registraStudente(proto.Remotemethod.Studente request,
                                  io.grpc.stub.StreamObserver<proto.Remotemethod.CodiceAppello> responseObserver) {
-        Remotemethod.CodiceAppello cod = Remotemethod.CodiceAppello.newBuilder().setCodice(uuid.toString().replace("-", "")).build();
-        if( ! g_DB.addStudent(request.getIdAppello(),cod))
-            cod = Remotemethod.CodiceAppello.newBuilder().setCodice("Errore registrazione").build();
+        //Remotemethod.CodiceAppello cod = Remotemethod.CodiceAppello.newBuilder().setCodice(uuid.toString().replace("-", "")).build();
 
-        responseObserver.onNext(cod);
+        Callable<String> task = () -> g_DB.addStudent(request);
+        Future<String> result = esecutore.submit(task);
+        String cod;
+        try{
+            cod = result.get(20,TimeUnit.SECONDS);
+        }catch (InterruptedException | ExecutionException | TimeoutException e) {
+            throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
+        }
+
+        Remotemethod.CodiceAppello codiceAppello = Remotemethod.CodiceAppello.newBuilder().setCodice(cod).build();
+
+        responseObserver.onNext(codiceAppello);
         responseObserver.onCompleted();
     }
-
+/*
     @Override
     public void caricaDomandeAppello(proto.Remotemethod.Info request,
                                      io.grpc.stub.StreamObserver<proto.Remotemethod.ListaDomande> responseObserver) {

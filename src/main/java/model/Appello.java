@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Appello implements Models {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     int id;
 

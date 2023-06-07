@@ -2,38 +2,56 @@ package gestionedatabase;
 
 import abstractfactory.AbstractFactory;
 import abstractfactory.AppelloFactory;
+import exception.AppelloNotFoundException;
+import exception.OperationDBException;
+import exception.UtenteAlreadyRegisteredException;
 import model.Appello;
+import model.Studente;
 import proto.Remotemethod;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import java.util.LinkedList;
 import java.util.List;
 
-public final class Handler implements HandlerDB{
-
-    EntityManagerFactory emf;
-    EntityManager em;
+public final class Handler implements HandlerDB{ //service
 
     AbstractFactory af = AppelloFactory.FACTORY;
 
+    Repository r = new Repository();
+
     public Handler(){
-        emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
-        em = emf.createEntityManager();
     }
 
-    public boolean addStudent(int appello, Remotemethod.CodiceAppello cod){
-        String codice = cod.getCodice();
+    public String addStudent(Remotemethod.Studente studente){
+        int idAppello = studente.getIdAppello();
+        String matricola = studente.getMatricola();
+        String codFiscale = studente.getCodFiscale();
 
-        return true;
+        //Verifico che l'appello per cui si vuole registrare sia valido
+        List<Appello> p = r.cercaAppello(idAppello);
+        if(p.size() != 1)
+            throw new AppelloNotFoundException();
+
+        //Verifico che lo studente non sia gia' presente nel database
+        List<Studente> listaS = r.cercaStudente(matricola,codFiscale);
+        if( ! listaS.isEmpty()) //posso aggiungere lo studente sul db
+            throw new UtenteAlreadyRegisteredException();
+
+        Studente s = r.aggiungiUtente(studente);
+
+        if(s == null)
+            throw new OperationDBException();
+
+        return s.getCodiceappello();
+    }
+
+    public static void main(String[] args){
+        Remotemethod.Studente s = Remotemethod.Studente.newBuilder().setCodFiscale("23ff").setIdAppello(2).setMatricola("fef3").build();
+        Handler e = new Handler();
+        e.addStudent(s);
     }
 
     public List<Remotemethod.Appello> caricaAppelli(){
-        String queryString = "SELECT e FROM Appello e";
-        TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
-        List<Appello> appelli = query.getResultList();
+        List<Appello> appelli = r.caricaAppelli();
         List<Remotemethod.Appello> result = new LinkedList<>();
         for(Appello ap : appelli)
             result.add((Remotemethod.Appello)af.createProto(ap));
@@ -51,9 +69,5 @@ public final class Handler implements HandlerDB{
         return null;
     }
 
-    public void closeHandler(){
-        em.close();
-        emf.close();
-    }
 
 }
