@@ -1,5 +1,6 @@
 package gestionedatabase;
 
+import exception.AppelloAlreadyStartedException;
 import exception.AppelloNotFoundException;
 import exception.UtenteAlreadyRegisteredException;
 import proto.Remotemethod;
@@ -48,12 +49,17 @@ public class ProxyHandler implements HandlerDB{
     }
 
     @Override
-    public boolean partecipaEsame(Remotemethod.pRequest richiesta) {
-        //try{
-            return gestore.partecipaEsame(richiesta);
-        //} catch ( ) {}
+    public String partecipaEsame(Remotemethod.pRequest richiesta) {
+        String risposta = "";
+        try{
+            gestore.partecipaEsame(richiesta);
+        } catch (AppelloNotFoundException e){
+            risposta = "Nessun appello trovato per il corrispettivo codice inviato.";
+        } catch (AppelloAlreadyStartedException e){
+            risposta = "Appello gia' iniziato. Impossibile partecipare.";
+        }
 
-        //return false;
+        return risposta;
     }
 
 

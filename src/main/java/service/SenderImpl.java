@@ -59,48 +59,23 @@ public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
 
     @Override
     public void partecipaEsame(Remotemethod.pRequest request, StreamObserver<Remotemethod.Info> responseObserver) {
-        Callable<Boolean> task = () -> g_DB.partecipaEsame(request);
-        Future<Boolean> result = esecutore.submit(task);
-        boolean esito;
+        Callable<String> task = () -> g_DB.partecipaEsame(request);
+        Future<String> result = esecutore.submit(task);
+        String esito;
         try{
-            esito = result.get(20,TimeUnit.SECONDS);
+            esito = result.get(5,TimeUnit.MINUTES); //il thread potrebbe essere messo in attesa
         }catch (InterruptedException | ExecutionException | TimeoutException e) {
             throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
         }
 
-        String testo;
-        if(esito){
-            testo = "Attendere inizio prova.";
-            // avviare thread
-        } else {
-            testo = "Tempo di partecipazione alla prova scaduto.";
-        }
-        Remotemethod.Info risposta = Remotemethod.Info.newBuilder().setTesto(testo).build();
+        Remotemethod.Info risposta = Remotemethod.Info.newBuilder().setTesto(esito).build();
 
         responseObserver.onNext(risposta);
         responseObserver.onCompleted();
     }
 
-    /*
-    public void partecipaEsame(proto.Remotemethod.Info request,
-                               io.grpc.stub.StreamObserver<proto.Remotemethod.ListaDomande> responseObserver) {
-        List<Remotemethod.Domanda> domande = g_DB.caricaDomandeAppello(request.getComment());
-        Remotemethod.ListaDomande response = Remotemethod.ListaDomande.newBuilder().addAllDomande(domande).build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
 
-    @Override
-    public void inviaRisposte(proto.Remotemethod.RispostaAppello request,
-                              io.grpc.stub.StreamObserver<proto.Remotemethod.Modulo> responseObserver) {
-        List<Remotemethod.Risposta> rispostaList = g_DB.ottieniRisposte(Integer.parseInt(request.getIdAppello()));
-        Remotemethod.ListaRisposte risposte = Remotemethod.ListaRisposte.newBuilder().addAllRisposte(rispostaList).build();
-        int punteggio = calcolaPunteggio(request.getListaRisposte().getRisposteList(), rispostaList);
-        Remotemethod.Modulo module = Remotemethod.Modulo.newBuilder().setIdAppello(request.getIdAppello()).setListaRisposte(risposte).setPunteggio(punteggio).build();
-        responseObserver.onNext(module);
-        responseObserver.onCompleted();
-    }
-
+/*
     private int calcolaPunteggio(List<Remotemethod.Risposta> risposteList, List<Remotemethod.Risposta> rispostaList) {
         int punteggio = 0;
         for (int i=0; i<risposteList.size(); i++){

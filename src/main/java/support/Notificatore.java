@@ -2,12 +2,13 @@ package support;
 
 import proto.Remotemethod;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Notificatore implements Runnable{
 
-    List<Ascoltatore> clients = new LinkedList<>();
+    List<Ascoltatore> clients = Collections.synchronizedList(new LinkedList<>());
     List<Remotemethod.Domanda> domande;
 
     public Notificatore(List<Remotemethod.Domanda> domande){

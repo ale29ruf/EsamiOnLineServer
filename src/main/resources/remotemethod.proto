@@ -30,9 +30,8 @@ message ListaAppelli {
 
 message Appello {
   int32 id = 1;
-  string data = 2;
-  string ora = 3;
-  string durata = 4;
+  string ora = 2;
+  string durata = 3;
 }
 
 message Studente {

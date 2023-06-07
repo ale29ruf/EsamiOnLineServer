@@ -9,5 +9,5 @@ public interface HandlerDB {
 
     String addStudent(Remotemethod.Studente studente);
 
-    boolean partecipaEsame(Remotemethod.pRequest richiesta);
+    String partecipaEsame(Remotemethod.pRequest richiesta);
 }

@@ -4,6 +4,7 @@ package model;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "appelli")
@@ -14,18 +15,14 @@ public class Appello implements Models {
     @Column(name = "id")
     int id;
 
-    @Column(name = "data")
-    LocalDate data;
-
     @Column(name = "ora")
-    LocalTime ora;
+    Calendar ora;
 
     @Column(name = "durata")
     String durata;
 
-    public Appello(int id, LocalDate data, LocalTime ora, String durata) {
+    public Appello(int id, Calendar ora, String durata) {
         this.id = id;
-        this.data = data;
         this.ora = ora;
         this.durata = durata;
     }
@@ -44,11 +41,7 @@ public class Appello implements Models {
         return id;
     }
 
-    public LocalDate getData() {
-        return data;
-    }
-
-    public LocalTime getOra() {
+    public Calendar getOra() {
         return ora;
     }
 
@@ -60,11 +53,7 @@ public class Appello implements Models {
         this.id = id;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public void setOra(LocalTime ora) {
+    public void setOra(Calendar ora) {
         this.ora = ora;
     }
 

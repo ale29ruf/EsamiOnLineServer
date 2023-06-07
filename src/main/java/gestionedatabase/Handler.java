@@ -3,6 +3,10 @@ package gestionedatabase;
 import converter.ConverterFactory;
 import converter.ModelToProtoAppello;
 import converter.ModelToProtoDomanda;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import proto.SenderGrpc;
+import support.Client;
 import support.Notificatore;
 import exception.AppelloAlreadyStartedException;
 import exception.AppelloNotFoundException;
@@ -13,14 +17,12 @@ import model.Domanda;
 import model.Studente;
 import proto.Remotemethod;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public final class Handler implements HandlerDB{ //service
 
@@ -30,6 +32,7 @@ public final class Handler implements HandlerDB{ //service
 
     Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
     Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
+    Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
 
     ScheduledExecutorService esecutore;
 
@@ -45,7 +48,9 @@ public final class Handler implements HandlerDB{ //service
 
         //Verifico che l'appello per cui si vuole registrare sia valido
         List<Appello> p = r.cercaAppello(idAppello);
-        if(p.size() != 1 || p.get(0).getData().isBefore(LocalDate.now()) || p.get(0).getOra().isBefore(LocalTime.now()))
+        Calendar nowLess = Calendar.getInstance();
+        nowLess.roll(Calendar.MINUTE,-30);
+        if(p.size() != 1 || p.get(0).getOra().before(nowLess))
             throw new AppelloNotFoundException();
 
         //Verifico che lo studente non sia gia' presente nel database
@@ -81,16 +86,34 @@ public final class Handler implements HandlerDB{ //service
     }
 
     @Override
-    public boolean partecipaEsame(Remotemethod.pRequest richiesta) {
+    public String partecipaEsame(Remotemethod.pRequest richiesta) {
         String codiceAppello = richiesta.getCodApello().toString();
         List<Appello> appello = r.ottieniAppello(codiceAppello);
         if(appello.isEmpty())
             throw new AppelloNotFoundException("Codice passato non valido");
 
         Appello p = appello.get(0);
-        if(p.getData().isAfter(LocalDate.now()) || p.getOra().plusMinutes(30).isAfter(LocalTime.now()))
+        Calendar oraAppelloPlus = p.getOra();
+        oraAppelloPlus.add(Calendar.MINUTE,30);
+        if(oraAppelloPlus.after(Calendar.getInstance()))
             throw new AppelloAlreadyStartedException();
 
+        l.lock();
+        Notificatore notificatore = aggiornaCache(p);
+        l.unlock();
+
+        String hostname = richiesta.getHostaname();
+        int port = richiesta.getPort();
+
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();
+        SenderGrpc.SenderBlockingStub stub = SenderGrpc.newBlockingStub(channel);
+        Client c = new Client(stub);
+        notificatore.aggiungiClient(c);
+
+        return "";
+    }
+
+    private Notificatore aggiornaCache(Appello p) {
         if(domandeAppello.get(p) == null){
             List<Domanda> domande = r.ottieniDomande(p);
             domandeAppello.put(p, domande);
@@ -99,12 +122,12 @@ public final class Handler implements HandlerDB{ //service
             for(Domanda d : domande)
                 listaDomande.add(conv.convert(d));
             Notificatore notificatore = new Notificatore(listaDomande);
-            //esecutore.schedule(notificatore,)
+            notificatoreMap.put(p,notificatore);
+            long timeElapse = p.getOra().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
+            esecutore.schedule(notificatore,timeElapse, TimeUnit.MILLISECONDS);
         }
-
-        return false;
+        return notificatoreMap.get(p);
     }
-
 
 
 }
