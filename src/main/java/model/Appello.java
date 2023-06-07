@@ -2,6 +2,8 @@ package model;
 
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "appelli")
@@ -13,15 +15,15 @@ public class Appello implements Models {
     int id;
 
     @Column(name = "data")
-    String data;
+    LocalDate data;
 
     @Column(name = "ora")
-    String ora;
+    LocalTime ora;
 
     @Column(name = "durata")
     String durata;
 
-    public Appello(int id, String data, String ora, String durata) {
+    public Appello(int id, LocalDate data, LocalTime ora, String durata) {
         this.id = id;
         this.data = data;
         this.ora = ora;
@@ -42,11 +44,11 @@ public class Appello implements Models {
         return id;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public String getOra() {
+    public LocalTime getOra() {
         return ora;
     }
 
@@ -58,11 +60,11 @@ public class Appello implements Models {
         this.id = id;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public void setOra(String ora) {
+    public void setOra(LocalTime ora) {
         this.ora = ora;
     }
 

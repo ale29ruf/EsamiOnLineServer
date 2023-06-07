@@ -9,6 +9,9 @@ import model.Appello;
 import model.Studente;
 import proto.Remotemethod;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +31,7 @@ public final class Handler implements HandlerDB{ //service
 
         //Verifico che l'appello per cui si vuole registrare sia valido
         List<Appello> p = r.cercaAppello(idAppello);
-        if(p.size() != 1)
+        if(p.size() != 1 || p.get(0).getData().isBefore(LocalDate.now()) || p.get(0).getOra().isBefore(LocalTime.now()))
             throw new AppelloNotFoundException();
 
         //Verifico che lo studente non sia gia' presente nel database
@@ -45,9 +48,10 @@ public final class Handler implements HandlerDB{ //service
     }
 
     public static void main(String[] args){
-        Remotemethod.Studente s = Remotemethod.Studente.newBuilder().setCodFiscale("23ff").setIdAppello(2).setMatricola("fef3").build();
-        Handler e = new Handler();
-        e.addStudent(s);
+        //Remotemethod.Studente s = Remotemethod.Studente.newBuilder().setCodFiscale("23ff").setIdAppello(2).setMatricola("fef3").build();
+        //Handler e = new Handler();
+        //e.addStudent(s);
+        System.out.println();
     }
 
     public List<Remotemethod.Appello> caricaAppelli(){
