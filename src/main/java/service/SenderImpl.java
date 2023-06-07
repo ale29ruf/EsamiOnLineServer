@@ -10,7 +10,7 @@ import proto.SenderGrpc;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
+public final class SenderImpl extends SenderGrpc.SenderImplBase implements ServiceIF{
 
     ScheduledExecutorService esecutore;
     HandlerDB g_DB;

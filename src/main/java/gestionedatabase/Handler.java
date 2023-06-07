@@ -30,6 +30,7 @@ public final class Handler implements HandlerDB{ //service
 
     Repository r = new Repository();
 
+    //TODO Avviare un thread 30 minuti dopo l'inizio dell'appello che vada a rimuovere la lista di domande e il notificatore dalle seguenti strutture
     Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
     Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
     Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
