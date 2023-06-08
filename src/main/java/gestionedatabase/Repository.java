@@ -82,6 +82,10 @@ public class Repository { //opera sul DB
     }
 
     public List<Risposta> caricaRisposte(int idAppello){
-        return null;
+        Appello appello = cercaAppello(idAppello).get(0);
+        String queryString = "SELECT r FROM Domanda d, Risposta r WHERE d.appello = :appello AND r.iddomanda = d";
+        TypedQuery<Risposta> queryR = em.createQuery(queryString, Risposta.class);
+        queryR.setParameter("appello",appello);
+        return queryR.getResultList();
     }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "risposte")
-public class Risposta {
+public class Risposta implements Models{
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -38,6 +38,11 @@ public class Risposta {
 
     public void setRisposta(Integer risposta) {
         this.risposta = risposta;
+    }
+
+    @Override
+    public boolean isRisposta(){
+        return true;
     }
 
 }

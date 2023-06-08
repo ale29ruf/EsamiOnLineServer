@@ -13,5 +13,7 @@ public interface Models {
         return false;
     }
 
-
+    default boolean isRisposta(){
+        return false;
+    }
 }

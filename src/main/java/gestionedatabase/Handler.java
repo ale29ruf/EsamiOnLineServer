@@ -1,10 +1,9 @@
 package gestionedatabase;
 
-import converter.ConverterFactory;
-import converter.ModelToProtoAppello;
-import converter.ModelToProtoDomanda;
+import converter.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import model.Risposta;
 import proto.SenderGrpc;
 import support.Client;
 import support.Notificatore;
@@ -33,7 +32,7 @@ public final class Handler implements HandlerDB{ //service
     //TODO Avviare un thread 30 minuti dopo l'inizio dell'appello che vada a rimuovere la lista di domande e il notificatore dalle seguenti strutture
     Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
     Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
-    Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
+    Lock l = new ReentrantLock(); //preferisco usare il lockA al posto di collezioni concorrenti
 
     ScheduledExecutorService esecutore;
 
@@ -132,7 +131,12 @@ public final class Handler implements HandlerDB{ //service
 
     @Override
     public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
-        return null;
+        List<Risposta> risposte = r.caricaRisposte(idAppello);
+        List<Remotemethod.Risposta> result = new LinkedList<>();
+        ModelToProtoRisposta conv = (ModelToProtoRisposta) af.createConverterModel(Risposta.class);
+        for(Risposta r : risposte)
+            result.add(conv.convert(r));
+        return result;
     }
 
 }

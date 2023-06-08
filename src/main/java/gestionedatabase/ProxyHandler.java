@@ -14,10 +14,13 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ProxyHandler implements HandlerDB{
 
     List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli (flyweight)
+    ReentrantLock lockA = new ReentrantLock();
+
     Handler gestore;
     boolean changed = true;
-    ReentrantLock lock = new ReentrantLock();
+
     Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
+    ReentrantLock lockR = new ReentrantLock();
 
 
     public ProxyHandler(Handler gestore){
@@ -26,12 +29,12 @@ public class ProxyHandler implements HandlerDB{
 
     @Override
     public List<Remotemethod.Appello> caricaAppelli() {
-        lock.lock();
+        lockA.lock();
         if(changed){
             appelliCached = gestore.caricaAppelli();
             changed = false;
         }
-        lock.unlock();
+        lockA.unlock();
         return appelliCached;
     }
 
@@ -67,9 +70,16 @@ public class ProxyHandler implements HandlerDB{
 
     @Override
     public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
-        List<Remotemethod.Risposta> risposte = risposteCached.get(idAppello);
-        if(risposte == null)
-            risposteCached.put(idAppello,gestore.inviaRisposte(idAppello));
+        List<Remotemethod.Risposta> risposte;
+        try{
+            lockR.lock();
+            risposte = risposteCached.get(idAppello);
+            if(risposte == null){
+                risposteCached.put(idAppello,gestore.inviaRisposte(idAppello));
+            }
+        }finally{
+            lockR.unlock();
+        }
         return risposte;
     }
 
