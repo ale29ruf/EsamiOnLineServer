@@ -11,6 +11,6 @@ public class ModelToProtoAppello implements Convertitore{
             throw new ClassCastException("Tipo passato non supportato per AbstractFactory");
         }
         Appello appello = (Appello)model;
-        return Remotemethod.Appello.newBuilder().setId(appello.getId()).setDurata(appello.getDurata()).setOra(appello.getOra().toString()).build();
+        return Remotemethod.Appello.newBuilder().setId(appello.getId()).setDurata(appello.getDurata()).setOra(appello.getOra().toString()).setNome(appello.getNome()).build();
     }
 }

@@ -2,8 +2,6 @@ package model;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 @Entity
@@ -11,9 +9,11 @@ import java.util.Calendar;
 public class Appello implements Models {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     int id;
+
+    @Column(name = "nome")
+    String nome;
 
     @Column(name = "ora")
     Calendar ora;
@@ -21,8 +21,9 @@ public class Appello implements Models {
     @Column(name = "durata")
     String durata;
 
-    public Appello(int id, Calendar ora, String durata) {
+    public Appello(int id, String nome, Calendar ora, String durata) {
         this.id = id;
+        this.nome = nome;
         this.ora = ora;
         this.durata = durata;
     }
@@ -40,6 +41,9 @@ public class Appello implements Models {
     public int getId() {
         return id;
     }
+    public String getNome() {
+        return nome;
+    }
 
     public Calendar getOra() {
         return ora;
@@ -52,6 +56,9 @@ public class Appello implements Models {
     public void setId(int id) {
         this.id = id;
     }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public void setOra(Calendar ora) {
         this.ora = ora;
@@ -59,5 +66,12 @@ public class Appello implements Models {
 
     public void setDurata(String durata) {
         this.durata = durata;
+    }
+
+    @Override
+    public String toString() {
+        return "Appello{" +
+                "id=" + id +
+                '}';
     }
 }

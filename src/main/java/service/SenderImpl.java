@@ -1,7 +1,6 @@
 package service;
 
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import gestionedatabase.HandlerDB;
 import io.grpc.stub.StreamObserver;
 import proto.Remotemethod;
@@ -30,6 +29,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         try {
             appelli = result.get();
         } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         Remotemethod.ListaAppelli response = Remotemethod.ListaAppelli.newBuilder().addAllAppelli(appelli).build();

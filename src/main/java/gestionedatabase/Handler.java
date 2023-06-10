@@ -1,10 +1,7 @@
 package gestionedatabase;
 
 import converter.*;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import model.Risposta;
-import proto.SenderGrpc;
 import support.Client;
 import support.Notificatore;
 import exception.AppelloAlreadyStartedException;
@@ -69,9 +66,9 @@ public final class Handler implements HandlerDB{ //service
 
 
     public static void main(String[] args){
-        Remotemethod.Studente s = Remotemethod.Studente.newBuilder().setCodFiscale("23ff").setIdAppello(2).setMatricola("fef3").build();
-        Handler e = new Handler();
-        e.addStudent(s);
+
+        Handler gestore = new Handler();
+
         System.out.println();
     }
 
@@ -79,8 +76,9 @@ public final class Handler implements HandlerDB{ //service
         List<Appello> appelli = r.caricaAppelli();
         List<Remotemethod.Appello> result = new LinkedList<>();
         ModelToProtoAppello conv = (ModelToProtoAppello) af.createConverterModel(Appello.class);
-        for(Appello ap : appelli)
+        for(Appello ap : appelli) {
             result.add(conv.convert(ap));
+        }
         //Remotemethod.ListaAppelli output = Remotemethod.ListaAppelli.newBuilder().addAllAppelli(result).build();
         return result;
     }
@@ -105,9 +103,7 @@ public final class Handler implements HandlerDB{ //service
         String hostname = richiesta.getHostaname();
         int port = richiesta.getPort();
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();
-        SenderGrpc.SenderBlockingStub stub = SenderGrpc.newBlockingStub(channel);
-        Client c = new Client(stub);
+        Client c = new Client(hostname,port);
         notificatore.aggiungiClient(c);
 
         return "";
@@ -117,13 +113,19 @@ public final class Handler implements HandlerDB{ //service
         if(domandeAppello.get(p) == null){
             List<Domanda> domande = r.ottieniDomande(p);
             domandeAppello.put(p, domande);
+
+            //Converto
             List<proto.Remotemethod.Domanda> listaDomande = new LinkedList<>();
             ModelToProtoDomanda conv = (ModelToProtoDomanda) af.createConverterModel(Domanda.class);
             for(Domanda d : domande)
                 listaDomande.add(conv.convert(d));
+
+            //Creo il task
             Notificatore notificatore = new Notificatore(listaDomande);
             notificatoreMap.put(p,notificatore);
             long timeElapse = p.getOra().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
+
+            //Schedulo il task
             esecutore.schedule(notificatore,timeElapse, TimeUnit.MILLISECONDS);
         }
         return notificatoreMap.get(p);

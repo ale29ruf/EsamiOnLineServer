@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,6 +26,43 @@ public class Repository { //opera sul DB
     public Repository(){
         emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         em = emf.createEntityManager();
+    }
+
+    public void aggiungiAppello(Appello appello){
+        try {
+
+            em.getTransaction().begin();
+            em.persist(appello);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+
+    }
+
+    public static void main(String[] args){
+        Repository r = new Repository();
+
+        for (int i=0; i<5; i++){
+            Appello appello = new Appello();
+            appello.setId(i);
+            appello.setNome("Appello "+i+"-esimo");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, 2023);
+            calendar.set(Calendar.MONTH, Calendar.JANUARY); // Gennaio
+            calendar.set(Calendar.DAY_OF_MONTH, 20);
+            calendar.set(Calendar.HOUR_OF_DAY, 10);
+            calendar.set(Calendar.MINUTE, 30);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            appello.setOra(calendar);
+            appello.setDurata("2 ore");
+            r.aggiungiAppello(appello);
+            System.out.println("aggiunto appello");
+        }
+
+
+
     }
 
     public List<Appello> caricaAppelli(){
