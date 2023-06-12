@@ -1,20 +1,27 @@
-import converter.ConverterFactory;
-import converter.ModelToProtoAppello;
+import converter.*;
 import gestionedatabase.Handler;
 import gestionedatabase.HandlerDB;
+import gestionedatabase.ProxyHandler;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import model.Appello;
+import model.Domanda;
+import model.Risposta;
+import proto.Remotemethod;
 import service.SenderImpl;
 
 import java.io.IOException;
 
 public class Starter {
     public static void main(String[] args){
-        ModelToProtoAppello conv = new ModelToProtoAppello();
-        ConverterFactory.FACTORY.installConverterModel(Appello.class,conv);
-        HandlerDB gestore = new Handler();
-        Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestore)).build();
+        ConverterFactory.FACTORY.installConverterModel(Appello.class,new ModelToProtoAppello());
+        ConverterFactory.FACTORY.installConverterProto(Remotemethod.Studente.class,new ProtoToModelStudente());
+        ConverterFactory.FACTORY.installConverterModel(Domanda.class, new ModelToProtoDomanda());
+        ConverterFactory.FACTORY.installConverterModel(Risposta.class, new ModelToProtoRisposta());
+
+        Handler gestore = new Handler();
+        HandlerDB gestoreProxy = new ProxyHandler(gestore);
+        Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestoreProxy)).build();
         try {
             server.start();
             System.out.println("Server started at " + server.getPort());

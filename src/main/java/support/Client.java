@@ -14,6 +14,7 @@ public class Client implements Ascoltatore{
 
     public Client(String hostname, int port){
         channel = ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();
+        System.out.println("Channel con il nuovo client creato");
         stub = SenderGrpc.newBlockingStub(channel);
     }
 

@@ -48,7 +48,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         try{
             cod = result.get(20,TimeUnit.SECONDS);
         }catch (InterruptedException | ExecutionException | TimeoutException e) {
-            throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
+            throw new RuntimeException("Connessione al server fallita"); //scrivere bene le eccezioni e mandarle al logger
         }
 
         Remotemethod.CodiceAppello codiceAppello = Remotemethod.CodiceAppello.newBuilder().setCodice(cod).build();
@@ -65,7 +65,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         try{
             esito = result.get(5,TimeUnit.MINUTES); //il thread potrebbe essere messo in attesa
         }catch (InterruptedException | ExecutionException | TimeoutException e) {
-            throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
+            throw new RuntimeException("Connessione al server fallita"); //scrivere bene le eccezioni e mandarle al logger
         }
 
         Remotemethod.Info risposta = Remotemethod.Info.newBuilder().setTesto(esito).build();
@@ -82,7 +82,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         try{
             risposte = result.get(20,TimeUnit.SECONDS);
         } catch (ExecutionException | InterruptedException | TimeoutException e) {
-            throw new RuntimeException("Tempo di connessione al server fallito"); //scrivere bene le eccezioni e mandarle al logger
+            throw new RuntimeException("Connessione al server fallita"); //scrivere bene le eccezioni e mandarle al logger
         }
         Remotemethod.ListaRisposte listaR = Remotemethod.ListaRisposte.newBuilder().addAllRisposte(risposte).build();
         int punteggio = calcolaPunteggio(request.getListaRisposte().getRisposteList(), risposte);

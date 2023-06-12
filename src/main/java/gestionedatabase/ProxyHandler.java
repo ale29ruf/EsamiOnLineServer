@@ -2,6 +2,7 @@ package gestionedatabase;
 
 import exception.AppelloAlreadyStartedException;
 import exception.AppelloNotFoundException;
+import exception.OperationDBException;
 import exception.UtenteAlreadyRegisteredException;
 import proto.Remotemethod;
 
@@ -44,13 +45,15 @@ public class ProxyHandler implements HandlerDB{
         try{
             res = gestore.addStudent(studente);
         } catch (AppelloNotFoundException e){
-            res = "Nessun appello trovato.";
+            res = "ERRORE: Nessun appello trovato.";
             System.out.println(res); //-> invia info al logger e sollevare una opportuna eccezione
         } catch (UtenteAlreadyRegisteredException e){
-            res = "Utente gia' registrato";
+            res = "ERRORE: Utente gia' registrato";
+            System.out.println(res); //-> invia info al logger e sollevare una opportuna eccezione
+        } catch (OperationDBException e){
+            res = "ERRORE: Riprova operazione piu' tardi";
             System.out.println(res); //-> invia info al logger e sollevare una opportuna eccezione
         }
-
         return res;
     }
 
@@ -58,11 +61,11 @@ public class ProxyHandler implements HandlerDB{
     public String partecipaEsame(Remotemethod.pRequest richiesta) {
         String risposta = "";
         try{
-            gestore.partecipaEsame(richiesta);
+            risposta = gestore.partecipaEsame(richiesta);
         } catch (AppelloNotFoundException e){
-            risposta = "Nessun appello trovato per il corrispettivo codice inviato.";
+            risposta = "ERRORE: Nessun appello trovato per il corrispettivo codice inviato";
         } catch (AppelloAlreadyStartedException e){
-            risposta = "Appello gia' iniziato. Impossibile partecipare.";
+            risposta = "ERRORE: Appello gia' iniziato. Impossibile partecipare";
         }
 
         return risposta;

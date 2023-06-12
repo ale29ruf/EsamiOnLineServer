@@ -5,6 +5,7 @@ import proto.Remotemethod;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Notificatore implements Runnable{
 
@@ -17,11 +18,23 @@ public class Notificatore implements Runnable{
 
     @Override
     public void run() {
-        for(Ascoltatore ascoltatore : clients)
-            ascoltatore.aggiorna(domande);
+        while(true){
+            for(Ascoltatore ascoltatore : clients){
+                ascoltatore.aggiorna(domande);
+                clients.remove(ascoltatore);
+            }
+
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException ignored) {
+
+            }
+        }
+
     }
 
     public void aggiungiClient(Ascoltatore ascoltatore){
+        System.out.println("Aggiunto nuovo client");
         clients.add(ascoltatore);
     }
 }

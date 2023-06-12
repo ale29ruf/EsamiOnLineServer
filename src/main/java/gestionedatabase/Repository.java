@@ -2,10 +2,7 @@ package gestionedatabase;
 
 import converter.ConverterFactory;
 import converter.ProtoToModelStudente;
-import model.Appello;
-import model.Domanda;
-import model.Risposta;
-import model.Studente;
+import model.*;
 import proto.Remotemethod;
 
 import javax.persistence.EntityManager;
@@ -43,13 +40,32 @@ public class Repository { //opera sul DB
     public static void main(String[] args){
         Repository r = new Repository();
 
+        Appello appello = new Appello();
+        appello.setId(12);
+        appello.setNome("Appello prossimo-esimo");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2023);
+        calendar.set(Calendar.MONTH, Calendar.JUNE);
+        calendar.set(Calendar.DAY_OF_MONTH, 12);
+        calendar.set(Calendar.HOUR_OF_DAY, 16);
+        calendar.set(Calendar.MINUTE, 40);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        appello.setOra(calendar);
+        appello.setDurata("2 ore");
+        r.aggiungiAppello(appello);
+        System.out.println("aggiunto appello");
+
+
+
+        /*
         for (int i=0; i<5; i++){
             Appello appello = new Appello();
             appello.setId(i);
             appello.setNome("Appello "+i+"-esimo");
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.YEAR, 2023);
-            calendar.set(Calendar.MONTH, Calendar.JANUARY); // Gennaio
+            calendar.set(Calendar.MONTH, Calendar.JULY);
             calendar.set(Calendar.DAY_OF_MONTH, 20);
             calendar.set(Calendar.HOUR_OF_DAY, 10);
             calendar.set(Calendar.MINUTE, 30);
@@ -62,6 +78,14 @@ public class Repository { //opera sul DB
         }
 
 
+
+        Appello ap = r.cercaAppello(0).get(0);
+        List<Domanda> domande = r.ottieniDomande(ap);
+        for(Domanda d : domande){
+            System.out.println(d.getTesto());
+            for(Scelte s : d.getScelte())
+                System.out.println(s.getTesto());
+        }*/
 
     }
 
@@ -78,11 +102,12 @@ public class Repository { //opera sul DB
         return query.getResultList();
     }
 
-    public List<Studente> cercaStudente(String matricola, String codFiscale){
-        String queryString = "SELECT s FROM Studente s WHERE s.codfiscale = :codFiscale or s.matricola = :matricola";
+    public List<Studente> cercaStudente(String matricola, String codFiscale, Appello appello){
+        String queryString = "SELECT s FROM Studente s WHERE (s.codfiscale = :codFiscale or s.matricola = :matricola) and s.idappello = :id";
         TypedQuery<Studente> queryS = em.createQuery(queryString, Studente.class);
         queryS.setParameter("codFiscale",codFiscale);
         queryS.setParameter("matricola",matricola);
+        queryS.setParameter("id",appello);
         return queryS.getResultList();
     }
 
@@ -98,8 +123,6 @@ public class Repository { //opera sul DB
         } catch (Exception e) {
             em.getTransaction().rollback();
             return null;
-        } finally {
-            em.close();
         }
         return s;
     }
@@ -115,7 +138,7 @@ public class Repository { //opera sul DB
     public List<Domanda> ottieniDomande(Appello p) {
         String queryString = "SELECT d FROM Domanda d WHERE d.appello = :idAppello";
         TypedQuery<Domanda> queryD = em.createQuery(queryString, Domanda.class);
-        queryD.setParameter("idAppello", p.getId());
+        queryD.setParameter("idAppello", p);
         return queryD.getResultList();
     }
 

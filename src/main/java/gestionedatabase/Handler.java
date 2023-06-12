@@ -43,6 +43,7 @@ public final class Handler implements HandlerDB{ //service
         String matricola = studente.getMatricola();
         String codFiscale = studente.getCodFiscale();
 
+        /*
         //Verifico che l'appello per cui si vuole registrare sia valido
         List<Appello> p = r.cercaAppello(idAppello);
         Calendar nowLess = Calendar.getInstance();
@@ -51,9 +52,11 @@ public final class Handler implements HandlerDB{ //service
             throw new AppelloNotFoundException();
 
         //Verifico che lo studente non sia gia' presente nel database
-        List<Studente> listaS = r.cercaStudente(matricola,codFiscale);
+        List<Studente> listaS = r.cercaStudente(matricola,codFiscale,p.get(0));
         if( ! listaS.isEmpty()) //posso aggiungere lo studente sul db
             throw new UtenteAlreadyRegisteredException(); // -> chain of responsibility
+
+         */
 
         Studente s = r.aggiungiUtente(studente);
 
@@ -79,22 +82,26 @@ public final class Handler implements HandlerDB{ //service
         for(Appello ap : appelli) {
             result.add(conv.convert(ap));
         }
-        //Remotemethod.ListaAppelli output = Remotemethod.ListaAppelli.newBuilder().addAllAppelli(result).build();
         return result;
     }
 
     @Override
     public String partecipaEsame(Remotemethod.pRequest richiesta) {
-        String codiceAppello = richiesta.getCodApello().toString();
+        String codiceAppello = richiesta.getCodApello().toString().substring(9,10+31);
         List<Appello> appello = r.ottieniAppello(codiceAppello);
-        if(appello.isEmpty())
-            throw new AppelloNotFoundException("Codice passato non valido");
+        if(appello.isEmpty()){
+            throw new AppelloNotFoundException();
+        }
 
         Appello p = appello.get(0);
+
+        /*
         Calendar oraAppelloPlus = p.getOra();
         oraAppelloPlus.add(Calendar.MINUTE,30);
-        if(oraAppelloPlus.after(Calendar.getInstance()))
-            throw new AppelloAlreadyStartedException();
+        if(confrontaDate(oraAppelloPlus,Calendar.getInstance()) < 0 && oraAppelloPlus.after(Calendar.getInstance()))
+                throw new AppelloAlreadyStartedException();
+
+         */
 
         l.lock();
         Notificatore notificatore = aggiornaCache(p);
@@ -106,11 +113,27 @@ public final class Handler implements HandlerDB{ //service
         Client c = new Client(hostname,port);
         notificatore.aggiungiClient(c);
 
-        return "";
+        return "Attendere inizio appello ...";
     }
+
+    private int confrontaDate(Calendar calendario1, Calendar calendario2) {
+        int anno = Integer.compare(calendario1.get(Calendar.YEAR), calendario2.get(Calendar.YEAR));
+        if (Integer.compare(calendario1.get(Calendar.YEAR), calendario2.get(Calendar.YEAR)) != 0) {
+            return anno;
+        }
+
+        int mese = Integer.compare(calendario1.get(Calendar.MONTH), calendario2.get(Calendar.MONTH));
+        if (mese != 0) {
+            return mese;
+        }
+
+        return Integer.compare(calendario1.get(Calendar.DAY_OF_MONTH), calendario2.get(Calendar.DAY_OF_MONTH));
+    }
+
 
     private Notificatore aggiornaCache(Appello p) {
         if(domandeAppello.get(p) == null){
+            System.out.println("Creazione notificatore");
             List<Domanda> domande = r.ottieniDomande(p);
             domandeAppello.put(p, domande);
 
@@ -123,10 +146,10 @@ public final class Handler implements HandlerDB{ //service
             //Creo il task
             Notificatore notificatore = new Notificatore(listaDomande);
             notificatoreMap.put(p,notificatore);
-            long timeElapse = p.getOra().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
+            //long timeElapse = p.getOra().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
 
             //Schedulo il task
-            esecutore.schedule(notificatore,timeElapse, TimeUnit.MILLISECONDS);
+            esecutore.schedule(notificatore,5000, TimeUnit.MILLISECONDS); //sostituire 5000 con timeElapse
         }
         return notificatoreMap.get(p);
     }

@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "domande")
@@ -16,6 +17,9 @@ public class Domanda implements Models{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "appello")
     private Appello appello;
+
+    @OneToMany(mappedBy = "domanda")
+    private List<Scelte> scelte;
 
     public Integer getId() {
         return id;
@@ -41,6 +45,13 @@ public class Domanda implements Models{
         this.appello = appello;
     }
 
+    public void setScelte(List<Scelte> scelte){
+        this.scelte = scelte;
+    }
+
+    public List<Scelte> getScelte() {
+        return scelte;
+    }
 
     @Override
     public boolean isDomanda(){

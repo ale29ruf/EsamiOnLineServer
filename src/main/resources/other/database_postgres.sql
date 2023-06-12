@@ -16,6 +16,15 @@ CREATE TABLE "domande" (
                            FOREIGN KEY (appello) REFERENCES appelli (id)
 );
 
+CREATE SEQUENCE scelte_seq;
+
+CREATE TABLE "scelte" (
+                           id INTEGER DEFAULT NEXTVAL ('scelte_seq') PRIMARY KEY,
+                           testo VARCHAR(50),
+                           domanda INTEGER,
+                           FOREIGN KEY (domanda) REFERENCES domande (id)
+);
+
 CREATE SEQUENCE risposte_seq;
 
 CREATE TABLE "risposte" (
