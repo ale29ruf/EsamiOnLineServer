@@ -73,17 +73,17 @@ public class ProxyHandler implements HandlerDB{
 
     @Override
     public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
-        List<Remotemethod.Risposta> risposte;
         try{
             lockR.lock();
-            risposte = risposteCached.get(idAppello);
-            if(risposte == null){
+
+            if(risposteCached.get(idAppello) == null){
                 risposteCached.put(idAppello,gestore.inviaRisposte(idAppello));
             }
+
         }finally{
             lockR.unlock();
         }
-        return risposte;
+        return risposteCached.get(idAppello);
     }
 
 
