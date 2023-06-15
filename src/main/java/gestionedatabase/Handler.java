@@ -113,7 +113,7 @@ public final class Handler implements HandlerDB{ //service
         Client c = new Client(hostname,port);
         notificatore.aggiungiClient(c);
 
-        return "Attendere inizio appello ...";
+        return p.getId()+"";
     }
 
     private int confrontaDate(Calendar calendario1, Calendar calendario2) {
@@ -159,8 +159,11 @@ public final class Handler implements HandlerDB{ //service
         List<Risposta> risposte = r.caricaRisposte(idAppello);
         List<Remotemethod.Risposta> result = new LinkedList<>();
         ModelToProtoRisposta conv = (ModelToProtoRisposta) af.createConverterModel(Risposta.class);
-        for(Risposta r : risposte)
+        for(Risposta r : risposte){
+            System.out.println(r.getRisposta());
             result.add(conv.convert(r));
+        }
+
         return result;
     }
 

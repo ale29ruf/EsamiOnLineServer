@@ -29,6 +29,7 @@ public class Notificatore implements Runnable{
             } catch (InterruptedException ignored) {
 
             }
+            System.out.println("Sto per aggiornare i client aggiunti");
         }
 
     }
