@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "risposte")
 public class Risposta implements Models{
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -13,8 +14,9 @@ public class Risposta implements Models{
     @JoinColumn(name = "iddomanda")
     private Domanda iddomanda;
 
-    @Column(name = "risposta")
-    private Integer risposta;
+    @OneToOne
+    @JoinColumn(name = "scelta")
+    private Scelta scelta;
 
     public Integer getId() {
         return id;
@@ -24,20 +26,24 @@ public class Risposta implements Models{
         this.id = id;
     }
 
-    public Domanda getIddomanda() {
-        return iddomanda;
+    public int getIddomanda() {
+        return iddomanda.getId();
     }
 
     public void setIddomanda(Domanda iddomanda) {
         this.iddomanda = iddomanda;
     }
 
-    public Integer getRisposta() {
-        return risposta;
+    public int getScelta() {
+        return scelta.getId();
     }
 
-    public void setRisposta(Integer risposta) {
-        this.risposta = risposta;
+    public String getTestoScelta(){
+        return scelta.getTesto();
+    }
+
+    public void setRisposta(Scelta scelta) {
+        this.scelta = scelta;
     }
 
     @Override

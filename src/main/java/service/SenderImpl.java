@@ -80,9 +80,9 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         Future<List<Remotemethod.Risposta>> result = esecutore.submit(task);
         List<Remotemethod.Risposta> risposte;
         try{
-            risposte = result.get(20,TimeUnit.SECONDS);
+            risposte = result.get(30,TimeUnit.SECONDS);
         } catch (ExecutionException | InterruptedException | TimeoutException e) {
-            throw new RuntimeException("Connessione al server fallita"); //scrivere bene le eccezioni e mandarle al logger
+            throw new RuntimeException(e.getMessage()); //scrivere bene le eccezioni e mandarle al logger
         }
         Remotemethod.ListaRisposte listaR = Remotemethod.ListaRisposte.newBuilder().addAllRisposte(risposte).build();
         int punteggio = calcolaPunteggio(request.getListaRisposte().getRisposteList(), risposte);
@@ -93,12 +93,16 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
 
     private int calcolaPunteggio(List<Remotemethod.Risposta> daVerificare, List<Remotemethod.Risposta> corrette) {
         int punteggio = 0;
-        for (int i=0; i<daVerificare.size(); i++){
-            int risposta = daVerificare.get(i).getRisposta();
-            if (risposta == -1) //risposta non data
-                punteggio += -1;
-            else if (risposta == corrette.get(i).getRisposta())
-                punteggio += 3;
+        for( Remotemethod.Risposta risposta: daVerificare ) {
+            System.out.println(risposta.getIdDomanda());
+            for (Remotemethod.Risposta rispostaOK : corrette) {
+                System.out.println(rispostaOK.getIdDomanda());
+                if (risposta.getIdDomanda() == rispostaOK.getIdDomanda())
+                    if (risposta.getIdScelta() == rispostaOK.getIdScelta())
+                        punteggio += 3;
+                    else if (risposta.getIdScelta() == -1)
+                        punteggio -= 1;
+            }
         }
         return punteggio;
     }

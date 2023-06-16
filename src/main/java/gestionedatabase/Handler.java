@@ -140,9 +140,9 @@ public final class Handler implements HandlerDB{ //service
             //Converto
             List<proto.Remotemethod.Domanda> listaDomande = new LinkedList<>();
             ModelToProtoDomanda conv = (ModelToProtoDomanda) af.createConverterModel(Domanda.class);
-            for(Domanda d : domande)
+            for(Domanda d : domande) {
                 listaDomande.add(conv.convert(d));
-
+            }
             //Creo il task
             Notificatore notificatore = new Notificatore(listaDomande);
             notificatoreMap.put(p,notificatore);

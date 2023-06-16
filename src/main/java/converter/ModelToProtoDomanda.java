@@ -2,7 +2,7 @@ package converter;
 
 import model.Domanda;
 import model.Models;
-import model.Scelte;
+import model.Scelta;
 import proto.Remotemethod;
 
 import java.util.LinkedList;
@@ -16,14 +16,15 @@ public class ModelToProtoDomanda implements Convertitore{
         }
         Domanda d = (Domanda) model;
 
-        List<Scelte> scelte = d.getScelte();
-        List<Remotemethod.Info> scelteProto = new LinkedList<>();
-        for(Scelte s : scelte){
-            Remotemethod.Info info = Remotemethod.Info.newBuilder().setTesto(s.getTesto()).build();
-            scelteProto.add(info);
+        List<Scelta> scelte = d.getScelte();
+        List<Remotemethod.Scelta> scelteProto = new LinkedList<>();
+        for(Scelta s : scelte){
+            Remotemethod.Scelta scelta = Remotemethod.Scelta.newBuilder().setId(s.getId())
+                    .setTesto(s.getTesto()).build();
+            scelteProto.add(scelta);
         }
 
-        Remotemethod.ListaScelte listaScelte = Remotemethod.ListaScelte.newBuilder().addAllScelta(scelteProto).build();
-        return Remotemethod.Domanda.newBuilder().setTesto(d.getTesto()).setScelte(listaScelte).build();
+        Remotemethod.ListaScelte listaScelte = Remotemethod.ListaScelte.newBuilder().addAllScelte(scelteProto).build();
+        return Remotemethod.Domanda.newBuilder().setTesto(d.getTesto()).setScelte(listaScelte).setId(d.getId()).build();
     }
 }

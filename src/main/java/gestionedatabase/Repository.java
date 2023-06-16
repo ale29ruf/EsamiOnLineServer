@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,9 +36,31 @@ public class Repository { //opera sul DB
 
     }
 
+    public void aggiungiRisposta(int idDomanda, int idScelta){
+        Domanda d = em.find(Domanda.class,idDomanda);
+        Scelta s = em.find(Scelta.class, idScelta);
+        Risposta r = new Risposta();
+        r.setIddomanda(d);
+        r.setRisposta(s);
+
+        try {
+
+            em.getTransaction().begin();
+            em.persist(r);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+    }
+
     public static void main(String[] args){
         Repository r = new Repository();
+        r.aggiungiRisposta(1,1);
 
+
+
+
+        /*
         Appello appello = new Appello();
         appello.setId(12);
         appello.setNome("Appello prossimo-esimo");
@@ -55,6 +76,8 @@ public class Repository { //opera sul DB
         appello.setDurata("2 ore");
         r.aggiungiAppello(appello);
         System.out.println("aggiunto appello");
+
+         */
 
 
 
@@ -86,6 +109,7 @@ public class Repository { //opera sul DB
             for(Scelte s : d.getScelte())
                 System.out.println(s.getTesto());
         }*/
+
 
     }
 

@@ -18,7 +18,7 @@ CREATE TABLE "domande" (
 
 CREATE SEQUENCE scelte_seq;
 
-CREATE TABLE "scelte" (
+CREATE TABLE "scelta" (
                            id INTEGER DEFAULT NEXTVAL ('scelte_seq') PRIMARY KEY,
                            testo VARCHAR(50),
                            domanda INTEGER,

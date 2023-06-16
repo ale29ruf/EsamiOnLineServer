@@ -19,7 +19,7 @@ public class Domanda implements Models{
     private Appello appello;
 
     @OneToMany(mappedBy = "domanda")
-    private List<Scelte> scelte;
+    private List<Scelta> scelta;
 
     public Integer getId() {
         return id;
@@ -45,12 +45,12 @@ public class Domanda implements Models{
         this.appello = appello;
     }
 
-    public void setScelte(List<Scelte> scelte){
-        this.scelte = scelte;
+    public void setScelte(List<Scelta> scelta){
+        this.scelta = scelta;
     }
 
-    public List<Scelte> getScelte() {
-        return scelte;
+    public List<Scelta> getScelte() {
+        return scelta;
     }
 
     @Override

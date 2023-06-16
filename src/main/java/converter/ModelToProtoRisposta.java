@@ -11,6 +11,6 @@ public class ModelToProtoRisposta implements Convertitore{
             throw new ClassCastException("Tipo passato non supportato per AbstractFactory");
         }
         Risposta r = (Risposta) model;
-        return Remotemethod.Risposta.newBuilder().setRisposta(r.getRisposta()).build();
+        return Remotemethod.Risposta.newBuilder().setIdDomanda(r.getIddomanda()).setIdScelta(r.getIddomanda()).setTesto(r.getTestoScelta()).build();
     }
 }
