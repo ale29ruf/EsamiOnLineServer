@@ -26,10 +26,11 @@ public final class Handler implements HandlerDB{ //service
 
     Repository r = new Repository();
 
-    //TODO Avviare un thread 30 minuti dopo l'inizio dell'appello che vada a rimuovere la lista di domande e il notificatore dalle seguenti strutture
+    //TODO Avviare un thread 30 minuti dopo l'inizio dell'appello che vada a rimuovere la lista di domande dalle seguenti strutture
     Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
     Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
-    Lock l = new ReentrantLock(); //preferisco usare il lockA al posto di collezioni concorrenti
+    Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
+    final int maxInterval = 5; //tempo massimo, in minuti, dall'inizio dell'appello, che consente agli utenti di prenotarsi
 
     ScheduledExecutorService esecutore;
 
@@ -60,19 +61,11 @@ public final class Handler implements HandlerDB{ //service
 
         Studente s = r.aggiungiUtente(studente);
 
+
         if(s == null)
             throw new OperationDBException();
 
         return s.getCodiceappello();
-    }
-
-
-
-    public static void main(String[] args){
-
-        Handler gestore = new Handler();
-
-        System.out.println();
     }
 
     public List<Remotemethod.Appello> caricaAppelli(){
@@ -97,10 +90,10 @@ public final class Handler implements HandlerDB{ //service
 
         /*
         Calendar oraAppelloPlus = p.getOra();
-        oraAppelloPlus.add(Calendar.MINUTE,30);
+        oraAppelloPlus.add(Calendar.MINUTE,maxInterval);
         if(confrontaDate(oraAppelloPlus,Calendar.getInstance()) < 0 && oraAppelloPlus.after(Calendar.getInstance()))
                 throw new AppelloAlreadyStartedException();
-
+        oraAppelloPlus.roll(Calendar.MINUTE,-maxInterval);
          */
 
         l.lock();
@@ -143,8 +136,10 @@ public final class Handler implements HandlerDB{ //service
             for(Domanda d : domande) {
                 listaDomande.add(conv.convert(d));
             }
+
+
             //Creo il task
-            Notificatore notificatore = new Notificatore(listaDomande);
+            Notificatore notificatore = new Notificatore(listaDomande,maxInterval);
             notificatoreMap.put(p,notificatore);
             //long timeElapse = p.getOra().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
 

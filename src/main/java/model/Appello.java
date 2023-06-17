@@ -5,7 +5,8 @@ import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
-@Table(name = "appelli")
+@Table(name = "appelli", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_constraint_name", columnNames = {"nome"})})
 public class Appello implements Models {
 
     @Id

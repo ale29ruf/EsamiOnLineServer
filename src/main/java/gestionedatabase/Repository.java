@@ -26,7 +26,6 @@ public class Repository { //opera sul DB
 
     public void aggiungiAppello(Appello appello){
         try {
-
             em.getTransaction().begin();
             em.persist(appello);
             em.getTransaction().commit();
@@ -123,6 +122,13 @@ public class Repository { //opera sul DB
         String queryString = "SELECT a FROM Appello a WHERE id = :idAppello";
         TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
         query.setParameter("idAppello", id);
+        return query.getResultList();
+    }
+
+    public List<Appello> cercaAppelloPerNome(String nomeAppello){
+        String queryString = "SELECT a FROM Appello a WHERE id = :nomeAppello";
+        TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
+        query.setParameter("nomeAppello", nomeAppello);
         return query.getResultList();
     }
 

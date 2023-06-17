@@ -19,8 +19,7 @@ public class Starter {
         ConverterFactory.FACTORY.installConverterModel(Domanda.class, new ModelToProtoDomanda());
         ConverterFactory.FACTORY.installConverterModel(Risposta.class, new ModelToProtoRisposta());
 
-        Handler gestore = new Handler();
-        HandlerDB gestoreProxy = new ProxyHandler(gestore);
+        HandlerDB gestoreProxy = new ProxyHandler();
         Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestoreProxy)).build();
         try {
             server.start();

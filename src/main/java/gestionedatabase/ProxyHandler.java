@@ -17,15 +17,15 @@ public class ProxyHandler implements HandlerDB{
     List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli (flyweight)
     ReentrantLock lockA = new ReentrantLock();
 
-    Handler gestore;
+    Handler gestore = new Handler();
     boolean changed = true;
 
     Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
     ReentrantLock lockR = new ReentrantLock();
 
 
-    public ProxyHandler(Handler gestore){
-        this.gestore = gestore;
+
+    public ProxyHandler(){
     }
 
     @Override

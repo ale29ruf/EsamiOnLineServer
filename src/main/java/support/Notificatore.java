@@ -11,13 +11,17 @@ public class Notificatore implements Runnable{
 
     List<Ascoltatore> clients = Collections.synchronizedList(new LinkedList<>());
     List<Remotemethod.Domanda> domande;
+    final int intervallo = 10; //tempo in secondi -> frequenza con cui un thread deve svegliarsi e concedere l'accesso all'appello
+    int maxInterval; //tempo in minuti
 
-    public Notificatore(List<Remotemethod.Domanda> domande){
+    public Notificatore(List<Remotemethod.Domanda> domande, int maxInterval){
         this.domande = domande;
+        this.maxInterval = maxInterval;
     }
 
     @Override
     public void run() {
+        //for(int i=0; i<((maxInterval*60)/intervallo); i++){
         while(true){
             for(Ascoltatore ascoltatore : clients){
                 ascoltatore.aggiorna(domande);
@@ -25,7 +29,7 @@ public class Notificatore implements Runnable{
             }
 
             try {
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(intervallo);
             } catch (InterruptedException ignored) {
 
             }
