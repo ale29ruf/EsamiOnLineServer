@@ -24,7 +24,7 @@ public final class Handler implements HandlerDB{ //service
 
     ConverterFactory af = ConverterFactory.FACTORY;
 
-    Repository r = new Repository();
+    Repository r = Repository.REPOSITORY;
 
     //TODO Avviare un thread 30 minuti dopo l'inizio dell'appello che vada a rimuovere la lista di domande dalle seguenti strutture
     Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();

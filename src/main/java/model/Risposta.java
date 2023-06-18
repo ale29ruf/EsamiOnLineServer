@@ -18,6 +18,14 @@ public class Risposta implements Models{
     @JoinColumn(name = "scelta")
     private Scelta scelta;
 
+    public Risposta(Domanda d, Scelta s){
+        this.scelta = s;
+        this.iddomanda = d;
+    }
+
+    public Risposta(){
+    }
+
     public Integer getId() {
         return id;
     }

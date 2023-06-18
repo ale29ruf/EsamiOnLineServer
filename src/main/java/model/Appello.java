@@ -10,6 +10,7 @@ import java.util.Calendar;
 public class Appello implements Models {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     int id;
 
@@ -22,8 +23,7 @@ public class Appello implements Models {
     @Column(name = "durata")
     String durata;
 
-    public Appello(int id, String nome, Calendar ora, String durata) {
-        this.id = id;
+    public Appello(String nome, Calendar ora, String durata) {
         this.nome = nome;
         this.ora = ora;
         this.durata = durata;

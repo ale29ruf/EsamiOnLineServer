@@ -1,22 +1,32 @@
 package servergui;
 
+import gestionedatabase.Repository;
+import model.Appello;
+import model.Domanda;
+import model.Risposta;
+import model.Scelta;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class JDialogQuery extends JDialog {
+public class JDialogAppello extends JDialog {
+    private String nomeAppello;
+    private Calendar dataOra;
+    private String durata;
 
-    List<String> domande = new LinkedList<>();
-    int numDomanda = 1;
-    Map<Integer,List<String>> scelteDomanda = new HashMap<>();
-    Map<Integer,String> rispostaDomanda = new HashMap<>();
+    private final List<String> domande = new LinkedList<>();
+    private int numDomanda = 0;
+    private final Map<Integer,List<String>> scelteDomanda = new HashMap<>();
+    private final Map<Integer,String> rispostaDomanda = new HashMap<>();
 
-    JLabel etichetta;
-    JTextField campo;
-    int totDomande;
+    private final JLabel etichetta;
+    private final JTextField campo;
+    private final int totDomande;
 
-    public JDialogQuery(JFrame f,int totDomande) {
+
+    public JDialogAppello(JFrame f, int totDomande) {
         super(f, "Finestra di aggiunta appello", true);
 
         this.totDomande = totDomande;
@@ -92,14 +102,25 @@ public class JDialogQuery extends JDialog {
             }
         }
         rispostaDomanda.put(numDomanda,rispostaDef);
-        if(numDomanda < totDomande){
+        if(numDomanda < totDomande-1){
             numDomanda++;
-            etichetta.setText("Domanda n."+ numDomanda +": ");
+            etichetta.setText("Domanda n."+ (numDomanda+1) +": ");
             campo.setText("");
             return true;
         }
+        registraAppello();
         System.out.println("Salvato nuovo appello nel db");
         return false;
+    }
+
+    private void registraAppello() {
+        Repository r = Repository.REPOSITORY;
+        Appello newAppello = new Appello(nomeAppello,dataOra,durata);
+        if(r.aggiungiAppelloCompleto(newAppello,domande,scelteDomanda,rispostaDomanda)){
+            System.out.println("Appello aggiunto con successo");
+        } else {
+            System.out.println("Appello non aggiunto a causa di errori interni");
+        }
     }
 
     private boolean caricaSceltaSuccessiva() {
@@ -128,4 +149,9 @@ public class JDialogQuery extends JDialog {
         return true;
     }
 
+    public void passaInfoAppello(String text, String durata, Calendar dataOra) {
+        this.nomeAppello = text;
+        this.durata = durata;
+        this.dataOra = dataOra;
+    }
 }

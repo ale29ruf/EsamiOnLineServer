@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Interface {
+
+    public Interface(){
+
+    }
     public static void main(String[] args){
         JFrame f = new JFrame("Applicazione server");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +48,7 @@ public class Interface {
         });
 
 
-        AddPanelFunction panelAdderAppello = new AddPanelFunction();
+        PannelloAggiuntaAppello panelAdderAppello = new PannelloAggiuntaAppello();
         panelAdderAppello.setVisible(false);
         JButton aggiungiAppello = new JButton("Aggiungi appello");
         aggiungiAppello.addActionListener( e -> {

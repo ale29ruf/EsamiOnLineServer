@@ -10,106 +10,47 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-public class Repository { //opera sul DB
+public enum Repository { //opera sul DB
 
+    REPOSITORY;
     EntityManagerFactory emf;
     EntityManager em;
 
     ConverterFactory af = ConverterFactory.FACTORY;
 
-    public Repository(){
+    Repository(){
         emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         em = emf.createEntityManager();
+        System.out.println("Unita' di persistenza attiva");
     }
 
-    public void aggiungiAppello(Appello appello){
+    public boolean aggiungiAppelloCompleto(Appello appello, List<String> domande, Map<Integer,List<String>> scelte,Map<Integer,String> risposte){
         try {
             em.getTransaction().begin();
             em.persist(appello);
+            for (int i = 0; i < domande.size(); i++) {
+                Domanda d = new Domanda(domande.get(i), appello);
+                em.persist(d);
+                List<String> scelteDomande = scelte.get(i);
+                Scelta sceltaRisposta = null;
+                for (String testoScelta : scelteDomande) {
+                    Scelta s = new Scelta(testoScelta, d);
+                    em.persist(s);
+                    if (testoScelta.equals(risposte.get(i)))
+                        sceltaRisposta = s;
+                }
+                Risposta risposta = new Risposta(d, sceltaRisposta);
+                em.persist(risposta);
+            }
             em.getTransaction().commit();
-        } catch (Exception e) {
+            return true;
+        } catch (Exception e){
             em.getTransaction().rollback();
         }
-
-    }
-
-    public void aggiungiRisposta(int idDomanda, int idScelta){
-        Domanda d = em.find(Domanda.class,idDomanda);
-        Scelta s = em.find(Scelta.class, idScelta);
-        Risposta r = new Risposta();
-        r.setIddomanda(d);
-        r.setRisposta(s);
-
-        try {
-
-            em.getTransaction().begin();
-            em.persist(r);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-        }
-    }
-
-    public static void main(String[] args){
-        Repository r = new Repository();
-        r.aggiungiRisposta(1,1);
-
-
-
-
-        /*
-        Appello appello = new Appello();
-        appello.setId(12);
-        appello.setNome("Appello prossimo-esimo");
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2023);
-        calendar.set(Calendar.MONTH, Calendar.JUNE);
-        calendar.set(Calendar.DAY_OF_MONTH, 12);
-        calendar.set(Calendar.HOUR_OF_DAY, 16);
-        calendar.set(Calendar.MINUTE, 40);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        appello.setOra(calendar);
-        appello.setDurata("2 ore");
-        r.aggiungiAppello(appello);
-        System.out.println("aggiunto appello");
-
-         */
-
-
-
-        /*
-        for (int i=0; i<5; i++){
-            Appello appello = new Appello();
-            appello.setId(i);
-            appello.setNome("Appello "+i+"-esimo");
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.YEAR, 2023);
-            calendar.set(Calendar.MONTH, Calendar.JULY);
-            calendar.set(Calendar.DAY_OF_MONTH, 20);
-            calendar.set(Calendar.HOUR_OF_DAY, 10);
-            calendar.set(Calendar.MINUTE, 30);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
-            appello.setOra(calendar);
-            appello.setDurata("2 ore");
-            r.aggiungiAppello(appello);
-            System.out.println("aggiunto appello");
-        }
-
-
-
-        Appello ap = r.cercaAppello(0).get(0);
-        List<Domanda> domande = r.ottieniDomande(ap);
-        for(Domanda d : domande){
-            System.out.println(d.getTesto());
-            for(Scelte s : d.getScelte())
-                System.out.println(s.getTesto());
-        }*/
-
-
+        return false;
     }
 
     public List<Appello> caricaAppelli(){
@@ -150,11 +91,11 @@ public class Repository { //opera sul DB
             s = (Studente) conv.convert(studente,p, UUID.randomUUID().toString().replace("-", ""));
             em.persist(s);
             em.getTransaction().commit();
+            return s;
         } catch (Exception e) {
             em.getTransaction().rollback();
-            return null;
         }
-        return s;
+        return null;
     }
 
     public List<Appello> ottieniAppello(String codiceAppello) {

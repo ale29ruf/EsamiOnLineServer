@@ -21,6 +21,15 @@ public class Domanda implements Models{
     @OneToMany(mappedBy = "domanda")
     private List<Scelta> scelta;
 
+    public Domanda(String testo,Appello p){
+        this.appello = p;
+        this.testo = testo;
+    }
+
+    public Domanda() {
+
+    }
+
     public Integer getId() {
         return id;
     }

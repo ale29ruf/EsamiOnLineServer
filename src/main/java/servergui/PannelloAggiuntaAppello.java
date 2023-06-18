@@ -4,9 +4,10 @@ import gestionedatabase.Repository;
 import model.Appello;
 
 import javax.swing.*;
+import java.util.Calendar;
 import java.util.List;
 
-public class AddPanelFunction extends JPanel {
+public class PannelloAggiuntaAppello extends JPanel {
 
     private JTextField nomeField;
     private JTextField durataField;
@@ -14,9 +15,9 @@ public class AddPanelFunction extends JPanel {
     private JTextField oraField;
     private JTextField numDomandeField;
     private JButton registraAppello;
-    Repository r = new Repository();
+    Repository r = Repository.REPOSITORY;
 
-    public AddPanelFunction(){
+    public PannelloAggiuntaAppello(){
         //setLayout(new GridLayout(1, 8, 5, 5)); // Layout con 4 righe, 2 colonne, spaziatura tra i componenti
 
         JLabel nome = new JLabel("Nome: ");
@@ -77,6 +78,14 @@ public class AddPanelFunction extends JPanel {
             return;
         }
 
+        Calendar dataOra = Calendar.getInstance();
+        dataOra.set(Calendar.YEAR, Integer.parseInt(giornoParts[2]));
+        dataOra.set(Calendar.MONTH, Integer.parseInt(giornoParts[1]));
+        dataOra.set(Calendar.DAY_OF_MONTH, Integer.parseInt(giornoParts[0]));
+        dataOra.set(Calendar.HOUR_OF_DAY, Integer.parseInt(oraParts[0]));
+        dataOra.set(Calendar.MINUTE, Integer.parseInt(oraParts[1]));
+        dataOra.set(Calendar.SECOND, Integer.parseInt(oraParts[2]));
+
         int numDomande;
         if(numDomandeField.getText().length() == 0){
             notificaErroreCampi("Campo Numero domande non specificato correttamente");
@@ -89,8 +98,9 @@ public class AddPanelFunction extends JPanel {
             }
         }
 
-        JDialogQuery jDialogQuery = new JDialogQuery((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this),numDomande);
-        jDialogQuery.setVisible(true);
+        JDialogAppello jDialogAppello = new JDialogAppello((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this),numDomande);
+        jDialogAppello.passaInfoAppello(nomeField.getText(),durataField.getText(),dataOra);
+        jDialogAppello.setVisible(true);
 
     }
 
