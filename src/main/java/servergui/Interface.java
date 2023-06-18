@@ -9,12 +9,11 @@ public class Interface {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setMinimumSize(new Dimension(1000, 400));
         f.setLocationRelativeTo(null);
-        f.setVisible(true);
 
-        JPanel panel = new JPanel();
-        panel.setSize(new Dimension(700,100));
+        JPanel mainPanel = new JPanel(new BorderLayout());
 
         JTextArea logger = new JTextArea();
+        logger.setEditable(false);
         logger.setSize(800,300);
         logger.setText("hosfvjifvhujnfvhjnfvjnbf" +
                 "ohsdfvojsdfvhjnfvsjnosdfvjosfvjnsfvjn" +
@@ -34,34 +33,46 @@ public class Interface {
         visualizzaCambiamentiButton.addActionListener( e -> {
             logger.setVisible(true);
             jScrollPane.setVisible(true);
+            aggiornaPannello(mainPanel);
         });
 
         JButton nonVisualizzaCambiamentiButton = new JButton("Disabilita visualizzazione cambiamenti");
         nonVisualizzaCambiamentiButton.addActionListener( e -> {
             logger.setVisible(false);
             jScrollPane.setVisible(false);
+            aggiornaPannello(mainPanel);
         });
+
 
         AddPanelFunction panelAdderAppello = new AddPanelFunction();
         panelAdderAppello.setVisible(false);
         JButton aggiungiAppello = new JButton("Aggiungi appello");
         aggiungiAppello.addActionListener( e -> {
             panelAdderAppello.setVisible(true);
+            aggiungiAppello.setVisible(false);
+            aggiornaPannello(mainPanel);
         });
 
         selettore.add(visualizzaCambiamentiButton);
         selettore.add(nonVisualizzaCambiamentiButton);
         selettore.add(aggiungiAppello);
 
-        panel.add(selettore,BorderLayout.NORTH);
-        panel.add(jScrollPane,BorderLayout.CENTER);
-        panel.add(panelAdderAppello,BorderLayout.SOUTH);
+        mainPanel.add(selettore,BorderLayout.NORTH);
+        mainPanel.add(jScrollPane,BorderLayout.CENTER);
+        mainPanel.add(panelAdderAppello,BorderLayout.SOUTH);
 
 
-        f.add(panel, BorderLayout.CENTER);
+        f.add(mainPanel, BorderLayout.CENTER);
 
         f.pack();
+        f.setVisible(true);
 
+
+    }
+
+    private static void aggiornaPannello(JPanel panel) {
+        panel.revalidate();
+        panel.repaint();
     }
 
 

@@ -54,8 +54,10 @@ public class AddPanelFunction extends JPanel {
 
     public void processaAppello(){
         if(nomeField.getText().length() == 0 || durataField.getText().length() == 0 ||
-        giornoField.getText().length() == 0 || oraField.getText().length() == 0)
+        giornoField.getText().length() == 0 || oraField.getText().length() == 0) {
             notificaErroreCampi(null);
+            return;
+        }
 
         List<Appello> listaAppello = r.cercaAppelloPerNome(nomeField.getText());
         if(!listaAppello.isEmpty()){
@@ -88,6 +90,7 @@ public class AddPanelFunction extends JPanel {
         }
 
         JDialogQuery jDialogQuery = new JDialogQuery((JFrame) SwingUtilities.getAncestorOfClass(JFrame.class, this),numDomande);
+        jDialogQuery.setVisible(true);
 
     }
 

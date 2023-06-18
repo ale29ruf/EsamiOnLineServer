@@ -126,7 +126,7 @@ public class Repository { //opera sul DB
     }
 
     public List<Appello> cercaAppelloPerNome(String nomeAppello){
-        String queryString = "SELECT a FROM Appello a WHERE id = :nomeAppello";
+        String queryString = "SELECT a FROM Appello a WHERE nome = :nomeAppello";
         TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
         query.setParameter("nomeAppello", nomeAppello);
         return query.getResultList();
