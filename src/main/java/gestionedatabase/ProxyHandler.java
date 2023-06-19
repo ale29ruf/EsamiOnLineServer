@@ -5,7 +5,9 @@ import exception.AppelloNotFoundException;
 import exception.OperationDBException;
 import exception.UtenteAlreadyRegisteredException;
 import proto.Remotemethod;
+import servergui.SyncronizedJTextArea;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,15 +19,29 @@ public class ProxyHandler implements HandlerDB{
     List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli (flyweight)
     ReentrantLock lockA = new ReentrantLock();
 
-    Handler gestore = new Handler();
+    Handler gestore;
     boolean changed = true;
 
     Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
     ReentrantLock lockR = new ReentrantLock();
 
+    SyncronizedJTextArea logger;
 
+    public ProxyHandler(Handler gestore){
+        this.gestore = gestore;
+    }
 
-    public ProxyHandler(){
+    public void setLogger(SyncronizedJTextArea logger){
+        this.logger = logger;
+    }
+
+    public void aggiornaCache(){
+        try{
+            lockA.lock();
+            changed = true;
+        } finally {
+            lockA.unlock();
+        }
     }
 
     @Override
@@ -36,6 +52,7 @@ public class ProxyHandler implements HandlerDB{
             changed = false;
         }
         lockA.unlock();
+        logger.segnala("Nuova richiesta di caricamento appello \n");
         return appelliCached;
     }
 
@@ -44,15 +61,16 @@ public class ProxyHandler implements HandlerDB{
         String res;
         try{
             res = gestore.addStudent(studente);
+            logger.segnala("Richiesta di prenotazione >> "+studente+" conclusa con successo \n");
         } catch (AppelloNotFoundException e){
             res = "ERRORE: Nessun appello trovato.";
-            System.out.println(res); //-> invia info al logger e sollevare una opportuna eccezione
+            logger.segnala("Richiesta di prenotazione >> "+studente+" conclusa con "+res+" \n");
         } catch (UtenteAlreadyRegisteredException e){
             res = "ERRORE: Utente gia' registrato";
-            System.out.println(res); //-> invia info al logger e sollevare una opportuna eccezione
+            logger.segnala("Richiesta di prenotazione >> "+studente+" conclusa con "+res+" \n");
         } catch (OperationDBException e){
             res = "ERRORE: Riprova operazione piu' tardi";
-            System.out.println(res); //-> invia info al logger e sollevare una opportuna eccezione
+            logger.segnala("Richiesta di prenotazione >> "+studente+" conclusa con "+res+" \n");
         }
         return res;
     }
@@ -62,10 +80,13 @@ public class ProxyHandler implements HandlerDB{
         String risposta = "";
         try{
             risposta = gestore.partecipaEsame(richiesta);
+            logger.segnala("Richiesta di partecipazione esame >> "+richiesta+" conclusa con successo \n");
         } catch (AppelloNotFoundException e){
             risposta = "ERRORE: Nessun appello trovato per il corrispettivo codice inviato";
+            logger.segnala("Richiesta di partecipazione esame >> "+richiesta+" conclusa con "+risposta+" \n");
         } catch (AppelloAlreadyStartedException e){
             risposta = "ERRORE: Appello gia' iniziato. Impossibile partecipare";
+            logger.segnala("Richiesta di partecipazione esame >> "+richiesta+" conclusa con "+risposta+" \n");
         }
 
         return risposta;
@@ -83,6 +104,7 @@ public class ProxyHandler implements HandlerDB{
         }finally{
             lockR.unlock();
         }
+        logger.segnala("Appello con id "+idAppello+" concluso ... invio delle risposte \n");
         return risposteCached.get(idAppello);
     }
 

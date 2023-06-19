@@ -2,14 +2,18 @@ import converter.*;
 import gestionedatabase.Handler;
 import gestionedatabase.HandlerDB;
 import gestionedatabase.ProxyHandler;
+import gestionedatabase.Repository;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import model.Appello;
 import model.Domanda;
 import model.Risposta;
 import proto.Remotemethod;
+import servergui.Interface;
+import servergui.SyncronizedJTextArea;
 import service.SenderImpl;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class Starter {
@@ -19,7 +23,13 @@ public class Starter {
         ConverterFactory.FACTORY.installConverterModel(Domanda.class, new ModelToProtoDomanda());
         ConverterFactory.FACTORY.installConverterModel(Risposta.class, new ModelToProtoRisposta());
 
-        HandlerDB gestoreProxy = new ProxyHandler();
+        Interface serverInterface = new Interface();
+        SyncronizedJTextArea logger = serverInterface.avvia();
+
+        Handler gestore = new Handler();
+        ProxyHandler gestoreProxy = new ProxyHandler(gestore);
+        gestoreProxy.setLogger(logger);
+
         Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestoreProxy)).build();
         try {
             server.start();

@@ -4,10 +4,8 @@ import converter.*;
 import model.Risposta;
 import support.Client;
 import support.Notificatore;
-import exception.AppelloAlreadyStartedException;
 import exception.AppelloNotFoundException;
 import exception.OperationDBException;
-import exception.UtenteAlreadyRegisteredException;
 import model.Appello;
 import model.Domanda;
 import model.Studente;
@@ -23,10 +21,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public final class Handler implements HandlerDB{ //service
 
     ConverterFactory af = ConverterFactory.FACTORY;
-
     Repository r = Repository.REPOSITORY;
 
-    //TODO Avviare un thread 30 minuti dopo l'inizio dell'appello che vada a rimuovere la lista di domande dalle seguenti strutture
     Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
     Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
     Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti

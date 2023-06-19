@@ -2,9 +2,6 @@ package servergui;
 
 import gestionedatabase.Repository;
 import model.Appello;
-import model.Domanda;
-import model.Risposta;
-import model.Scelta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,7 +106,6 @@ public class JDialogAppello extends JDialog {
             return true;
         }
         registraAppello();
-        System.out.println("Salvato nuovo appello nel db");
         return false;
     }
 

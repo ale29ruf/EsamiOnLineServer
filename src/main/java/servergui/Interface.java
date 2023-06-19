@@ -5,10 +5,10 @@ import java.awt.*;
 
 public class Interface {
 
-    public Interface(){
-
+    public Interface() {
     }
-    public static void main(String[] args){
+
+    public SyncronizedJTextArea avvia() {
         JFrame f = new JFrame("Applicazione server");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setMinimumSize(new Dimension(1000, 400));
@@ -16,12 +16,9 @@ public class Interface {
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        JTextArea logger = new JTextArea();
+        SyncronizedJTextArea logger = new SyncronizedJTextArea();
         logger.setEditable(false);
         logger.setSize(800,300);
-        logger.setText("hosfvjifvhujnfvhjnfvjnbf" +
-                "ohsdfvojsdfvhjnfvsjnosdfvjosfvjnsfvjn" +
-                "vsjnosdfvjsdfvjvjnsfd \n"+"cvwerjvjernvjernvj \n"+"cvwerjvjernvjernvj \n");
 
         logger.setAlignmentX(Component.CENTER_ALIGNMENT);
         logger.setLineWrap(true);
@@ -54,6 +51,7 @@ public class Interface {
         aggiungiAppello.addActionListener( e -> {
             panelAdderAppello.setVisible(true);
             aggiungiAppello.setVisible(false);
+            logger.segnala("Richiesta aggiunta appello avviata \n");
             aggiornaPannello(mainPanel);
         });
 
@@ -71,7 +69,7 @@ public class Interface {
         f.pack();
         f.setVisible(true);
 
-
+        return logger;
     }
 
     private static void aggiornaPannello(JPanel panel) {

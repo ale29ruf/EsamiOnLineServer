@@ -53,7 +53,7 @@ public class PannelloAggiuntaAppello extends JPanel {
         add(registraAppello);
     }
 
-    public void processaAppello(){
+    private void processaAppello(){
         if(nomeField.getText().length() == 0 || durataField.getText().length() == 0 ||
         giornoField.getText().length() == 0 || oraField.getText().length() == 0) {
             notificaErroreCampi(null);
@@ -105,7 +105,7 @@ public class PannelloAggiuntaAppello extends JPanel {
     }
 
 
-    void notificaErroreCampi(String message){
+    private void notificaErroreCampi(String message){
         if(!(message == null))
             JOptionPane.showMessageDialog(null, message, "Errore", JOptionPane.ERROR_MESSAGE);
         else

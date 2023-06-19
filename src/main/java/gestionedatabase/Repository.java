@@ -24,7 +24,6 @@ public enum Repository { //opera sul DB
     Repository(){
         emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         em = emf.createEntityManager();
-        System.out.println("Unita' di persistenza attiva");
     }
 
     public boolean aggiungiAppelloCompleto(Appello appello, List<String> domande, Map<Integer,List<String>> scelte,Map<Integer,String> risposte){
@@ -71,15 +70,6 @@ public enum Repository { //opera sul DB
         TypedQuery<Appello> query = em.createQuery(queryString, Appello.class);
         query.setParameter("nomeAppello", nomeAppello);
         return query.getResultList();
-    }
-
-    public List<Studente> cercaStudente(String matricola, String codFiscale, Appello appello){
-        String queryString = "SELECT s FROM Studente s WHERE (s.codfiscale = :codFiscale or s.matricola = :matricola) and s.idappello = :id";
-        TypedQuery<Studente> queryS = em.createQuery(queryString, Studente.class);
-        queryS.setParameter("codFiscale",codFiscale);
-        queryS.setParameter("matricola",matricola);
-        queryS.setParameter("id",appello);
-        return queryS.getResultList();
     }
 
     public Studente aggiungiUtente(Remotemethod.Studente studente){
