@@ -9,10 +9,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Notificatore implements Runnable{
 
-    List<Ascoltatore> clients = Collections.synchronizedList(new LinkedList<>());
-    List<Remotemethod.Domanda> domande;
-    final int intervallo = 10; //tempo in secondi -> frequenza con cui un thread deve svegliarsi e concedere l'accesso all'appello
-    int maxInterval; //tempo in minuti
+    private List<Ascoltatore> clients = Collections.synchronizedList(new LinkedList<>());
+    private List<Remotemethod.Domanda> domande;
+    private final int intervallo = 10; //tempo in secondi -> frequenza con cui un thread deve svegliarsi e concedere l'accesso all'appello
+    private int maxInterval; //tempo in minuti
 
     public Notificatore(List<Remotemethod.Domanda> domande, int maxInterval){
         this.domande = domande;
@@ -33,7 +33,6 @@ public class Notificatore implements Runnable{
             } catch (InterruptedException ignored) {
 
             }
-            System.out.println("Sto per aggiornare i client aggiunti");
         }
 
     }

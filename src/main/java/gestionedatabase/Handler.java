@@ -20,13 +20,13 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public final class Handler implements HandlerDB{ //service
 
-    ConverterFactory af = ConverterFactory.FACTORY;
-    Repository r = Repository.REPOSITORY;
+    private ConverterFactory af = ConverterFactory.FACTORY;
+    private Repository r = Repository.REPOSITORY;
 
-    Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
-    Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
-    Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
-    final int maxInterval = 5; //tempo massimo, in minuti, dall'inizio dell'appello, che consente agli utenti di prenotarsi
+    private Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
+    private Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
+    private Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
+    private final int maxInterval = 5; //tempo massimo, in minuti, dall'inizio dell'appello, che consente agli utenti di prenotarsi
 
     ScheduledExecutorService esecutore;
 
@@ -55,13 +55,15 @@ public final class Handler implements HandlerDB{ //service
 
          */
 
-        Studente s = r.aggiungiUtente(studente);
+        ProtoToModelStudente conv = (ProtoToModelStudente) af.createConverterProto(Remotemethod.Studente.class);
+        Studente s = (Studente) conv.convert(studente);
+        String codiceAppello = r.aggiungiUtente(s);
 
 
         if(s == null)
             throw new OperationDBException();
 
-        return s.getCodiceappello();
+        return codiceAppello;
     }
 
     public List<Remotemethod.Appello> caricaAppelli(){
@@ -147,7 +149,7 @@ public final class Handler implements HandlerDB{ //service
 
     @Override
     public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
-        List<Risposta> risposte = r.caricaRisposte(idAppello);
+        List<Risposta> risposte = r.ottieniRisposte(idAppello);
         List<Remotemethod.Risposta> result = new LinkedList<>();
         ModelToProtoRisposta conv = (ModelToProtoRisposta) af.createConverterModel(Risposta.class);
         for(Risposta r : risposte){

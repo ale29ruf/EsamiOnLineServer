@@ -51,7 +51,7 @@ public class Interface {
         aggiungiAppello.addActionListener( e -> {
             panelAdderAppello.setVisible(true);
             aggiungiAppello.setVisible(false);
-            logger.segnala("Richiesta aggiunta appello avviata \n");
+            logger.segnala("Richiesta per aggiungere un nuovo appello avviata \n");
             aggiornaPannello(mainPanel);
         });
 

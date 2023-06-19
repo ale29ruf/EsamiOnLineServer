@@ -29,6 +29,7 @@ public class Starter {
         Handler gestore = new Handler();
         ProxyHandler gestoreProxy = new ProxyHandler(gestore);
         gestoreProxy.setLogger(logger);
+        Repository.REPOSITORY.setProxy(gestoreProxy);
 
         Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestoreProxy)).build();
         try {

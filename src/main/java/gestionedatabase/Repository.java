@@ -1,9 +1,6 @@
 package gestionedatabase;
 
-import converter.ConverterFactory;
-import converter.ProtoToModelStudente;
 import model.*;
-import proto.Remotemethod;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,14 +13,18 @@ import java.util.UUID;
 public enum Repository { //opera sul DB
 
     REPOSITORY;
-    EntityManagerFactory emf;
-    EntityManager em;
+    private EntityManagerFactory emf;
+    private EntityManager em;
+    private ProxyHandler proxy;
 
-    ConverterFactory af = ConverterFactory.FACTORY;
 
     Repository(){
         emf = Persistence.createEntityManagerFactory("MyPersistenceUnit");
         em = emf.createEntityManager();
+    }
+
+    public void setProxy(ProxyHandler proxy){
+        this.proxy = proxy;
     }
 
     public boolean aggiungiAppelloCompleto(Appello appello, List<String> domande, Map<Integer,List<String>> scelte,Map<Integer,String> risposte){
@@ -45,6 +46,7 @@ public enum Repository { //opera sul DB
                 em.persist(risposta);
             }
             em.getTransaction().commit();
+            proxy.aggiornaCache();
             return true;
         } catch (Exception e){
             em.getTransaction().rollback();
@@ -72,16 +74,17 @@ public enum Repository { //opera sul DB
         return query.getResultList();
     }
 
-    public Studente aggiungiUtente(Remotemethod.Studente studente){
-        Studente s;
+    public String aggiungiUtente(Studente s){
+        String codice;
         try {
             em.getTransaction().begin();
-            Appello p = cercaAppello(studente.getIdAppello()).get(0); //oggetto persistente
-            ProtoToModelStudente conv = (ProtoToModelStudente) af.createConverterProto(Remotemethod.Studente.class);
-            s = (Studente) conv.convert(studente,p, UUID.randomUUID().toString().replace("-", ""));
+            Appello p = cercaAppello(s.getIdappello().getId()).get(0); //oggetto persistente
+            s.setIdappello(p);
+            codice = UUID.randomUUID().toString().replace("-", "");
+            s.setCodiceappello(codice);
             em.persist(s);
             em.getTransaction().commit();
-            return s;
+            return codice;
         } catch (Exception e) {
             em.getTransaction().rollback();
         }
@@ -103,7 +106,7 @@ public enum Repository { //opera sul DB
         return queryD.getResultList();
     }
 
-    public List<Risposta> caricaRisposte(int idAppello){
+    public List<Risposta> ottieniRisposte(int idAppello){
         Appello appello = cercaAppello(idAppello).get(0);
         String queryString = "SELECT r FROM Domanda d, Risposta r WHERE d.appello = :appello AND r.iddomanda = d";
         TypedQuery<Risposta> queryR = em.createQuery(queryString, Risposta.class);

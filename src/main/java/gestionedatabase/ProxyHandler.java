@@ -7,7 +7,6 @@ import exception.UtenteAlreadyRegisteredException;
 import proto.Remotemethod;
 import servergui.SyncronizedJTextArea;
 
-import javax.swing.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +15,16 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ProxyHandler implements HandlerDB{
 
-    List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli (flyweight)
-    ReentrantLock lockA = new ReentrantLock();
+    private List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli (flyweight)
+    private ReentrantLock lockA = new ReentrantLock();
 
-    Handler gestore;
-    boolean changed = true;
+    private Handler gestore;
+    private boolean changed = true;
 
-    Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
-    ReentrantLock lockR = new ReentrantLock();
+    private Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
+    private ReentrantLock lockR = new ReentrantLock();
 
-    SyncronizedJTextArea logger;
+    private SyncronizedJTextArea logger;
 
     public ProxyHandler(Handler gestore){
         this.gestore = gestore;
