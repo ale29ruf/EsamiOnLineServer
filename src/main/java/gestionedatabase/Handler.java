@@ -153,6 +153,7 @@ public final class Handler implements HandlerDB{ //service
         List<Remotemethod.Risposta> result = new LinkedList<>();
         ModelToProtoRisposta conv = (ModelToProtoRisposta) af.createConverterModel(Risposta.class);
         for(Risposta r : risposte){
+            System.out.println("Risposta ottenuta dal db: "+r.getScelta());
             result.add(conv.convert(r));
         }
         return result;

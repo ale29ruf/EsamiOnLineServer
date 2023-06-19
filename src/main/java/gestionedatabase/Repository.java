@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -108,9 +109,15 @@ public enum Repository { //opera sul DB
 
     public List<Risposta> ottieniRisposte(int idAppello){
         Appello appello = cercaAppello(idAppello).get(0);
-        String queryString = "SELECT r FROM Domanda d, Risposta r WHERE d.appello = :appello AND r.iddomanda = d";
-        TypedQuery<Risposta> queryR = em.createQuery(queryString, Risposta.class);
-        queryR.setParameter("appello",appello);
-        return queryR.getResultList();
+        List<Domanda> domande = ottieniDomande(appello);
+        List<Risposta> result = new LinkedList<>();
+        for(Domanda domanda : domande){
+            String queryString = "SELECT r FROM Risposta r WHERE r.iddomanda = :d";
+            TypedQuery<Risposta> queryR = em.createQuery(queryString, Risposta.class);
+            queryR.setParameter("d",domanda);
+            result.add(queryR.getSingleResult());
+        }
+
+        return result;
     }
 }

@@ -42,7 +42,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
     public void registraStudente(proto.Remotemethod.Studente request,
                                  io.grpc.stub.StreamObserver<proto.Remotemethod.CodiceAppello> responseObserver) {
 
-        Callable<String> task = () -> g_DB.addStudent(request);
+        Callable<String> task = () -> g_DB. addStudent(request);
         Future<String> result = esecutore.submit(task);
         String cod;
         try{
@@ -94,9 +94,9 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
     private int calcolaPunteggio(List<Remotemethod.Risposta> daVerificare, List<Remotemethod.Risposta> corrette) {
         int punteggio = 0;
         for( Remotemethod.Risposta risposta: daVerificare ) {
-            System.out.println(risposta.getIdDomanda());
+            System.out.println("Scelta da verificare: "+risposta.getIdScelta());
             for (Remotemethod.Risposta rispostaOK : corrette) {
-                System.out.println(rispostaOK.getIdDomanda());
+                System.out.println("Risposta corretta: "+rispostaOK.getIdScelta());
                 if (risposta.getIdDomanda() == rispostaOK.getIdDomanda())
                     if (risposta.getIdScelta() == rispostaOK.getIdScelta())
                         punteggio += 3;
