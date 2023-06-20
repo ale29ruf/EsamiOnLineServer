@@ -124,10 +124,8 @@ public final class Handler implements HandlerDB{ //service
 
     private Notificatore aggiornaCache(Appello p) {
         if(domandeAppello.get(p) == null){
-            System.out.println("Creazione notificatore");
             List<Domanda> domande = r.ottieniDomande(p);
             domandeAppello.put(p, domande);
-
             //Converto
             List<proto.Remotemethod.Domanda> listaDomande = new LinkedList<>();
             ModelToProtoDomanda conv = (ModelToProtoDomanda) af.createConverterModel(Domanda.class);
@@ -135,9 +133,9 @@ public final class Handler implements HandlerDB{ //service
                 listaDomande.add(conv.convert(d));
             }
 
-
             //Creo il task
             Notificatore notificatore = new Notificatore(listaDomande,maxInterval);
+
             notificatoreMap.put(p,notificatore);
             //long timeElapse = p.getOra().getTimeInMillis() - Calendar.getInstance().getTimeInMillis();
 
@@ -153,7 +151,6 @@ public final class Handler implements HandlerDB{ //service
         List<Remotemethod.Risposta> result = new LinkedList<>();
         ModelToProtoRisposta conv = (ModelToProtoRisposta) af.createConverterModel(Risposta.class);
         for(Risposta r : risposte){
-            System.out.println("Risposta ottenuta dal db: "+r.getScelta());
             result.add(conv.convert(r));
         }
         return result;

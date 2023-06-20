@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class Domanda implements Models{
     @Column(name = "testo", length = 50)
     private String testo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "appello")
     private Appello appello;
 
@@ -24,6 +25,7 @@ public class Domanda implements Models{
     public Domanda(String testo,Appello p){
         this.appello = p;
         this.testo = testo;
+        this.scelta = new LinkedList<>();
     }
 
     public Domanda() {
@@ -56,6 +58,10 @@ public class Domanda implements Models{
 
     public void setScelte(List<Scelta> scelta){
         this.scelta = scelta;
+    }
+
+    public void aggiungiScelta(Scelta s){
+        scelta.add(s);
     }
 
     public List<Scelta> getScelte() {

@@ -17,6 +17,7 @@ public class ModelToProtoDomanda implements Convertitore{
         Domanda d = (Domanda) model;
 
         List<Scelta> scelte = d.getScelte();
+
         List<Remotemethod.Scelta> scelteProto = new LinkedList<>();
         for(Scelta s : scelte){
             Remotemethod.Scelta scelta = Remotemethod.Scelta.newBuilder().setId(s.getId())

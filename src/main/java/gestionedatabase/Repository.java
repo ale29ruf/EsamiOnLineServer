@@ -39,10 +39,13 @@ public enum Repository { //opera sul DB
                 Scelta sceltaRisposta = null;
                 for (String testoScelta : scelteDomande) {
                     Scelta s = new Scelta(testoScelta, d);
+                    d.aggiungiScelta(s);
                     em.persist(s);
                     if (testoScelta.equals(risposte.get(i)))
                         sceltaRisposta = s;
                 }
+
+
                 Risposta risposta = new Risposta(d, sceltaRisposta);
                 em.persist(risposta);
             }

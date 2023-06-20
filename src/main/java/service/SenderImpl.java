@@ -65,7 +65,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
         try{
             esito = result.get(5,TimeUnit.MINUTES); //il thread potrebbe essere messo in attesa
         }catch (InterruptedException | ExecutionException | TimeoutException e) {
-            throw new RuntimeException("Connessione al server fallita"); //scrivere bene le eccezioni e mandarle al logger
+            throw new RuntimeException(e.getMessage()+"\n Cause: "+e.getCause()); //scrivere bene le eccezioni e mandarle al logger
         }
 
         Remotemethod.Info risposta = Remotemethod.Info.newBuilder().setTesto(esito).build();
@@ -94,9 +94,7 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
     private int calcolaPunteggio(List<Remotemethod.Risposta> daVerificare, List<Remotemethod.Risposta> corrette) {
         int punteggio = 0;
         for( Remotemethod.Risposta risposta: daVerificare ) {
-            System.out.println("Scelta da verificare: "+risposta.getIdScelta());
             for (Remotemethod.Risposta rispostaOK : corrette) {
-                System.out.println("Risposta corretta: "+rispostaOK.getIdScelta());
                 if (risposta.getIdDomanda() == rispostaOK.getIdDomanda())
                     if (risposta.getIdScelta() == rispostaOK.getIdScelta())
                         punteggio += 3;

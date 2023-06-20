@@ -38,7 +38,6 @@ public class Notificatore implements Runnable{
     }
 
     public void aggiungiClient(Ascoltatore ascoltatore){
-        System.out.println("Aggiunto nuovo client");
         clients.add(ascoltatore);
     }
 }
