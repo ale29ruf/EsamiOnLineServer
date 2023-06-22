@@ -51,7 +51,8 @@ public enum Repository {
                 em.persist(risposta);
             }
             em.getTransaction().commit();
-            proxy.aggiornaCache();
+            if(proxy != null)
+                proxy.aggiornaCache();
             return true;
         } catch (Exception e){
             em.getTransaction().rollback();

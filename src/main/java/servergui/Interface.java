@@ -8,10 +8,7 @@ import java.awt.*;
  */
 public class Interface {
 
-    public Interface() {
-    }
-
-    public SyncronizedJTextArea avvia() {
+    public Interface(SyncronizedJTextArea logger) {
         JFrame f = new JFrame("Applicazione server");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setMinimumSize(new Dimension(1000, 400));
@@ -19,7 +16,6 @@ public class Interface {
 
         JPanel mainPanel = new JPanel(new BorderLayout());
 
-        SyncronizedJTextArea logger = new SyncronizedJTextArea();
         logger.setEditable(false);
         logger.setSize(800,300);
 
@@ -71,8 +67,6 @@ public class Interface {
 
         f.pack();
         f.setVisible(true);
-
-        return logger;
     }
 
     private static void aggiornaPannello(JPanel panel) {

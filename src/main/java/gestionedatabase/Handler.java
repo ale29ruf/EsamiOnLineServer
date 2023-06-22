@@ -1,7 +1,6 @@
 package gestionedatabase;
 
 import converter.*;
-import exception.AppelloAlreadyStartedException;
 import exception.UtenteAlreadyRegisteredException;
 import model.Risposta;
 import support.Client;

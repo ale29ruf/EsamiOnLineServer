@@ -37,10 +37,13 @@ public class ProxyHandler implements HandlerDB{
     @Override
     public void aggiornaCache(){ //metodo invocato dal Repository dopo aver aggiunto un nuovo appello
         try{
+            System.out.println("Prima del lock");
             lockA.lock();
+            System.out.println("Dopo del lock");
             changed = true;
         } finally {
             lockA.unlock();
+
         }
     }
 
@@ -66,7 +69,7 @@ public class ProxyHandler implements HandlerDB{
             res = "ERRORE: Nessun appello trovato.";
             logger.segnala("Richiesta di prenotazione >> "+studente+" conclusa con "+res+" \n");
         } catch (UtenteAlreadyRegisteredException e){
-            res = "ERRORE: Utente gia' registrato";
+            res = "ERRORE: Utente già registrato";
             logger.segnala("Richiesta di prenotazione >> "+studente+" conclusa con "+res+" \n");
         } catch (OperationDBException e){
             res = "ERRORE: Riprova operazione piu' tardi";

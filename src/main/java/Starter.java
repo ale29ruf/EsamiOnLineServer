@@ -17,14 +17,20 @@ import java.io.IOException;
 public class Starter {
     public static void main(String[] args){
 
+        Starter s = new Starter();
+        s.inizializza(false);
+    }
+
+    public ProxyHandler inizializza(boolean conInterfaccia){
         //Installo i vari convertitori
         ConverterFactory.FACTORY.installConverterModel(Appello.class,new ModelToProtoAppello());
         ConverterFactory.FACTORY.installConverterProto(Remotemethod.Studente.class,new ProtoToModelStudente());
         ConverterFactory.FACTORY.installConverterModel(Domanda.class, new ModelToProtoDomanda());
         ConverterFactory.FACTORY.installConverterModel(Risposta.class, new ModelToProtoRisposta());
 
-        Interface serverInterface = new Interface();
-        SyncronizedJTextArea logger = serverInterface.avvia(); //avvio l'interfaccia grafica
+        SyncronizedJTextArea logger = new SyncronizedJTextArea();
+
+        if(conInterfaccia) new Interface(logger);
 
         Handler gestore = new Handler();
         ProxyHandler gestoreProxy = new ProxyHandler(gestore);
@@ -39,5 +45,8 @@ public class Starter {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        return gestoreProxy;
     }
+
 }
