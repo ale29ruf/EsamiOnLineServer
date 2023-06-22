@@ -7,24 +7,24 @@ import exception.UtenteAlreadyRegisteredException;
 import proto.Remotemethod;
 import servergui.SyncronizedJTextArea;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
-
+/**
+ * La classe svolge il ruolo di proxy nei confronti dell'Handler.
+ */
 public class ProxyHandler implements HandlerDB{
 
-    private List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli (flyweight)
-    private ReentrantLock lockA = new ReentrantLock();
+    private List<Remotemethod.Appello> appelliCached; //utilizzo di una cache in modo da condividere la lista di appelli
+    private ReentrantLock lockA = new ReentrantLock(); //lock usato su appelliCached
 
-    private Handler gestore;
-    private boolean changed = true;
+    private final Handler gestore;
+    private boolean changed = true; //utilizzata nel caso in cui fosse aggiunto un nuovo appello
 
-    private Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>();
-    private ReentrantLock lockR = new ReentrantLock();
+    private final Map<Integer,List<Remotemethod.Risposta>> risposteCached = new HashMap<>(); //caching delle risposte
+    private ReentrantLock lockR = new ReentrantLock(); //lock su risposteCached
 
-    private SyncronizedJTextArea logger;
+    private SyncronizedJTextArea logger; //logger a cui comunichiamo le varie attività
 
     public ProxyHandler(Handler gestore){
         this.gestore = gestore;
@@ -34,7 +34,8 @@ public class ProxyHandler implements HandlerDB{
         this.logger = logger;
     }
 
-    public void aggiornaCache(){
+    @Override
+    public void aggiornaCache(){ //metodo invocato dal Repository dopo aver aggiunto un nuovo appello
         try{
             lockA.lock();
             changed = true;
@@ -87,7 +88,6 @@ public class ProxyHandler implements HandlerDB{
             risposta = "ERRORE: Appello gia' iniziato. Impossibile partecipare";
             logger.segnala("Richiesta di partecipazione esame >> "+richiesta+" conclusa con "+risposta+" \n");
         }
-
         return risposta;
     }
 
@@ -95,11 +95,9 @@ public class ProxyHandler implements HandlerDB{
     public List<Remotemethod.Risposta> inviaRisposte(int idAppello) {
         try{
             lockR.lock();
-
             if(risposteCached.get(idAppello) == null){
                 risposteCached.put(idAppello,gestore.inviaRisposte(idAppello));
             }
-
         }finally{
             lockR.unlock();
         }

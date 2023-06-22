@@ -6,6 +6,10 @@ import model.Models;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * La classe si occupa di convertire gli oggetti ottenuti dal database in oggetti da trasmettere tramite chiamata
+ * a procedura remota e viceversa.
+ */
 public enum ConverterFactory {
 
     FACTORY;

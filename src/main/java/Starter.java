@@ -1,6 +1,5 @@
 import converter.*;
 import gestionedatabase.Handler;
-import gestionedatabase.HandlerDB;
 import gestionedatabase.ProxyHandler;
 import gestionedatabase.Repository;
 import io.grpc.Server;
@@ -13,18 +12,19 @@ import servergui.Interface;
 import servergui.SyncronizedJTextArea;
 import service.SenderImpl;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class Starter {
     public static void main(String[] args){
+
+        //Installo i vari convertitori
         ConverterFactory.FACTORY.installConverterModel(Appello.class,new ModelToProtoAppello());
         ConverterFactory.FACTORY.installConverterProto(Remotemethod.Studente.class,new ProtoToModelStudente());
         ConverterFactory.FACTORY.installConverterModel(Domanda.class, new ModelToProtoDomanda());
         ConverterFactory.FACTORY.installConverterModel(Risposta.class, new ModelToProtoRisposta());
 
         Interface serverInterface = new Interface();
-        SyncronizedJTextArea logger = serverInterface.avvia();
+        SyncronizedJTextArea logger = serverInterface.avvia(); //avvio l'interfaccia grafica
 
         Handler gestore = new Handler();
         ProxyHandler gestoreProxy = new ProxyHandler(gestore);

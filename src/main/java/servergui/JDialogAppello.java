@@ -8,19 +8,22 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+/**
+ * La classe si occupa di raccogliere le varie domande dell'appello, le relative scelte e le risposte corrette.
+ */
 public class JDialogAppello extends JDialog {
     private String nomeAppello;
     private Calendar dataOra;
     private String durata;
 
     private final List<String> domande = new LinkedList<>();
-    private int numDomanda = 0;
+    private int numDomanda = 0; //indice della domanda attuale
     private final Map<Integer,List<String>> scelteDomanda = new HashMap<>();
     private final Map<Integer,String> rispostaDomanda = new HashMap<>();
 
     private final JLabel etichetta;
     private final JTextField campo;
-    private final int totDomande;
+    private final int totDomande; //numero totale di domande
 
 
     public JDialogAppello(JFrame f, int totDomande) {
@@ -50,7 +53,7 @@ public class JDialogAppello extends JDialog {
 
         JButton confermaDomanda = new JButton("Conferma");
         confermaDomanda.addActionListener( e -> {
-            if(caricaScelte()){
+            if(caricaPrimaScelta()){
                 confermaDomanda.setVisible(false);
                 prossimaScelta.setVisible(true);
             }
@@ -105,11 +108,11 @@ public class JDialogAppello extends JDialog {
             campo.setText("");
             return true;
         }
-        registraAppello();
+        aggiungiAppello();
         return false;
     }
 
-    private void registraAppello() {
+    private void aggiungiAppello() {
         Repository r = Repository.REPOSITORY;
         Appello newAppello = new Appello(nomeAppello,dataOra,durata);
         if(r.aggiungiAppelloCompleto(newAppello,domande,scelteDomanda,rispostaDomanda)){
@@ -131,7 +134,7 @@ public class JDialogAppello extends JDialog {
         return true;
     }
 
-    private boolean caricaScelte() {
+    private boolean caricaPrimaScelta() {
         if(campo.getText().length() == 0){
             JOptionPane.showMessageDialog(null, "Campo vuoto", "Errore", JOptionPane.ERROR_MESSAGE);
             return false;

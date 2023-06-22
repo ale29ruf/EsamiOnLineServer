@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface HandlerDB {
     List<Remotemethod.Appello> caricaAppelli();
+    default void aggiornaCache(){}
 
     String addStudent(Remotemethod.Studente studente);
 

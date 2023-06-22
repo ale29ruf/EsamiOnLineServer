@@ -3,6 +3,9 @@ package servergui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * La classe rappresenta l'interfaccia server.
+ */
 public class Interface {
 
     public Interface() {

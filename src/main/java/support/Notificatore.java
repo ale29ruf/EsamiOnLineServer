@@ -7,10 +7,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Il Notificatore si occupa di notificare ad una certa ora i vari client (inviandogli le domande) per ufficializzare l'inizio dell'appello.
+ */
 public class Notificatore implements Runnable{
 
-    private List<Ascoltatore> clients = Collections.synchronizedList(new LinkedList<>());
-    private List<Remotemethod.Domanda> domande;
+    private final List<Ascoltatore> clients = Collections.synchronizedList(new LinkedList<>());
+    private final List<Remotemethod.Domanda> domande;
     private final int intervallo = 10; //tempo in secondi -> frequenza con cui un thread deve svegliarsi e concedere l'accesso all'appello
     private int maxInterval; //tempo in minuti
 
@@ -21,8 +24,7 @@ public class Notificatore implements Runnable{
 
     @Override
     public void run() {
-        //for(int i=0; i<((maxInterval*60)/intervallo); i++){
-        while(true){
+        for(int i=0; i<((maxInterval*60)/intervallo); i++){
             for(Ascoltatore ascoltatore : clients){
                 ascoltatore.aggiorna(domande);
                 clients.remove(ascoltatore);

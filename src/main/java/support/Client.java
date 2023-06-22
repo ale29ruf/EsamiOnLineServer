@@ -7,10 +7,13 @@ import proto.SenderGrpc;
 
 import java.util.List;
 
+/**
+ * La seguente classe rappresenta l'applicazione client in attesa di ricevere le domande.
+ */
 public class Client implements Ascoltatore{
 
-    SenderGrpc.SenderBlockingStub stub;
-    ManagedChannel channel;
+    private final SenderGrpc.SenderBlockingStub stub;
+    private final ManagedChannel channel;
 
     public Client(String hostname, int port){
         channel = ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();

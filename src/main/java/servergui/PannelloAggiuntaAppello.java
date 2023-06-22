@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Classe utilizzata per raccogliere le informazioni di base di un appello.
+ */
 public class PannelloAggiuntaAppello extends JPanel {
 
     private JTextField nomeField;

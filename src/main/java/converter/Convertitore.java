@@ -1,4 +1,4 @@
 package converter;
 
-public interface Convertitore {
+public interface Convertitore { //marker interface
 }

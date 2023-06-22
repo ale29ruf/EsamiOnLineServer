@@ -11,12 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public enum Repository { //opera sul DB
+/**
+ * La classe svolge le varie operazioni sul database.
+ */
+public enum Repository {
 
-    REPOSITORY;
+    REPOSITORY; //unica istanza disponibile
     private EntityManagerFactory emf;
     private EntityManager em;
-    private ProxyHandler proxy;
+    private HandlerDB proxy;
 
 
     Repository(){
@@ -24,7 +27,7 @@ public enum Repository { //opera sul DB
         em = emf.createEntityManager();
     }
 
-    public void setProxy(ProxyHandler proxy){
+    public void setProxy(HandlerDB proxy){
         this.proxy = proxy;
     }
 
@@ -44,8 +47,6 @@ public enum Repository { //opera sul DB
                     if (testoScelta.equals(risposte.get(i)))
                         sceltaRisposta = s;
                 }
-
-
                 Risposta risposta = new Risposta(d, sceltaRisposta);
                 em.persist(risposta);
             }
@@ -122,5 +123,28 @@ public enum Repository { //opera sul DB
         }
 
         return result;
+    }
+
+    public void rimuoviCodiceAppello(String codiceAppello) {
+        try {
+            em.getTransaction().begin();
+            String queryString = "SELECT s FROM Studente s WHERE s.codiceappello = :codAp";
+            TypedQuery<Studente> queryA = em.createQuery(queryString, Studente.class);
+            queryA.setParameter("codAp", codiceAppello);
+            Studente s = queryA.getSingleResult();
+            em.remove(s);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        }
+    }
+
+    public List<Studente> cercaStudente(String matricola, String codFiscale, Appello appello){
+        String queryString = "SELECT s FROM Studente s WHERE (s.codfiscale = :codFiscale or s.matricola = :matricola) and s.idappello = :id";
+        TypedQuery<Studente> queryS = em.createQuery(queryString, Studente.class);
+        queryS.setParameter("codFiscale",codFiscale);
+        queryS.setParameter("matricola",matricola);
+        queryS.setParameter("id",appello);
+        return queryS.getResultList();
     }
 }
