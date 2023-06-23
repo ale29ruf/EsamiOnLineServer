@@ -18,7 +18,7 @@ public class Starter {
     public static void main(String[] args){
 
         Starter s = new Starter();
-        s.inizializza(false);
+        s.inizializza(false); //settare a true se si vuole visualizzare l'interfaccia grafica
     }
 
     public ProxyHandler inizializza(boolean conInterfaccia){
@@ -40,9 +40,19 @@ public class Starter {
         Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestoreProxy)).build();
         try {
             server.start();
+
+            Thread thread = new Thread(() -> { //Evito che il thread principale si messa in attesa
+                try {
+                    server.awaitTermination(); //blocca l'esecuzione del thread corrente finché il server gRPC non viene terminato
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            thread.start(); // avvio il server
+
             System.out.println("Server started at " + server.getPort());
-            server.awaitTermination(); //blocca l'esecuzione del thread corrente finché il server gRPC non viene terminato
-        } catch (IOException | InterruptedException e) {
+
+        } catch (IOException  e) {
             throw new RuntimeException(e);
         }
 

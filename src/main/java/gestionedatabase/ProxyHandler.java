@@ -37,9 +37,7 @@ public class ProxyHandler implements HandlerDB{
     @Override
     public void aggiornaCache(){ //metodo invocato dal Repository dopo aver aggiunto un nuovo appello
         try{
-            System.out.println("Prima del lock");
             lockA.lock();
-            System.out.println("Dopo del lock");
             changed = true;
         } finally {
             lockA.unlock();
