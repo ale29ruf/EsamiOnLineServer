@@ -30,6 +30,8 @@ public final class Handler implements HandlerDB{ //Servizio principale
     private Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
     private Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
     private final int maxInterval = 5; //tempo massimo, in minuti, dall'inizio dell'appello, che consente agli utenti di partecipare
+    private final int ritardoPartecipazioneAppello = 5; //tempo in minuti oltre il quale, dall'inizio dell'appello, non è piu' possibile partecipare
+    private final int limitePrenotazioneAppello = 5; //tempo in minuti prima dell'inizio dell'appello che consente di prenotarsi
 
     ScheduledExecutorService esecutore;
 
@@ -55,12 +57,12 @@ public final class Handler implements HandlerDB{ //Servizio principale
             throw new UtenteAlreadyRegisteredException();
 
         //Verifico che lo studente possa ancora prenotarsi
-        /* Disabilito momentaneamente per debug
+        /* Disabilito momentaneamente per debug. Da attivare per testing.
         Appello p = listaA.get(0);
         int timeElapse = diffTimeFromNow(p);
-        if(timeElapse <= 300)
+        if(timeElapse <= limitePrenotazioneAppello*60)
             throw new AppelloNotFoundException();
-         */
+        */
 
 
         ProtoToModelStudente conv = (ProtoToModelStudente) af.createConverterProto(Remotemethod.Studente.class);
@@ -88,12 +90,18 @@ public final class Handler implements HandlerDB{ //Servizio principale
         String codiceAppello = richiesta.getCodApello().toString().substring(9,10+31);
         List<Appello> appello = repository.ottieniAppello(codiceAppello);
         if(appello.isEmpty()){
+            repository.rimuoviCodiceAppello(codiceAppello);
             throw new AppelloNotFoundException();
         }
 
-        repository.rimuoviCodiceAppello(codiceAppello);
-
         Appello p = appello.get(0);
+        int timeElapse = diffTimeFromNow(p);
+        if(timeElapse < 0 && Math.abs(timeElapse) > ritardoPartecipazioneAppello*60) { //Consentiamo la partecipazione ad un appello fino a ritardoPartecipazioneAppello minuti dall'inizio
+            repository.rimuoviCodiceAppello(codiceAppello);
+            throw new AppelloAlreadyStartedException();
+        }
+
+        repository.rimuoviCodiceAppello(codiceAppello);
 
         l.lock();
         Notificatore notificatore = aggiornaCache(p);

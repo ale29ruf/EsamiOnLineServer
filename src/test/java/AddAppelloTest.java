@@ -12,7 +12,8 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ProxyHandlerTest {
+public class AddAppelloTest {
+
     static String hostname = "localhost";
     static int port = 8999;
     static ManagedChannel channel;
@@ -28,24 +29,6 @@ public class ProxyHandlerTest {
         stub = SenderGrpc.newBlockingStub(channel);
     }
 
-
-    /**
-     * Verifico che l'aggiunta di un utente già esistente non possa essere effettuata
-     */
-    @Test
-    public void addStudentVerify(){
-
-        Remotemethod.Studente studente = Remotemethod.Studente.newBuilder().setIdAppello(12).setMatricola("022323")
-                .setCodFiscale("012445a6f77821d3").build();
-        Remotemethod.CodiceAppello codiceAppello = stub.registraStudente(studente);
-        assertEquals(32, codiceAppello.getCodice().length());
-
-        Remotemethod.CodiceAppello codiceAppelloError = stub.registraStudente(studente);
-        assertEquals(codiceAppelloError.getCodice(),"ERRORE: Utente già registrato");
-
-    }
-
-
     /**
      * Verifico che l'aggiunta di un nuovo appello avvenga correttamente
      */
@@ -53,21 +36,7 @@ public class ProxyHandlerTest {
     public void addAppelloVerify(){
         Remotemethod.ListaAppelli appelli = stub.caricaAppelli(Remotemethod.Info.newBuilder().build());
         Appello p = new Appello("Prova", Calendar.getInstance(), "120");
-
-        String domanda1 = "Capitale d'Italia?";
-        List<String> listaDomande = new LinkedList<>();
-        listaDomande.add(domanda1);
-
-        Map<Integer,List<String>> scelte = new HashMap<>();
-        List<String> listaScelte = new LinkedList<>();
-        listaScelte.add("Roma");
-        listaScelte.add("Berlino");
-        scelte.put(0,listaScelte);
-
-        Map<Integer,String> risposte = new HashMap<>();
-        risposte.put(0,"Roma");
-
-        Repository.REPOSITORY.aggiungiAppelloCompleto(p,listaDomande,scelte,risposte);
+        Repository.REPOSITORY.aggiungiAppelloCompleto(p,new LinkedList<>(),new HashMap<>(),new HashMap<>());
 
         Remotemethod.ListaAppelli appelli2 = stub.caricaAppelli(Remotemethod.Info.newBuilder().build());
 
@@ -83,5 +52,4 @@ public class ProxyHandlerTest {
         if (channel != null && !channel.isShutdown())
             channel.shutdown();
     }
-
 }
