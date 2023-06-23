@@ -18,10 +18,10 @@ public class Starter {
     public static void main(String[] args){
 
         Starter s = new Starter();
-        s.inizializza(false); //settare a true se si vuole visualizzare l'interfaccia grafica
+        s.inizializza(true); //settare a true se si vuole visualizzare l'interfaccia grafica
     }
 
-    public ProxyHandler inizializza(boolean conInterfaccia){
+    public void inizializza(boolean conInterfaccia){
         //Installo i vari convertitori
         ConverterFactory.FACTORY.installConverterModel(Appello.class,new ModelToProtoAppello());
         ConverterFactory.FACTORY.installConverterProto(Remotemethod.Studente.class,new ProtoToModelStudente());
@@ -56,7 +56,6 @@ public class Starter {
             throw new RuntimeException(e);
         }
 
-        return gestoreProxy;
     }
 
 }

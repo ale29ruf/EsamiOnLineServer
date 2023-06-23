@@ -1,6 +1,7 @@
 package gestionedatabase;
 
 import converter.*;
+import exception.AppelloAlreadyStartedException;
 import exception.UtenteAlreadyRegisteredException;
 import model.Risposta;
 import support.Client;
@@ -44,14 +45,23 @@ public final class Handler implements HandlerDB{ //Servizio principale
 
 
         //Verifico che l'appello per cui si vuole registrare sia valido
-        List<Appello> p = repository.cercaAppello(idAppello);
-        if(p.size() != 1)
+        List<Appello> listaA = repository.cercaAppello(idAppello);
+        if(listaA.size() != 1)
             throw new AppelloNotFoundException();
 
         //Verifico che lo studente non sia gia' presente nel database
-        List<Studente> listaS = repository.cercaStudente(matricola,codFiscale,p.get(0));
+        List<Studente> listaS = repository.cercaStudente(matricola,codFiscale, listaA.get(0));
         if( ! listaS.isEmpty()) //posso aggiungere lo studente sul db
-            throw new UtenteAlreadyRegisteredException(); //
+            throw new UtenteAlreadyRegisteredException();
+
+        //Verifico che lo studente possa ancora prenotarsi
+        /* Disabilito momentaneamente per debug
+        Appello p = listaA.get(0);
+        int timeElapse = diffTimeFromNow(p);
+        if(timeElapse <= 300)
+            throw new AppelloNotFoundException();
+         */
+
 
         ProtoToModelStudente conv = (ProtoToModelStudente) af.createConverterProto(Remotemethod.Studente.class);
         Studente s = (Studente) conv.convert(studente);
@@ -114,10 +124,8 @@ public final class Handler implements HandlerDB{ //Servizio principale
             Notificatore notificatore = new Notificatore(listaDomande,maxInterval);
 
             notificatoreMap.put(p,notificatore);
-            int tempoInSec = p.getOra().get(Calendar.HOUR)*60*60 + p.getOra().get(Calendar.MINUTE)*60 + p.getOra().get(Calendar.SECOND);
-            int timeNow = Calendar.getInstance().get(Calendar.HOUR)*60*60 + Calendar.getInstance().get(Calendar.MINUTE)*60 + Calendar.getInstance().get(Calendar.SECOND);
 
-            int timeElapse = tempoInSec - timeNow;
+            int timeElapse = diffTimeFromNow(p);
 
             //Schedulo il task
             if(timeElapse < 0) timeElapse = 0;
@@ -125,6 +133,14 @@ public final class Handler implements HandlerDB{ //Servizio principale
             esecutore.schedule(notificatore,timeElapse, TimeUnit.SECONDS);
         }
         return notificatoreMap.get(p);
+    }
+
+    public int diffTimeFromNow(Appello p){
+        int tempoInSecAppello = p.getOra().get(Calendar.HOUR)*60*60 + p.getOra().get(Calendar.MINUTE)*60 + p.getOra().get(Calendar.SECOND);
+        int timeNow = Calendar.getInstance().get(Calendar.HOUR)*60*60 + Calendar.getInstance().get(Calendar.MINUTE)*60 + Calendar.getInstance().get(Calendar.SECOND);
+
+        int timeElapse = tempoInSecAppello - timeNow;
+        return timeElapse;
     }
 
     @Override

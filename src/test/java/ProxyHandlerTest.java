@@ -4,7 +4,6 @@ import io.grpc.ManagedChannelBuilder;
 import model.Appello;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import proto.Remotemethod;
 import proto.SenderGrpc;
@@ -33,7 +32,6 @@ public class ProxyHandlerTest {
     /**
      * Verifico che l'aggiunta di un utente già esistente non possa essere effettuata
      */
-
     @Test
     public void addStudentVerify(){
 

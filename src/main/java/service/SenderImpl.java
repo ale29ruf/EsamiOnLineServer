@@ -42,13 +42,13 @@ public final class SenderImpl extends SenderGrpc.SenderImplBase implements Servi
     public void registraStudente(proto.Remotemethod.Studente request,
                                  io.grpc.stub.StreamObserver<proto.Remotemethod.CodiceAppello> responseObserver) {
 
-        Callable<String> task = () -> g_DB. addStudent(request);
+        Callable<String> task = () -> g_DB.addStudent(request);
         Future<String> result = esecutore.submit(task);
         String cod;
         try{
             cod = result.get(20,TimeUnit.SECONDS);
         }catch (InterruptedException | ExecutionException | TimeoutException e) {
-            throw new RuntimeException("Connessione al server fallita"); //scrivere bene le eccezioni e mandarle al logger
+            throw new RuntimeException(e.getCause()+"  "+e.getMessage()); //scrivere bene le eccezioni e mandarle al logger
         }
 
         Remotemethod.CodiceAppello codiceAppello = Remotemethod.CodiceAppello.newBuilder().setCodice(cod).build();

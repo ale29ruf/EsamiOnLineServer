@@ -29,7 +29,6 @@ public class Notificatore implements Runnable{
                 ascoltatore.aggiorna(domande);
                 clients.remove(ascoltatore);
             }
-
             try {
                 TimeUnit.SECONDS.sleep(intervallo);
             } catch (InterruptedException ignored) {
