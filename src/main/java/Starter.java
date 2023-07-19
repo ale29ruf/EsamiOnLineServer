@@ -15,6 +15,9 @@ import service.SenderImpl;
 import java.io.IOException;
 
 public class Starter {
+
+    public static int portaServer = 8999;
+
     public static void main(String[] args){
 
         Starter s = new Starter();
@@ -37,7 +40,7 @@ public class Starter {
         gestoreProxy.setLogger(logger);
         Repository.REPOSITORY.setProxy(gestoreProxy);
 
-        Server server = ServerBuilder.forPort(8999).addService(new SenderImpl(gestoreProxy)).build();
+        Server server = ServerBuilder.forPort(portaServer).addService(new SenderImpl(gestoreProxy)).build();
         try {
             server.start();
 

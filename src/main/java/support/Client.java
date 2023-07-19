@@ -14,11 +14,9 @@ public class Client implements Ascoltatore{
 
     private final SenderGrpc.SenderBlockingStub stub;
     private final ManagedChannel channel;
-    private final String hostname;
     private final int port;
 
     public Client(String hostname, int port){
-        this.hostname = hostname;
         this.port = port;
         channel = ManagedChannelBuilder.forAddress(hostname, port).usePlaintext().build();
         System.out.println("Channel con il nuovo client avente hostname "+hostname+" e porta "+port+" creato");
@@ -28,7 +26,6 @@ public class Client implements Ascoltatore{
     @Override
     public void aggiorna(List<Remotemethod.Domanda> listaDomande) {
         stub.inviaDomande(Remotemethod.ListaDomande.newBuilder().addAllDomande(listaDomande).build());
-        System.out.println("Domande inviate al client con porta "+port);
         channel.shutdown();
     }
 }

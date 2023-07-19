@@ -14,9 +14,8 @@ import model.Studente;
 import proto.Remotemethod;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -29,15 +28,15 @@ public final class Handler implements HandlerDB{ //Servizio principale
     private Map<Appello,List<Domanda>> domandeAppello = new HashMap<>();
     private Map<Appello, Notificatore> notificatoreMap = new HashMap<>();
     private Lock l = new ReentrantLock(); //preferisco usare il lock al posto di collezioni concorrenti
-    private final int maxInterval = 5; //tempo massimo, in minuti, dall'inizio dell'appello, che consente agli utenti di partecipare
+    private final int maxInterval = 15; //tempo massimo, in minuti, dall'inizio dell'appello, che consente agli utenti di partecipare
     private final int ritardoPartecipazioneAppello = 5; //tempo in minuti oltre il quale, dall'inizio dell'appello, non è piu' possibile partecipare
     private final int limitePrenotazioneAppello = 5; //tempo in minuti prima dell'inizio dell'appello che consente di prenotarsi
 
-    ScheduledExecutorService esecutore;
+    ExecutorService esecutore;
 
 
     public Handler(){
-        esecutore = Executors.newScheduledThreadPool(30);
+        esecutore = Executors.newFixedThreadPool(30);
     }
 
     public String addStudent(Remotemethod.Studente studente){
@@ -48,8 +47,9 @@ public final class Handler implements HandlerDB{ //Servizio principale
 
         //Verifico che l'appello per cui si vuole registrare sia valido
         List<Appello> listaA = repository.cercaAppello(idAppello);
-        if(listaA.size() != 1)
+        if(listaA.size() != 1) {
             throw new AppelloNotFoundException();
+        }
 
         //Verifico che lo studente non sia gia' presente nel database
         List<Studente> listaS = repository.cercaStudente(matricola,codFiscale, listaA.get(0));
@@ -57,13 +57,13 @@ public final class Handler implements HandlerDB{ //Servizio principale
             throw new UtenteAlreadyRegisteredException();
 
         //Verifico che lo studente possa ancora prenotarsi
-        /* Disabilito momentaneamente per debug. Da attivare per testing.
+        /* Disabilitare per debug. Da attivare per testing.
         Appello p = listaA.get(0);
         int timeElapse = diffTimeFromNow(p);
         if(timeElapse <= limitePrenotazioneAppello*60)
             throw new AppelloNotFoundException();
-        */
 
+         */
 
         ProtoToModelStudente conv = (ProtoToModelStudente) af.createConverterProto(Remotemethod.Studente.class);
         Studente s = (Studente) conv.convert(studente);
@@ -95,11 +95,15 @@ public final class Handler implements HandlerDB{ //Servizio principale
         }
 
         Appello p = appello.get(0);
+
+        /*
         int timeElapse = diffTimeFromNow(p);
         if(timeElapse < 0 && Math.abs(timeElapse) > ritardoPartecipazioneAppello*60) { //Consentiamo la partecipazione ad un appello fino a ritardoPartecipazioneAppello minuti dall'inizio
             repository.rimuoviCodiceAppello(codiceAppello);
             throw new AppelloAlreadyStartedException();
         }
+
+         */
 
         repository.rimuoviCodiceAppello(codiceAppello);
 
@@ -128,17 +132,13 @@ public final class Handler implements HandlerDB{ //Servizio principale
                 listaDomande.add(conv.convert(d));
             }
 
-            //Creo il task
-            Notificatore notificatore = new Notificatore(listaDomande,maxInterval);
-
-            notificatoreMap.put(p,notificatore);
-
             int timeElapse = diffTimeFromNow(p);
-
-            //Schedulo il task
             if(timeElapse < 0) timeElapse = 0;
 
-            esecutore.schedule(notificatore,timeElapse, TimeUnit.SECONDS);
+            //Creo il task
+            Notificatore notificatore = new Notificatore(listaDomande,maxInterval,timeElapse);
+            notificatoreMap.put(p,notificatore);
+            esecutore.execute(notificatore);
         }
         return notificatoreMap.get(p);
     }
@@ -147,8 +147,7 @@ public final class Handler implements HandlerDB{ //Servizio principale
         int tempoInSecAppello = p.getOra().get(Calendar.HOUR)*60*60 + p.getOra().get(Calendar.MINUTE)*60 + p.getOra().get(Calendar.SECOND);
         int timeNow = Calendar.getInstance().get(Calendar.HOUR)*60*60 + Calendar.getInstance().get(Calendar.MINUTE)*60 + Calendar.getInstance().get(Calendar.SECOND);
 
-        int timeElapse = tempoInSecAppello - timeNow;
-        return timeElapse;
+        return tempoInSecAppello - timeNow;
     }
 
     @Override

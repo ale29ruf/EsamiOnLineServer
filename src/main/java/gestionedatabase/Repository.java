@@ -52,7 +52,7 @@ public enum Repository {
             }
             em.getTransaction().commit();
             if(proxy != null)
-                proxy.aggiornaCache();
+                proxy.aggiornaCache(); // notifichiamo il Proxy solo nel momento in cui siamo certi che l'appello è stato aggiunto
             return true;
         } catch (Exception e){
             em.getTransaction().rollback();
