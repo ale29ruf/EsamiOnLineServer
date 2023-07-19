@@ -16,6 +16,8 @@ import proto.Remotemethod;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -32,11 +34,11 @@ public final class Handler implements HandlerDB{ //Servizio principale
     private final int ritardoPartecipazioneAppello = 5; //tempo in minuti oltre il quale, dall'inizio dell'appello, non è piu' possibile partecipare
     private final int limitePrenotazioneAppello = 5; //tempo in minuti prima dell'inizio dell'appello che consente di prenotarsi
 
-    ExecutorService esecutore;
+    ScheduledExecutorService esecutore;
 
 
     public Handler(){
-        esecutore = Executors.newFixedThreadPool(30);
+        esecutore = Executors.newScheduledThreadPool(30);
     }
 
     public String addStudent(Remotemethod.Studente studente){
@@ -136,9 +138,9 @@ public final class Handler implements HandlerDB{ //Servizio principale
             if(timeElapse < 0) timeElapse = 0;
 
             //Creo il task
-            Notificatore notificatore = new Notificatore(listaDomande,maxInterval,timeElapse);
+            Notificatore notificatore = new Notificatore(listaDomande,maxInterval);
             notificatoreMap.put(p,notificatore);
-            esecutore.execute(notificatore);
+            esecutore.schedule(notificatore,timeElapse, TimeUnit.SECONDS);
         }
         return notificatoreMap.get(p);
     }

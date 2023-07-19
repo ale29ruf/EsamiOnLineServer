@@ -20,20 +20,14 @@ public class Notificatore implements Runnable{
     private final List<Remotemethod.Domanda> domande;
     private final int intervallo = 10; //tempo in secondi -> frequenza con cui un thread deve svegliarsi e concedere l'accesso all'appello
     private int maxInterval; //tempo in minuti
-    private int timeElapse;
 
-    public Notificatore(List<Remotemethod.Domanda> domande, int maxInterval, int timeElapse){
+    public Notificatore(List<Remotemethod.Domanda> domande, int maxInterval){
         this.domande = domande;
         this.maxInterval = maxInterval;
-        this.timeElapse = timeElapse;
     }
 
     @Override
     public void run() {
-        try {
-            TimeUnit.SECONDS.sleep(timeElapse);
-        } catch (InterruptedException ignored) {}
-
         System.out.println("Inizio del Notificatore: "+clients.size());
 
         for(int i=0; i<((maxInterval*60)/intervallo); i++){
@@ -47,7 +41,6 @@ public class Notificatore implements Runnable{
             try {
                 TimeUnit.SECONDS.sleep(intervallo);
             } catch (InterruptedException ignored) {}
-
         }
     }
 
